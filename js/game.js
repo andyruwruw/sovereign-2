@@ -98,7 +98,7 @@ window.onload = function()
             townCenterPage: false,
             barracksPage: false,
             marketPage: false,
-            satBoosts: [{sat: 0, startSat: 0, time: 1000000, startTime: 1000000, lag: 0}],
+            satBoosts: [{sat: 0, startSat: 0, time: 1000000, startTime: 1000000, lag: 0, ramp: 0, full: 1}],
             actionCooldowns: {gatherWood: {done: 1, time: 0}, huntFood: {done: 1, time: 0}, townFaire: {done: 1, time: 0}},
             resourceStat : {lumber: 0, food: 6, stone: 0, gold: 0, weaponsNum: 0, landNum: 1},
             citizensStat : {population: 2, satisfaction: 0.75, taxRate: 0.00, beds: 5},
@@ -258,9 +258,15 @@ window.onload = function()
 
                         for (var i = 0; i < this.satBoosts.length; i++)
                         {
-                            if (this.satBoosts[i].lag > 0)
+                            if (this.satBoosts[i].ramp < this.satBoosts[i].full)
+                            {
+                                this.satBoosts[i].ramp += 1;
+                                this.satBoosts[i].sat = (this.satBoosts[i].startSat * (this.satBoosts[i].ramp / this.satBoosts[i].full));
+                            }
+                            else if (this.satBoosts[i].lag > 0)
                             {
                                 this.satBoosts[i].lag -= 1;
+                                this.satBoosts[i].sat = this.satBoosts[i].startSat;
                             }
                             else
                             {
@@ -274,6 +280,7 @@ window.onload = function()
                                     this.satBoosts[i].time -= 1;
                                     this.satBoosts[i].sat = (this.satBoosts[i].startSat * (this.satBoosts[i].time / this.satBoosts[i].startTime));
                                 }
+
                             }
                         }
 
@@ -419,7 +426,7 @@ window.onload = function()
                         this.citizensStat.population += deadPeople;
                         this.killPeople(deadPeople, 0);
                         this.commentArray.push({text: "Builder: Sire, our people are dying of stavation, we lost " + Math.abs(deadPeople) + " good people.", timer: 5, noise: 0, played: 0, bold: 1});
-                        this.satBoosts.push({sat: this.STARVE_FACTORS.SAT_DEPRESSION, startSat: this.STARVE_FACTORS.SAT_DEPRESSION, time: 30, startTime: 30, lag: 0});
+                        this.satBoosts.push({sat: this.STARVE_FACTORS.SAT_DEPRESSION, startSat: this.STARVE_FACTORS.SAT_DEPRESSION, time: 30, startTime: 30, lag: 0, ramp: 0, full: 10});
                         this.specialsArray.push({time: 30, starttime: 30, id: "Mourn", title: "Mourning"});
                     }
                     this.resourceStat.food = 0;
@@ -676,7 +683,7 @@ window.onload = function()
                             {
                                 document.getElementById("tavernLumber").style.color = "rgb(194, 146, 146)";
                             }
-                            if (this.resourceStat.stone >= this.TOWN_SQR_FACTORS.STONE_COST)
+                            if (this.resourceStat.stone >= this.TAVERN_FACTORS.STONE_COST)
                             {
                                 document.getElementById("tavernStone").style.color = "rgb(192, 192, 192)";
                             }
@@ -831,11 +838,7 @@ window.onload = function()
                         else if (this.buttonsColor.siege == 2)
                         {
                             document.getElementById("siegeButton").style.color = max;
-                        }
-                        if (this.buildingNum.siege)
-                        {
-                            ratio = (this.buildingNum.siege / this.SIEGE_FACTORS.PER_LAND * 100)
-                            document.getElementById("siegeSpan").style.width = ratio + "%";
+                            document.getElementById("siegeSpan").style.width = "100%";
                         }
 
                     }
@@ -1226,7 +1229,7 @@ window.onload = function()
                     this.buttonsColor.townFaire = 1;
                     this.playSound(this.SOUNDS.faire.sound, this.SOUNDS.faire.volume);
                     this.specialsArray.push({time: 60, starttime: 60, id: "travelingPerformersSpan", title: "Faire&nbsp;Joy"});
-                    this.satBoosts.push({sat: this.TOWN_FAIR_FACTORS.SAT_BOOST, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 60, startTime: 60, lag: 0});
+                    this.satBoosts.push({sat: this.TOWN_FAIR_FACTORS.SAT_BOOST, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 60, startTime: 60, lag: 0, ramp: 0, full: 5});
                     this.commentArray.push({text: "Builder: The faire was a huge success! Moral is high.", timer: 5, noise: 0, played: 0, bold: 0});
                 }
                 else
@@ -1285,13 +1288,14 @@ window.onload = function()
                 else
                 {
                     var newVisitors = Math.round(this.citizensStat.population * this.CITIZEN_FACTORS.VISITORS);
-                    var availableBeds = (this.buildingNum.houses * this.HOUSE_FACTORS.BEDS) - this.citizensStat.population;
-                    var possibleImg = newVisitors;
                     if (this.refugees > 0)
                     {
-                        possibleImg += this.refugees;
+                        newVisitors += this.refugees;
                         this.refugees = 0;
                     }
+                    var availableBeds = (this.buildingNum.houses * this.HOUSE_FACTORS.BEDS) - this.citizensStat.population;
+                    var possibleImg = newVisitors;
+ 
                     var imgOutcome = "but none were able to stay."
                     var immigrantCit = 0;
                     
@@ -1358,7 +1362,7 @@ window.onload = function()
                 {
                     console.log("death");
                     this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
-                    this.deathString = "The citizens are beyond trusting you again. They storm your home and throw you out of the town. As you stuble into the forest you'll look back, they won't.";
+                    this.deathString = "The citizens are beyond trusting you again. They storm your home and throw you out of the town. As you stumble into the forest you'll look back, they won't.";
                     this.isGameOver = 1;
                     notGameOver = 0;
                     pauseMusic();
@@ -1369,7 +1373,7 @@ window.onload = function()
                 {
                     this.townSquareBool = 1;
                     this.BUILD_REQ.townsqr.pop = 1;
-                    this.buttonsColor.townsqr = 0;
+                    this.buttonsColor.townsqr = 1;
                     this.commentArray.push({text: ("Builder: We can now build a town square!"), timer: 5, noise: 0, played: 0, bold: 1});
                 }
                 
@@ -1401,14 +1405,24 @@ window.onload = function()
                 }
                 else if ((this.citizensStat.population >= 50) && (this.citizensStat.population >= 100) && (this.townType != this.TOWN_TYPES[3]))
                 {
-                    this.DISASTER_FACTORS.DISASTER_CHANCE += .1;
-                    this.DISASTER_FACTORS.INVASION += .1;
+                    
                     if (this.townType == this.TOWN_TYPES[2])
                     {
                         this.playSound(this.SOUNDS.cityadvance.sound, this.SOUNDS.cityadvance.volume);
                         this.animateTownType = 1;
                     }
                     this.townType = this.TOWN_TYPES[3];
+                }
+                if (this.citizensStat.population >= 75)
+                {
+                    this.DISASTER_FACTORS.DISASTER_CHANCE = .53;
+                    this.DISASTER_FACTORS.INVASION = .43;
+
+                }
+                else
+                {
+                    this.DISASTER_FACTORS.DISASTER_CHANCE = .4;
+                    this.DISASTER_FACTORS.INVASION = .3;
                 }
             },
             // -----------------------------MISC
@@ -1667,7 +1681,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.feast.sound, this.SOUNDS.feast.volume);
                     this.resourceStat.food -= this.FEAST_FACTORS.FOOD;
                     this.specialsArray.push({time: 20, starttime: 20, id: "travelingPerformersSpan", title: "Feast&nbsp;Joy"});
-                    this.satBoosts.push({sat: this.TOWN_FAIR_FACTORS.SAT_BOOST, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0});
+                    this.satBoosts.push({sat: this.TOWN_FAIR_FACTORS.SAT_BOOST, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0, ramp: 0, full: 5});
                     this.commentArray.push({text: "Builder: Everyone loved the feast!", timer: 5, noise: 0, played: 0, bold: 0});
                 }
                 else
@@ -2422,7 +2436,10 @@ window.onload = function()
                     this.resourceStat.lumber -= this.WALL_FACTORS.LUMBER_COST;
                     this.resourceStat.stone -= this.WALL_FACTORS.STONE_COST;
                     this.BUILD_REQ.siege.req = 1;
-                    this.buttonsColor.siege = 1;
+                    if (this.buttonsColor.siege == 0)
+                    {
+                        this.buttonsColor.siege = 1;
+                    }
                     this.commentArray.push({text: "Builder: The walls are up! We are better prepared to fight off any invasion and we can now train archers.", timer: 5, noise: 0, played: 0, bold: 0});
                     return null;
                 }
@@ -2514,11 +2531,8 @@ window.onload = function()
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.townsqr2.sound, this.SOUNDS.townsqr2.volume);
                     this.buildingNum.townsqr += 1;
-                    if (this.buildingNum.townsqur == this.TOWN_FAIR_FACTORS.PER_LAND)
-                    {
                         this.BUILD_REQ.townsqr.max = 1;
                         this.buttonsColor.townsqr = 2;
-                    }
                     this.resourceStat.lumber -= this.TOWN_SQR_FACTORS.LUMBER_COST;
                     this.resourceStat.gold -= this.TOWN_SQR_FACTORS.GOLD_COST;
                     this.buttonsColor.townFaire = 1;
@@ -2694,7 +2708,7 @@ window.onload = function()
                     random += 1;
                 }
                 this.specialsArray.push({time: 20, starttime: 20, id: "defeatSpan", title: "Robbed&nbsp;Depression"});
-                this.satBoosts.push({sat: this.ROBBERS_FACTORS.SAT_DEPRESSION, startSat: this.ROBBERS_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0});
+                this.satBoosts.push({sat: this.ROBBERS_FACTORS.SAT_DEPRESSION, startSat: this.ROBBERS_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
                 this.commentArray.push({text: "Builder: We were robbed in the middle of the night! We lost " + loss + " " + resourceType, timer: 10, noise: 1, played: 0, bold: 1});
             },
 
@@ -2708,6 +2722,15 @@ window.onload = function()
                 if (this.mercenaryProtection == 1)
                 {
                     string = " The mercenaries kept their word and defended us, they've left now.";
+                    this.mercenaryProtection = 0;
+                    for (var i = 0; i < this.specialsArray.length; i++)
+                    {
+                        if (this.specialsArray[i].title == "Mercenary&nbsp;Protection")
+                        {
+                            this.specialsArray.splice(i, 1);
+                            break;
+                        }
+                    }
                 }
                 else
                 {
@@ -2717,7 +2740,7 @@ window.onload = function()
                     {
                         deadPeople = Math.ceil(this.citizensStat.population * (enemyStrength - kingdomStrength));
                         this.specialsArray.push({time: 20, starttime: 20, id: "defeatSpan", title: "Ransacked&nbsp;Depression"});
-                        this.satBoosts.push({sat: this.INVASION_FACTORS.SAT_DEPRESSION, startSat: this.INVASION_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0});
+                        this.satBoosts.push({sat: this.INVASION_FACTORS.SAT_DEPRESSION, startSat: this.INVASION_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
                         if (enemyStrength - kingdomStrength >= .2)
                         {
                             deadPeople = Math.ceil(this.citizensStat.population * (enemyStrength - kingdomStrength + (Math.random() / 10)));
@@ -2747,8 +2770,12 @@ window.onload = function()
                     else
                     {
                         this.specialsArray.push({time: 20, starttime: 20, id: "victorySpan", title: "Victory&nbsp;Celebrations"});
-                        this.satBoosts.push({sat: this.INVASION_FACTORS.SAT_BOOST, startSat: this.INVASION_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0});
-                        deadPeople = Math.floor(this.citizensStat.population * enemyStrength - this.citizensStat.population * (kingdomStrength - enemyStrength));
+                        this.satBoosts.push({sat: this.INVASION_FACTORS.SAT_BOOST, startSat: this.INVASION_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0, ramp: 0, full: 3});
+                        deadPeople = Math.floor((this.citizensStat.population * enemyStrength / 3) - (this.citizensStat.population * (kingdomStrength - enemyStrength)));
+                        if (deadPeople < 0)
+                        {
+                            deadPeople = 0;
+                        }
                         if (kingdomStrength - enemyStrength >= .2)
                         {
                             string = " We fought heroically and defended successfully. "
@@ -2799,7 +2826,7 @@ window.onload = function()
                 this.disasterNum += 1;
                 this.famine = this.FAMINE_FACTORS.FOOD_LOSS;
                 this.specialsArray.push({time: 120, starttime: 120, id: "famineSpan", title: "Famine"});
-                this.satBoosts.push({sat: this.FAMINE_FACTORS.SAT_DEPRESSION, startSat: this.FAMINE_FACTORS.SAT_DEPRESSION, time: 120, startTime: 120, lag: 30});
+                this.satBoosts.push({sat: this.FAMINE_FACTORS.SAT_DEPRESSION, startSat: this.FAMINE_FACTORS.SAT_DEPRESSION, time: 120, startTime: 120, lag: 30, ramp: 0, full: 15});
                 this.commentArray.push({text: "Builder: Sire, a famine has struck.", timer: 10, noise: 1, played: 0, bold: 1});
             },
 
@@ -2823,12 +2850,16 @@ window.onload = function()
                     {
                         string = "One house burned down.";
                         this.buildingNum.houses -= 1;
+                        this.BUILD_REQ.house.max = 0;
+                        this.buttonsColor.house = 1;
+
                     }
                     else
                     {
                         var burnedHouses = Math.ceil(this.buildingNum.houses * chance);
                         string = burnedHouses + " houses burned down.";
                         this.BUILD_REQ.house.max = 0;
+                        this.buttonsColor.house = 1;
                         this.buildingNum.houses -= burnedHouses;
                     }
                 }
@@ -2837,7 +2868,7 @@ window.onload = function()
                     string = "Luckily the fire was contained.";
                 }
                 this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Fire&nbsp;Depression"});
-                this.satBoosts.push({sat: this.FIRE_FACTORS.SAT_DEPRESSION, startSat: this.FIRE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0});
+                this.satBoosts.push({sat: this.FIRE_FACTORS.SAT_DEPRESSION, startSat: this.FIRE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
                 this.commentArray.push({text: "Builder: Sire! The villiage is on fire! " + string, timer: 10, noise: 1, played: 0, bold: 1});
             },
 
@@ -2846,7 +2877,7 @@ window.onload = function()
                 this.disasterNum += 1;
                 this.playSound(this.SOUNDS.storm.sound, this.SOUNDS.storm.volume);
                 this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Storm&nbsp;Depression"});
-                this.satBoosts.push({sat: this.STORM_FACTORS.SAT_DEPRESSION, startSat: this.STORM_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0});
+                this.satBoosts.push({sat: this.STORM_FACTORS.SAT_DEPRESSION, startSat: this.STORM_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
                 var string = "";
                 if (Math.random() < this.STORM_FACTORS.FARM_CHANCE)
                 {
@@ -2925,7 +2956,7 @@ window.onload = function()
                     
                     this.killPeople(deadPeople, 0);
                     this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Plague&nbsp;Depression"});
-                    this.satBoosts.push({sat: this.PLAGUE_FACTORS.SAT_DEPRESSION, startSat: this.PLAGUE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0});
+                    this.satBoosts.push({sat: this.PLAGUE_FACTORS.SAT_DEPRESSION, startSat: this.PLAGUE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
                 }
                 this.commentArray.push({text: "Builder: Sire, a plague has swept through the town, " + string, timer: 10, noise: 1, played: 0, bold: 1});
             },
@@ -3299,7 +3330,7 @@ window.onload = function()
                     this.resourceStat.gold += this.SLAVE_TRADE_FACTORS.GOLD;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.slaves.sound, this.SOUNDS.slaves.volume);
-                    this.satBoosts.push({sat: this.SLAVE_TRADE_FACTORS.SAT_DROP, startSat: this.SLAVE_TRADE_FACTORS.SAT_DROP, time: 90, startTime: 90, lag: 0});
+                    this.satBoosts.push({sat: this.SLAVE_TRADE_FACTORS.SAT_DROP, startSat: this.SLAVE_TRADE_FACTORS.SAT_DROP, time: 90, startTime: 90, lag: 0, ramp: 0, full: 3});
                     this.specialsArray.push({time: 90, starttime: 90, id: "Betrayal", title: "Betrayal"});
                     this.commentArray.push({text: "Slaver: Pleasure doing business with you sire.", timer: 5, noise: 1, played: 1, bold: 1});
                     this.commentArray.push({text: "The builder falls silent...", timer: 5, noise: 1, played: 1, bold: 1});
@@ -3389,7 +3420,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.lateNights.sound, this.SOUNDS.lateNights.volume);
                     this.specialsArray.push({time: 90, starttime: 90, id: "Betrayal", title: "Betrayal"});
-                    this.satBoosts.push({sat: this.LATE_NIGHTS.SAT_DROP, startSat: this.LATE_NIGHTS.SAT_DROP, time: 60, startTime: 60, lag: 30});
+                    this.satBoosts.push({sat: this.LATE_NIGHTS.SAT_DROP, startSat: this.LATE_NIGHTS.SAT_DROP, time: 60, startTime: 60, lag: 30, ramp: 0, full: 3});
                     this.commentArray.push({text: "The villiagers are worked through the nights. The builder falls silent.", timer: 5, noise: 1, played: 1, bold: 1});
                     this.specialItemUsed = 1;
                 }
@@ -3418,7 +3449,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.faire.sound, this.SOUNDS.faire.volume);
                     this.specialsArray.push({time: 60, starttime: 60, id: "travelingPerformersSpan", title: "Joy&nbsp;from&nbsp;Performers"});
-                    this.satBoosts.push({sat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, startSat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, time: 30, startTime: 30, lag: 30});
+                    this.satBoosts.push({sat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, startSat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, time: 30, startTime: 30, lag: 30, ramp: 0, full: 4});
                     this.commentArray.push({text: "The performances and music were beyond anything the villiagers had ever seen before.", timer: 5, noise: 1, played: 1, bold: 1});
                     this.commentArray.push({text: "Builder: That was fantastic!", timer: 5, noise: 1, played: 0, bold: 1});
                     this.specialItemUsed = 1;
