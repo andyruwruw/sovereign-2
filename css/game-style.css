@@ -1,0 +1,1040 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+body
+{
+    width: 100%;
+    height: 100%;
+    
+}
+#background
+{
+    background-image: url("https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/428550/3288949bd5d35b3bcfa9de0b65faade54bbd701c.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+#game
+{
+    
+    padding-top: 30px;
+    width: 1080px;
+    height: 720px;
+}
+#screen
+{
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+}
+#commentsDiv
+{
+    background-image: linear-gradient(120deg, rgba(226, 211, 165, .1) 0%, rgba(0, 0, 0, .4) 70% 100%), url("data:image/jpeg;base64,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");
+    background-repeat: repeat;
+    background-size: 130%;
+    width: 100%;
+    height: 100%;
+}
+#comments
+{
+    width: 100%;
+}
+.commentBox
+{
+    background-image: linear-gradient(120deg, rgba(226, 211, 165, .4) 0%, rgba(0, 0, 0, 0.3) 80% 100%), url("https://naldzgraphics.net/wp-content/uploads/2014/07/1-certificate-paper-texture.jpg");
+    background-size:cover;
+    background-repeat: repeat;
+    display: block;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    margin-top: 23px;
+    padding: 8px;
+    font-family: 'VT323', monospace;
+    color: black;
+}
+#forestPagePrice
+{
+    font-size: 125%;
+}
+#forestPageNote
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: center;
+    padding-top: 190px;
+    color: rgb(192, 192, 192);
+    display: block;
+    margin: 0 auto;
+    font-size: 125%;
+}
+.space
+{
+    height: 30px;
+}
+.addSubLabor
+{
+    background-image: url("https://i.ibb.co/7zfqqcj/small-blue-00000.jpg");
+    background-size: 30px 30px;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: grey;
+    color: black;
+    width: 30px;
+    height: 30px;
+}
+#headerTitle
+{
+    color: rgb(185, 185, 185);
+    padding-top: 5px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+.headerButton
+{
+    display: inline-block;
+    border: none;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: center;
+    color: rgb(185, 185, 185);
+    width: 90px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0% 100%);
+}
+.headerButton:hover
+{
+    padding-top: 16px;
+    color: rgb(185, 185, 185);
+    font-size: 130%;
+}
+.defense
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 20px;
+}
+h2
+{
+    color: white;
+    font-size: 150%;
+    padding-bottom: 20px;
+}
+.bold
+{
+    background-image: linear-gradient(120deg, rgba(196, 165, 72, 0.3) 0%, rgba(97, 78, 23, 0.5) 95% 100%), url("https://naldzgraphics.net/wp-content/uploads/2014/07/1-certificate-paper-texture.jpg");
+    color: black;
+    width: 100%;
+    padding: 9px;
+}
+.paddingZero
+{
+    padding-right: 0px;
+}
+.labor
+{
+    display: inline-block;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 100%;
+    color: white;
+    text-align: center;
+    padding: auto;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-image: linear-gradient(to bottom, rgba(40, 117, 218, 0.171) 0%, rgba(0, 0, 0, 0) 90% 100%);
+}
+.taxes
+{
+    font-size: 200%;
+    font-family: 'VT323', monospace;
+}
+.center
+{
+    margin: 0 auto;
+    text-align: center;
+}
+#header
+{
+    width: 100%;
+    height: 65px;
+    padding-bottom: 20px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+
+#rightScreen
+{
+    background-image: linear-gradient(210deg, rgba(136, 116, 78, 0.5) 0%, rgba(0, 0, 0, .8) 75% 100%), url("https://cdna.artstation.com/p/assets/images/images/006/295/132/large/sergiu-matei-planks-seemless-tile-pixel-art-rpg-top-view-indie-game-dev-matei-sergiu.jpg?1497472734");
+    background-size: 80%;
+    background-repeat: repeat;
+    padding-left: 0px;
+}
+
+
+#townType
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+}
+
+#gameOver
+{
+    color: white;
+    width: 100%;
+    padding-top: 10%;
+    font-size: 900%;
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
+}
+#deathReason
+{
+    color: rgb(199, 199, 199);
+    display: block;
+    margin: auto;
+    width: 50%;
+    padding-top: 3%;
+    font-size: 200%;
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
+}
+#timeLasted
+{
+    color: white;
+    display: block;
+    margin: auto;
+    width: 50%;
+    padding-top: 6%;
+    font-size: 180%;
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+#moreStatsButton
+{
+    color: rgba(173, 173, 173, 0.377);
+    display: block;
+    margin: auto;
+    width: 50%;
+    padding-top: 1%;
+    font-size: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    background-image: linear-gradient(to right, rgba(189, 189, 189, 0) 0%, rgba(224, 224, 224, 0) 0% 100%)
+}
+
+
+#clear
+{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
+}
+#gameoverDiv
+{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 99% 100%);
+}
+.fulllength
+{
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
+}
+#moreStatsDiv
+{
+    padding-left: 40px;
+}
+#stats
+{
+    background-image: linear-gradient(210deg, rgba(136, 116, 78, 0.1) 0%, rgba(0, 0, 0, .1) 75% 100%), url("https://i.ibb.co/g6fLNSZ/stats-00000.jpg");
+    background-repeat: no-repeat;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-size: 525px 115px;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    margin: 30px;
+    margin-bottom: 10px;
+    color: white;
+}
+#menu
+{
+    width: 100%;
+    height: 100%;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+#page
+{
+    width: 100%;
+    height: 100%;
+    min-height:100%;
+}
+.pageButton
+{
+    display: inline-block;
+    background-color: grey;
+    width: 130px;
+    height: 50px;
+    color: black;
+}
+
+
+
+.buttonRow
+{
+    display: inline-flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+    justify-content: flex-start;
+}
+.forestButton
+{
+    
+    font-size: 190%;
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: grey;
+    width: 230px;
+    height: 88px;
+    margin: 0 auto;
+    color: black;
+}
+#forestMenuButton
+{
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+}
+
+#workshopMenuButton
+{
+    background-image: url("https://i.ibb.co/tQPjzQF/greenbutton-00000.jpg");
+    background-size: cover;
+}
+#marketMenuButton
+{
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+}
+#townCenterMenuButton
+{
+    background-image: url("https://i.ibb.co/S3bbTDn/bluebutton-00000.jpg");
+    background-size: cover;
+}
+.townCenterButton
+{
+    background-image: url("https://i.ibb.co/S3bbTDn/bluebutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    display: inline-block;
+    background-color: grey;
+    width: 170px;
+    height: 64px;
+    margin: 0 auto;
+    color: black;
+}
+#holdFeastButton
+{
+    background-image: url("https://i.ibb.co/S3bbTDn/bluebutton-00000.jpg");
+    font-size: 100%;
+}
+#specialsDiv
+{
+    position: absolute;
+    bottom: 5px;
+    left: 5%;
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 5px;
+    padding-bottom: 0px;
+    border-radius: 15px;
+}
+
+#specialsBar
+{
+    background-color: rgba(29, 29, 29, 0.349);
+    border-radius: 13px;
+}
+
+#specialTimer
+{
+    display: inline-block;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 80%;
+    color: white;
+    text-align: center;
+    padding: auto;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#specialItemButton
+{
+    background-image: black;
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    display: inline-block;
+    background-color: grey;
+    width: 210px;
+    height: 82.5px;
+    font-size: 125%;
+    margin: 0 auto;
+    color: black;
+}
+#specialDescription
+{
+    font-size: 100%
+}
+.add-padding-special
+{
+    padding-top: 25px;
+}
+
+#buyStats
+{
+    background-image: linear-gradient(to bottom, rgba(218, 176, 40, 0.171) 0%, rgba(0, 0, 0, 0) 90% 100%);
+}
+
+.townCenterSmallButton
+{
+    
+    display: inline-block;
+    background-color: grey;
+    width: 130px;
+    height: 50px;
+    margin: 0 auto;
+    color: black;
+}
+.workshopButton
+{
+    background-image: url("https://i.ibb.co/tQPjzQF/greenbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: grey;
+    width: 170px;
+    font-size: 130%;
+    height: 64px;
+    margin: 0 auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: black;
+}
+.barracksButton
+{
+    background-image: url("https://i.ibb.co/X2P8Dn4/button.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    display: inline-block;
+    background-color: grey;
+    width: 130px;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 8px;
+    margin-bottom: 3px;
+    color: black;
+}
+.purchaseItems
+{
+    display: block;
+    color: white;
+    font-family: 'VT323', monospace;
+    margin-top: 10px;
+}
+.marketButton
+{
+    background-image: url("https://i.ibb.co/0ZqjDZ8/marketbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: grey;
+    width: 90px;
+    font-size: 130%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: rgb(177, 177, 177);
+}
+#shield
+{
+    height: 100%;
+    width: 100%;
+}
+#shieldDivLeft
+{
+    margin-left: auto;
+    margin-top: 2px;
+    height: 35px;
+    width: 30px;
+}
+#shieldDivRight
+{
+    margin-right: auto;
+    margin-top: 2px;
+    height: 35px;
+    width: 30px;
+}
+.no-padding-right
+{
+    padding-right: 0px;
+}
+#defense
+{
+    display: inline-block;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 175%;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: auto;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-image: linear-gradient(to bottom, rgba(218, 40, 78, 0.171) 0%, rgba(0, 0, 0, 0) 90% 100%);
+}
+#barracksMenuButton
+{
+    background-image: url("https://i.ibb.co/X2P8Dn4/button.jpg");
+    background-size: cover;
+}
+#addMargin
+{
+    margin-top: 3px;
+}
+.border
+{
+    border: 2px solid rgb(0, 0, 0);
+}
+.shadow
+{
+    box-shadow: 10px 10px 5px black;
+}
+#extend
+{
+    background-image: url("https://img.itch.zone/aW1hZ2UvMTIxNjU4LzU2MDQxMC5wbmc=/original/hCUwLQ.png");
+    background-size: cover;
+    height: 475px;
+}
+
+
+
+.descriptionRow
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    margin: 0 auto;
+    text-align: center;
+}
+.description
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: center;
+    font-size: 80%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin: 0 auto;
+}
+.priceRow
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    margin-left: 5px;
+    padding-right: 0px;
+    color: rgb(192, 192, 192);
+}
+.no-right-padding
+{
+    padding-right: 0px;
+}
+.priceItem
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: left;
+    font-size: 80%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    color: rgb(192, 192, 192);
+}
+.price
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: right;
+    font-size: 80%;
+    color: rgb(192, 192, 192);
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+#buttons1
+{
+    margin-top: 20px;
+}
+#buttons2
+{
+    margin-top: 20px;
+}
+#buttons3
+{
+    margin-top: 5px;
+}
+#buttons4
+{
+    margin-top: 5px;
+}
+
+#laborDistribution
+{
+    font-family: 'VT323', monospace;
+    width: 100%;
+    height: 100%;
+}
+
+#townCenterPage
+{
+    font-family: 'VT323', monospace;
+    width: 100%;
+    height: 100%;
+}
+
+.RED
+{
+    color: red;
+}
+.right
+{
+    text-align: right;
+}
+.left
+{
+    text-align: left;
+}
+p
+{
+    color: white;
+}
+
+button
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    background-image: linear-gradient(to right, rgb(189, 189, 189) 0%, rgb(224, 224, 224) 0% 100%);
+    border: black 1px;
+}
+#devTools
+{
+    text-align: center;
+}
+#devText
+{
+    border: none;
+}
+#devText
+{
+    background-color: rgba(0, 0, 0, 0);
+}
+#devText2
+{
+    background-color: rgba(0, 0, 0, 0);
+}
+#footer
+{
+    position: fixed;
+    width: 100%;
+
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+#footerLink
+{
+    display: block;
+}
+
+
+/*
+----------------------------BUTTON ANIMATIONS----------------------------------------------------------
+*/
+#gatherWoodButton
+{
+    color: rgb(0,0,0);
+}
+#progressBar {
+    
+    background-color: rgba(102, 102, 102, 0.418);
+    border-radius: 13px;
+    /* (height of inner div) / 2 + padding */
+}
+#specialTitle
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-transform: uppercase;
+    position: relative;
+    left: 10px;
+    bottom: 2px;
+    text-align: left;
+    margin-bottom: 0px;
+}
+#special0
+{
+    width: 100%;
+}
+#special1
+{
+    width: 100%;
+}
+#special2
+{
+    width: 100%;
+}
+#special3
+{
+    width: 100%;
+}
+#special4
+{
+    width: 100%;
+}
+.famineSpan
+{
+    background-color: rgba(99, 68, 10, .6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: left;
+    color: white;
+}
+
+.defeatSpan
+{
+    background-color: rgba(53, 5, 5, 0.6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: left;
+    color: white;
+}
+
+.victorySpan
+{
+    background-color: rgba(5, 43, 4, 0.6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: left;
+    color: white;
+}
+
+.mercinariesSpan
+{
+    font-family: 'VT323', monospace;
+    text-transform: capitalize;
+    background-color: rgba(57, 0, 80, .6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: center;
+    text-align: left;
+    color: white;
+}
+
+.travelingPerformersSpan
+{
+    font-family: 'VT323', monospace;
+    text-transform: capitalize;
+    background-color: rgba(9, 71, 1, .6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: center;
+    text-align: left;
+    color: white;
+}
+
+.Betrayal
+{
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    background-color: rgba(68, 1, 1, .6);
+    height: 20px;
+    border-radius: 13px;
+    color: white;
+}
+
+.Mourn
+{
+    font-family: 'VT323', monospace;
+    text-transform: capitalize;
+    background-color: rgba(44, 24, 24, .6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: left;
+    color: white;
+}
+
+.disaster
+{
+    font-family: 'VT323', monospace;
+    text-transform: capitalize;
+    background-color: rgba(25, 24, 44, 0.6);
+    height: 20px;
+    border-radius: 13px;
+    text-align: left;
+    color: white;
+}
+
+.specialTimerSpan {
+
+    /* Adjust with JavaScript */
+    height: 10px;
+    border-radius: 5px;
+    border-radius: 5px;
+}
+
+#gatherWoodSpan {
+    background-color: white;
+    width: 40%;
+    /* Adjust with JavaScript */
+    height: 8px;
+    border-radius: 5px;
+}
+
+
+
+
+#progressBarSpaceWorkshop
+{
+    height: 4px;
+}
+#gatherWoodSpan {
+    background-color: white;
+    width: 40%;
+    /* Adjust with JavaScript */
+    height: 8px;
+    border-radius: 5px;
+}
+#huntFoodSpan
+{
+    background-color: white;
+    width: 40%;
+    /* Adjust with JavaScript */
+    height: 8px;
+    border-radius: 5px;
+}
+#townFaireSpan
+{
+    background-color: white;
+    width: 40%;
+    /* Adjust with JavaScript */
+    height: 8px;
+    border-radius: 5px;
+}
+#houseSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+#farmSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+#CworkshopSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+#townSqrSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+#lumbermillSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+#mineSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+#tavernSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+#marketSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+#barracksSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+#wallSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+#siegeSpan
+{
+    background-color: white;
+    width: 0%;
+    /* Adjust with JavaScript */
+    height: 4px;
+    border-radius: 5px;
+}
+
+
+
+.marketTitle
+{
+    display: block;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 150%;
+    color: white;
+    text-align: center;
+
+}
+.townCenterTitle
+{
+    display: block;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 150%;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    background-image: linear-gradient(to bottom, rgba(40, 123, 218, 0.171) 0%, rgba(0, 0, 0, 0) 90% 100%);
+}
+
+
+#progressBarSpace
+{
+    height: 8px;
+}
+.forestPageMargin
+{
+    margin-top: 60px;
+}
+#huntFoodButton
+{
+    color: rgb(0,0,0);
+}
+#townFaireButton
+{
+    color: rgb(177, 177, 177);
+}
+#houseButton
+{
+    color: rgb(0,0,0);
+}
+#farmButton
+{
+    color: rgb(0,0,0);
+}
+#CworkshopButton
+{
+    color: rgb(0,0,0);
+}
+#townsqrButton
+{
+    color: rgb(177, 177, 177);
+}
+#lumberMillButton
+{
+    color: rgb(177, 177, 177);
+}
+#mineButton
+{
+    color: rgb(177, 177, 177);
+}
+#tavernButton
+{
+    color: rgb(177, 177, 177);
+}
+#marketButton
+{
+    color: rgb(177, 177, 177);
+}
+#barracksButton
+{
+    color: rgb(177, 177, 177);
+}
+#wallsButton
+{
+    color: rgb(177, 177, 177);
+}
+#siegeButton
+{
+    color: rgb(177, 177, 177);
+}
+
+.ui-tooltip {
+    /* tooltip container box */
+    white-space: pre-line;
+}
+
+.ui-tooltip-content {
+    /* tooltip content */
+    white-space: pre-line;
+
+}

@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+body
+{
+    width: 100%;
+    height: 100%;
+    
+}
+#background
+{
+    background-image: url("../images/rain3.gif");
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+#header
+{
+    width: 100%;
+    height: 65px;
+    padding-bottom: 20px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+#headerTitle
+{
+    color: rgb(185, 185, 185);
+    padding-top: 5px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+.headerButton
+{
+    display: inline-block;
+    border: none;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: center;
+    color: rgb(185, 185, 185);
+    width: 90px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+.headerButton:hover
+{
+    padding-top: 16px;
+    color: rgb(185, 185, 185);
+    font-size: 130%;
+}
+#footer
+{
+    position: fixed;
+    width: 100%;
+
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+#footerLink
+{
+    display: block;
+}
+#rule
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 1000%;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    padding-top: 8%;
+    color: rgba(255, 255, 255, 0.863);
+}
+#playButton
+{
+    text-align: center;
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: block;
+    width: 230px;
+    font-size: 270%;
+    height: 88px;
+    margin: auto;
+    color: black;  
+    padding-top: 10px;
+    margin-top: 60px;
+}
+#playButton:hover
+{
+    text-align: center;
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: block;
+    width: 230px;
+    font-size: 270%;
+    height: 88px;
+    margin: auto;
+    color: rgb(87, 1, 1); 
+    font-weight: bold; 
+    padding-top: 10px;
+    margin-top: 60px;
+}

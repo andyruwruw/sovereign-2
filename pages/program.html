@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+        <link rel="stylesheet" href="../css/game-style.css" />
+        <meta name="viewport"/>
+        <title>Sovereign</title>
+        <audio id="myMusic">
+            <source src="../sounds/gametheme.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="menuTabSound">
+            <source src="../sounds/menumove.wav" type="audio/wav">
+        </audio>
+        <audio id="builder">
+            <source src="../sounds/builder.wav" type="audio/wav">
+        </audio>
+        <audio id="error">
+            <source src="../sounds/error.wav" type="audio/wav">
+        </audio>
+        <audio id="click">
+            <source src="../sounds/click.wav" type="audio/wav">
+        </audio>
+        <audio id="barracks">
+            <source src="../sounds/barracks.wav" type="audio/wav">
+        </audio>
+        <audio id="mine">
+            <source src="../sounds/mine.wav" type="audio/wav">
+        </audio>
+        <audio id="catapult">
+            <source src="../sounds/catapult.wav" type="audio/wav">
+        </audio>
+        <audio id="cityadvance">
+            <source src="../sounds/cityadvance.wav" type="audio/wav">
+        </audio>
+        <audio id="farm">
+            <source src="../sounds/farm.wav" type="audio/wav">
+        </audio>
+        <audio id="fire">
+            <source src="../sounds/fire.wav" type="audio/wav">
+        </audio>
+        <audio id="house">
+            <source src="../sounds/house.wav" type="audio/wav">
+        </audio>
+        <audio id="invasion">
+            <source src="../sounds/invasion.wav" type="audio/wav">
+        </audio>
+        <audio id="lumbermill">
+            <source src="../sounds/lumbermill.wav" type="audio/wav">
+        </audio>
+        <audio id="market">
+            <source src="../sounds/market.wav" type="audio/wav">
+        </audio>
+        <audio id="siege">
+            <source src="../sounds/siege.wav" type="audio/wav">
+        </audio>
+        <audio id="storm">
+            <source src="../sounds/storm.wav" type="audio/wav">
+        </audio>
+        <audio id="tavern">
+            <source src="../sounds/tavern.wav" type="audio/wav">
+        </audio>
+        <audio id="tavern2">
+            <source src="../sounds/tavern2.wav" type="audio/wav">
+        </audio>
+        <audio id="townsqr">
+            <source src="../sounds/townsqr.wav" type="audio/wav">
+        </audio>
+        <audio id="townsqr2">
+            <source src="../sounds/townsqr2.wav" type="audio/wav">
+        </audio>
+        <audio id="wall">
+            <source src="../sounds/wall.wav" type="audio/wav">
+        </audio>
+        <audio id="weapon">
+            <source src="../sounds/weapon.wav" type="audio/wav">
+        </audio>
+        <audio id="workshop">
+            <source src="../sounds/workshop.wav" type="audio/wav">
+        </audio>
+        <audio id="gameover">
+            <source src="../sounds/gameover.mp3" types="audio/mpeg">
+        </audio>
+        <audio id="angel">
+            <source src="../sounds/angel.mp3" types="audio/mpeg">
+        </audio>
+        <audio id="pop">
+            <source src="../sounds/pop.mp3" types="audio/mpeg">
+        </audio>
+        <audio id="faire">
+            <source src="../sounds/faire.wav" types="audio/mpeg">
+        </audio>
+        <audio id="time">
+            <source src="../sounds/time.wav" types="audio/wav">
+        </audio>
+        <audio id="robbed">
+            <source src="../sounds/robbed.wav" types="audio/wav">
+        </audio>
+        <audio id="cough">
+            <source src="../sounds/cough.wav" types="audio/wav">
+        </audio>
+        <audio id="feast">
+            <source src="../sounds/feast.mp3" types="audio/wav">
+        </audio>
+        <audio id="lateNights">
+            <source src="../sounds/whip.mp3" types="audio/wav">
+        </audio>
+        <audio id="marching_army">
+            <source src="../sounds/marching army.wav" types="audio/wav">
+        </audio>
+        <audio id="mercinaries">
+            <source src="../sounds/mercenaries.wav" types="audio/mpeg">
+        </audio>
+        <audio id="refugees">
+            <source src="../sounds/refugees.wav" types="audio/mpeg">
+        </audio>
+        <audio id="slaves">
+            <source src="../sounds/slaves.wav" types="audio/wav">
+        </audio>
+        <audio id="wizard">
+            <source src="../sounds/wizard.wav" types="audio/wav">
+        </audio>
+        <audio id="lateNights">
+            <source src="../sounds/whip.mp3" types="audio/wav">
+        </audio>
+        </head>
+    <body id="background">
+        <div class="container" id="headerContainer">
+            <div class="row" id="header">
+                <div class="col-lg-6">
+                    <h1 id="headerTitle">S O V E R E I G N</h1>
+                </div>
+                <div class="col-lg-2">
+                    <a href="../index.html" class="headerButton">HOME</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="../pages/program.html" class="headerButton">RESTART</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="about.html" class="headerButton">ABOUT</a>
+                </div>
+            </div>
+        </div>
+        <div id="game" class="container" onclick="playMusic();">
+            <div class="row" id="gameoverDiv" v-if="isGameOver">
+                <h2 id="gameOver">GAME OVER</h2>
+                <div id="clear2" class="fulllength">
+                    <h3 id="deathReason">{{deathString}}</h3>
+                </div>
+                <div id="clear" class="fulllength">
+                    <h3 id="timeLasted">You lasted {{getFinalDays}} {{getFinalMonths}} {{getFinalYears}}</h3>
+                </div>
+                <div class="fulllength">
+                    <button id="moreStatsButton" v-on:click="moreStatsButton">More Stats</button>
+                </div>
+                <div id="moreStatsDiv" class="fulllength row" v-if="moreStats">
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Maximum Population: {{highestPopulation}}</h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Total Invasions: {{invasionNum}}</h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Total Disasters: {{disasterNum}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="screen" v-if="!isGameOver && play">
+
+                <div class="col-lg-3" id="commentsDiv">
+                    <div id="comments"></div>
+                    <div id="specialsDiv"></div>
+                </div>
+                <div class="col-lg-9" id="rightScreen">
+                    <div class="no-right-padding container">
+                        <div class="container" id="stats">
+                            <div class="row" id="stats1">
+                                <div class="col-lg-5">
+                                    <div class="container">
+                                        <div class="row no-gutters" id="titleDiv">
+                                            <div class="col-lg-12">
+                                                <h1 id="townType" data-toggle="tooltip" title="Changes based on population size.">{{townType}}</h1>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">Population:</div>
+                                            <div class="right col-lg-4" data-toggle="tooltip" title="Population and Available Beds.&#013;Every month travelers will visit and decide whether to stay&#013;They judge based on:&#013;--Citizen Satisfaction&#013;--Available Beds">{{citizensStat.population}} / {{getBeds}}</div>
+                                            <div class="col-lg-4"> </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">Satisfaction:</div>
+                                            <div class="right col-lg-4" data-toggle="tooltip" title="Increases likelyhood visitors will stay. &#013;Drop below 20% and your citizens will kick you out.&#013;--Keep it high in case of disasters.&#013;Ways to Raise Satisfaction:&#013;--Feasts and Faires give temporary boosts.&#013;--Building a Town Square, Market, or Tavern.&#013;--Lower Taxes.&#013;--Being victorious versus invasions.&#013;--Special Market Items.&#013;Ways to Lower Satisfaction:&#013;--Distasters temporarily lower satisfaction.&#013;--Raise Taxes.&#013;--Defeat in an Invasion.&#013;--Special Market Items.">{{getSatisfaction}} %</div>
+                                            <div class="col-lg-4"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-6">Food:</div>
+                                            <div class="right paddingZero col-lg-3">{{resourceStat.food}}</div>
+                                            <div id="monthRateFood" class="right paddingZero col-lg-3"data-toggle="tooltip" title="Food Rate of Each Month:&#013;--Citizens each need food each month.&#013;--Build and assign civilians to Farms.">{{plusFood}}{{monthlyIncome.foodRate}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">Lumber:</div>
+                                            <div class="right paddingZero col-lg-3">{{resourceStat.lumber}}</div>
+                                            <div id="monthRateLumber" class="right paddingZero col-lg-3"data-toggle="tooltip" title="Lumber Rate of Each Month:&#013;--Build and assign civilians to Lumber Mills.">{{plusLumber}}{{monthlyIncome.lumberRate}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">Stone:</div>
+                                            <div class="right paddingZero col-lg-3">{{resourceStat.stone}}</div>
+                                            <div id="monthRateStone" class="right paddingZero col-lg-3"data-toggle="tooltip" title="Stone Rate of Each Month:&#013;--Start and assign civilians to Mines.">{{plusStone}}{{monthlyIncome.stoneRate}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">Gold:</div>
+                                            <div class="right paddingZero col-lg-3">{{resourceStat.gold}}</div>
+                                            <div id="monthRateGold" class="right paddingZero col-lg-3" data-toggle="tooltip" title="Gold Rate of Each Month:&#013;--Tax your civilians.&#013;--Build a Tavern for Tax.&#013;--Build a Market for Tax.&#013;--Soliders require monthly wages.">{{plusGold}}{{monthlyIncome.goldRate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="right col-lg-12">
+                                                <p>{{getYears}}{{getMonths}}{{getDays}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div id="specialTimersDiv2" class="col-lg-6">
+
+                                            </div>
+                                            <div id="specialTimersDiv1" class="col-lg-6">
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div id="specialTimersDiv4" class="col-lg-6">
+
+                                            </div>
+                                            <div id="specialTimersDiv3" class="col-lg-6">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="line"></div>
+                        <div class="row" id="menu">
+                                    <button id="forestMenuButton" class="pageButton" v-on:click="forestMenu">F O R E S T</button>
+                                    <button id="workshopMenuButton" class="pageButton" v-on:click="workshopMenu">W O R K S H O P</button>
+                                    <button id="townCenterMenuButton" class="pageButton" v-on:click="townCenterMenu">TOWN CENTER</button>
+                                    <button id="barracksMenuButton" class="pageButton" v-on:click="barracksMenu">B A R R A C K S</button>
+                                    <button id="marketMenuButton" class="pageButton" v-on:click="marketMenu">M A R K E T</button>
+                        </div>
+                        <div id="line"></div>
+                        <div id="extend">
+                        <div class="container border" id="page">
+                            <div class="row" id="buttons1" v-if="!workshopPage">
+                                <div class="col-lg-5" v-if="townCenterPage">
+                                    <div class="container" id="laborDistribution">
+                                        <div class="row center townCenterTitle">C I V I L I A N  J O B S</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p>Farm:</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addFarmButton" class="addSubLabor" v-on:click="subFarmLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.farm}}/{{maxFarmLabor}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addFarmButton" class="addSubLabor" v-on:click="addFarmLabor">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Lumber Mill:</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addLumberButton" class="addSubLabor" v-on:click="subLumberLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.lumber}}/{{maxLumberLabor}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addLumberButton" class="addSubLabor" v-on:click="addLumberLabor">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Mine:</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addMineButton" class="addSubLabor" v-on:click="subMineLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.mine}}/{{maxMineLabor}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addMineButton" class="addSubLabor" v-on:click="addMineLabor">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Tavern:</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="subTavernButton" class="addSubLabor" v-on:click="subTavernLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.tavern}}/{{maxTavernLabor}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="addTavernButton" class="addSubLabor" v-on:click="addTavernLabor">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Soldier: </p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="subSoldierButton" class="addSubLabor" v-on:click="subSoldierLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.soldier}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Archer:</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="subArcherButton" class="addSubLabor" v-on:click="subArcherLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.archer}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Catapult:</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                                <button id="subCatapultButton" class="addSubLabor" v-on:click="subCatapultLabor">-</button>
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                    <p>{{laborDistribution.catapult}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="paddingZero col-lg-6">
+                                                <p>Free: </p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                            </div>
+                                            <div class="paddingZero center col-lg-2">
+                                                <p>{{laborDistribution.free}}</p>
+                                            </div>
+                                            <div class="paddingZero col-lg-2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="townCenterPage">
+                                    <div class="container no-right-padding">
+                                        <div class="row center townCenterTitle">T A X E S : {{getTaxPercent}} %</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 right">
+                                                <button id="subTax" class="addSubLabor" v-on:click="subTaxes">-</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button id="addTax" class="addSubLabor" v-on:click="addTaxes">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="townCenterPage">
+                                    <div class="container no-right-padding">
+                                        <div class="row center townCenterTitle">M O R A L E</div>
+                                        <div class="row">
+                                            <div class="col-lg-12 center">
+                                                <div id="progressBarSpace"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="holdFeastButton" class="townCenterButton" v-on:click="holdFeast">Hold a Feast</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow">
+                                            <p class="description">Temporarily boosts morale</p>
+                                        </div>
+                                        <div class="row" class="priceRow">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Food:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="feastFood">-{{FEAST_FACTORS.FOOD}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row space">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 center">
+                                                <div id="progressBar" v-if="actionCooldowns.townFaire.time">
+                                                    <div id="townFaireSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpace" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="townFaireButton" class="townCenterButton" v-on:click="townFaire">Hold a Town Faire</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!buildingNum.townsqr">
+                                            <p class="description">Requires Town Square</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="buildingNum.townsqr">
+                                            <p class="description">Temporarily boosts morale</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="buildingNum.townsqr">
+
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Food:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="faireFood">-{{TOWN_FAIR_FACTORS.FOOD}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="buildingNum.townsqr">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="faireGold">-{{TOWN_FAIR_FACTORS.GOLD}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2" v-if="barracksPage">
+                                    <div id="shieldDivLeft" class="no-padding-right">
+                                        <img id="shield" src="https://i.ibb.co/0JqhpF7/pngkey-com-silver-shield-png-1672614.png">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 center" v-if="barracksPage">
+                                    <div class="row" id="defense">W E A P O N S : {{resourceStat.weaponsNum}}</div>
+                                </div>
+                                <div class="col-lg-4 center" v-if="barracksPage">
+                                        <div class="row" id="defense">D E F E N S E : {{getDefense}}  %</div>
+                                </div>
+                                <div class="col-lg-2" v-if="barracksPage">
+                                    <div id="shieldDivRight" class="no-padding-left">
+                                        <img id="shield" src="https://i.ibb.co/0JqhpF7/pngkey-com-silver-shield-png-1672614.png">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" v-if="marketPage">
+                                    <div class="container" id="buyStats">
+                                        <div class="row center marketTitle">R E S O U R C E S</div>
+                                        <div class="row center purchaseItems">F O O D : {{FOOD_FACTORS.WORTH}} GOLD</div>
+                                        <div class="row center">
+                                            <div class="col-lg-6 right">
+                                                <button id="buyFood" class="marketButton" v-on:click="buyFood">Buy</button>
+                                            </div>
+                                            <div class="col-lg-6 left">
+                                                <button id="sellFood" class="marketButton" v-on:click="sellFood">Sell</button>
+                                            </div>
+                                        </div>
+                                        <div class="row center purchaseItems">L U M B E R : {{LUMBER_FACTORS.WORTH}} GOLD</div>
+                                        <div class="row center">
+                                            <div class="col-lg-6 right">
+                                                <button id="buyFood" class="marketButton" v-on:click="buyLumber">Buy</button>
+                                            </div>
+                                            <div class="col-lg-6 left">
+                                                <button id="sellFood" class="marketButton" v-on:click="sellLumber">Sell</button>
+                                            </div>
+                                        </div>
+                                        <div class="row center purchaseItems">S T O N E : {{STONE_FACTORS.WORTH}} GOLD</div>
+                                        <div class="row center">
+                                            <div class="col-lg-6 right">
+                                                <button id="buyFood" class="marketButton" v-on:click="buyStone">Buy</button>
+                                            </div>
+                                            <div class="col-lg-6 left">
+                                                <button id="sellFood" class="marketButton" v-on:click="sellStone">Sell</button>
+                                            </div>
+                                        </div>
+                                        <div class="row center purchaseItems">W E A P O N S : {{WEAPON_FACTORS.WORTH}} GOLD</div>
+                                        <div class="row center">
+                                            <div class="col-lg-6 right">
+                                                <button id="buyFood" class="marketButton" v-on:click="buyWeapons">Buy</button>
+                                            </div>
+                                            <div class="col-lg-6 left">
+                                                <button id="sellFood" class="marketButton" v-on:click="sellWeapons">Sell</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" v-if="marketPage">
+                                    <div class="container" id="buyStats">
+                                        <div class="row center marketTitle">M O N T H L Y  S P E C I A L</div>
+                                        <div class="row add-padding-special" v-if="!specialItemUsed">
+                                            <button id="specialItemButton" class="specialButton" v-on:click="specialPurchase">{{getSpecialTitle}}</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!buildingNum.market">
+                                            <p class="description" id="specialDescription">Requires Market.</p>
+                                        </div>
+                                        <div class="row" id="specialDescription" class="descriptionRow" v-if="buildingNum.market && !specialItemUsed">
+                                            <p class="description">{{getSpecialDescription}}</p>
+                                        </div>
+                                        <div id="specialItems" v-if="!specialItemUsed"></div>
+                                        <div class="row add-padding-special" id="specialDescription" class="descriptionRow" v-if="buildingNum.market && specialItemUsed">
+                                            <p class="description">No Strange Travelers in the Market</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="buttons2">
+                                <div class="col-lg-3" v-if="barracksPage">
+                                    <div class="container">
+                                        <div class="row" id="house">
+                                            <button id="makeWeaponsButton" class="barracksButton" v-on:click="makeWeapons">Make Weapons</button>
+                                        </div>
+                                    <div class="row" class="descriptionRow" v-if="!buildingNum.carpenter">
+                                            <p class="description">Requires Workshop.</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="buildingNum.carpenter">
+                                            <p class="description">Allows citizens to defend.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="buildingNum.carpenter">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Stone:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="weaponStone">-{{WEAPON_FACTORS.STONE_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.carpenter">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="weaponGold">{{WEAPON_FACTORS.GOLD_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.carpenter">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Defense:</p>
+                                            </div>
+                                            <div class="right col-lg-6">
+                                                <p class="price">1/3%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="barracksPage">
+                                    <div class="container">
+                                        <div class="row" id="house">
+                                            <button id="trainSoldierButton" class="barracksButton" v-on:click="trainTroops">Train Soldier</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!buildingNum.barracks">
+                                            <p class="description">Requires Barracks.</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="buildingNum.barracks">
+                                            <p class="description">Paid Monthly Wages to Protect.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="buildingNum.barracks">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="soldierGold">-{{SOLDIER_FACTORS.GOLD_TRAIN}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.barracks">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Weapon:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="soldierWeapon">1</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.barracks">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Wage:</p>
+                                            </div>
+                                            <div class="right col-lg-6">
+                                                <p class="price">{{SOLDIER_FACTORS.MONTHLY_WAGE}}/month</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="barracksPage">
+                                    <div class="container">
+                                        <div class="row" id="house">
+                                            <button id="trainArcherButton" class="barracksButton" v-on:click="trainArchers">Train Archer</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!buildingNum.walls">
+                                            <p class="description">Requires Walls.</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="buildingNum.walls">
+                                            <p class="description">Man the walls for defense.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="buildingNum.walls">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="archerGold">-{{ARCHER_FACTORS.GOLD_TRAIN}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.walls">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Weapon:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="archerWeapon">1</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.walls">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Wage:</p>
+                                            </div>
+                                            <div class="right col-lg-6">
+                                                <p class="price">{{ARCHER_FACTORS.MONTHLY_WAGE}}/month</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="barracksPage">
+                                    <div class="container">
+                                        <div class="row" id="house">
+                                            <button id="buildCatapultButton" class="barracksButton" v-on:click="buildCatapults">Build Catapult</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!buildingNum.siege">
+                                            <p class="description">Requires Siege Workshop.</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="buildingNum.siege">
+                                            <p class="description">Defend the city from siege.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="buildingNum.siege">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="catapultGold">-{{CATAPULT_FACTORS.GOLD_TRAIN}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.siege">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="right price" id="catapultLumber">{{CATAPULT_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.siege">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Soldiers:</p>
+                                            </div>
+                                            <div class="right col-lg-6">
+                                                <p class="price" id="catapultSoldier">{{CATAPULT_FACTORS.SOLDIER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="buildingNum.siege">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Wage:</p>
+                                            </div>
+                                            <div class="right col-lg-6">
+                                                <p class="price">{{CATAPULT_FACTORS.MONTHLY_WAGE}}/month</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" v-if="forestPage" id="addMargin">
+                                    <div class="container">
+                                        <div class="row forestPageMargin">
+                                            <div class="col-lg-3"></div>
+                                            <div class="col-lg-6">
+                                                <div id="progressBar" v-if="actionCooldowns.gatherWood.time">
+                                                    <div id="gatherWoodSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpace" v-else></div>
+                                            </div>
+                                            <div class="col-lg-3"></div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button v-if="forestPage" id="gatherWoodButton" class="forestButton" v-on:click="gatherWood">Gather Wood</button>
+                                        </div>
+                                        <div class="row" class="priceRow">
+                                            <div class="col-lg-3"></div>
+                                            <div class="col-lg-3">
+                                                <p id="forestPagePrice" class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <p id="forestPagePrice" class="price">+{{gatherWoodCalc}}</p>
+                                            </div>
+                                            <div class="col-lg-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6" v-if="forestPage" id="addMargin">
+                                    <div class="container">
+                                        <div class="row forestPageMargin">
+                                            <div class="col-lg-3"></div>
+                                            <div class="col-lg-6">
+                                                <div id="progressBar" v-if="actionCooldowns.huntFood.time">
+                                                    <div id="huntFoodSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpace" v-else></div>
+                                            </div>
+                                            <div class="col-lg-3"></div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="huntFoodButton" class="forestButton" v-on:click="huntFood">Hunt Food</button>
+                                        </div>
+                                        <div class="row" class="priceRow">
+                                            <div class="col-lg-3"></div>
+                                            <div class="col-lg-3">
+                                                <p id="forestPagePrice" class="priceItem">Food:</button>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <p id="forestPagePrice" class="price">+{{huntFoodCalc}}</p>
+                                            </div>
+                                            <div class="col-lg-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.houses >= 2">
+                                                    <div id="houseSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="houseButton" class="workshopButton" v-on:click="buildHouse">House</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.house.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.house.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.house.max">
+                                            <p class="description">Increases max population</button>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="!BUILD_REQ.house.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="houseLumber">-{{HOUSE_FACTORS.LUMBER_COST}}</button>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="!BUILD_REQ.house.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Beds:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price">+{{HOUSE_FACTORS.BEDS}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.farm">
+                                                    <div id="farmSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="farmButton" class="workshopButton" v-on:click="startFarm">Farm</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.farm.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.farm.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.farm.max">
+                                            <p class="description">A place to grow food.</button>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="!BUILD_REQ.farm.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="farmLumber">-{{FARM_FACTORS.LUMBER_COST}}</button>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="!BUILD_REQ.farm.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Food:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price">+{{FARM_FACTORS.INCOME_PER_WORKER}}/worker</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.carpenter">
+                                                    <div id="CworkshopSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="CworkshopButton" class="workshopButton" v-on:click="buildCarpentersWorkshop">Workshop</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.workshop.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.workshop.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.workshop.max">
+                                            <p class="description">Enables the builder.</button>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="!BUILD_REQ.workshop.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="workshopLumber">-{{CW_FACTORS.LUMBER_COST}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.townsqr">
+                                                    <div id="townSqrSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="townsqrButton" class="workshopButton" v-on:click="buildTownSquare">Town Square</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.townsqr.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.townsqr.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.townsqr.req && !BUILD_REQ.townsqr.max">
+                                            <p class="description">Requires Workshop</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.townsqr.pop && BUILD_REQ.townsqr.req && !BUILD_REQ.townsqr.max">
+                                            <p class="description">Requires Population 30</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.townsqr.pop && BUILD_REQ.townsqr.req && !BUILD_REQ.townsqr.max">
+                                            <p class="description">Fun for the whole town!</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.townsqr.pop && BUILD_REQ.townsqr.req && !BUILD_REQ.townsqr.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="townsqrLumber">-{{TOWN_SQR_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.townsqr.pop && BUILD_REQ.townsqr.req && !BUILD_REQ.townsqr.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="townsqrGold">-{{TOWN_SQR_FACTORS.GOLD_COST}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="buttons3">
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.lumbermill">
+                                                    <div id="lumbermillSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="lumberMillButton" class="workshopButton" v-on:click="buildLumberMill">Lumber Mill</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.lumber.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.lumber.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.lumber.req && !BUILD_REQ.lumber.max">
+                                            <p class="description">Requires Workshop</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.lumber.req && !BUILD_REQ.lumber.max">
+                                            <p class="description">Provides monthly lumber.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.lumber.req && !BUILD_REQ.lumber.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="lumberLumber">-{{LM_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.lumber.req && !BUILD_REQ.lumber.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price">+{{LM_FACTORS.INCOME_PER_WORKER}}/worker</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div id="progressBar" v-if="buildingNum.mine">
+                                                        <div id="mineSpan"></div>
+                                                    </div>
+                                                    <div id="progressBarSpaceWorkshop" v-else></div>
+                                                </div>
+                                            </div>
+                                        <div class="row" id="house">
+                                            <button id="mineButton" class="workshopButton" v-on:click="startMine">Mine</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.mine.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.mine.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.mine.req && !BUILD_REQ.mine.max">
+                                            <p class="description">Requires Workshop</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.mine.req && !BUILD_REQ.mine.max">
+                                            <p class="description">Workers mine for stone.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.mine.req && !BUILD_REQ.mine.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="mineLumber">-{{MINE_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.mine.req && !BUILD_REQ.mine.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Stone:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price">+{{MINE_FACTORS.INCOME_PER_WORKER}}/worker</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.tavern">
+                                                    <div id="tavernSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="tavernButton" class="workshopButton" v-on:click="buildTavern">Tavern</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.tavern.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.tavern.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.tavern.req && !BUILD_REQ.tavern.max">
+                                            <p class="description">Requires Workshop</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.tavern.req && !BUILD_REQ.tavern.max">
+                                            <p class="description">Every town needs one!</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.tavern.req && !BUILD_REQ.tavern.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="tavernLumber">-{{TAVERN_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.tavern.req && !BUILD_REQ.tavern.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Stone:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="tavernStone">-{{TAVERN_FACTORS.STONE_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.tavern.req && !BUILD_REQ.tavern.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price">+{{TAVERN_FACTORS.INCOME_PER_WORKER}}/worker</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.market">
+                                                    <div id="marketSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="marketButton" class="workshopButton" v-on:click="buildMarket">Market</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.market.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.market.max"><p> </p></div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.market.req && !BUILD_REQ.market.max">
+                                            <p class="description">Requires Workshop</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.market.req && !BUILD_REQ.market.max">
+                                            <p class="description">Place for trade</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.market.req && !BUILD_REQ.market.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="marketLumber">-{{MARKET_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.market.req && !BUILD_REQ.market.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="marketGold">-{{MARKET_FACTORS.GOLD_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.market.req && !BUILD_REQ.market.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Taxes:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price">+{{MARKET_FACTORS.GOLD_INCOME}}/month</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="buttons4">
+                                <div class="col-lg-12" v-if="forestPage" id="addMargin">
+                                    <p id="forestPageNote">Free civilians accompany and increase yield.</p>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.barracks">
+                                                    <div id="barracksSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="barracksButton" class="workshopButton" v-on:click="buildBarracks">Barracks</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.barracks.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.barracks.req && !BUILD_REQ.barracks.max">
+                                            <p class="description">Requires Workshop</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.barracks.req && !BUILD_REQ.barracks.max">
+                                            <p class="description">Start training an army.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.barracks.req && !BUILD_REQ.barracks.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="barracksLumber">-{{BRK_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.barracks.req && !BUILD_REQ.barracks.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Stone:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="barracksStone">-{{BRK_FACTORS.STONE_COST}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.walls">
+                                                    <div id="wallSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="wallsButton" class="workshopButton" v-on:click="buildWalls">Walls</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.wall.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.wall.req && !BUILD_REQ.wall.max">
+                                            <p class="description">Requires Barracks</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.wall.req && !BUILD_REQ.wall.max">
+                                            <p class="description">Adds defense and archers.</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.wall.req && !BUILD_REQ.wall.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="wallLumber">-{{WALL_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.wall.req && !BUILD_REQ.wall.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Stone:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="wallStone">-{{WALL_FACTORS.STONE_COST}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="progressBar" v-if="buildingNum.siege">
+                                                    <div id="siegeSpan"></div>
+                                                </div>
+                                                <div id="progressBarSpaceWorkshop" v-else></div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="house">
+                                            <button id="siegeButton" class="workshopButton" v-on:click="buildSiegeWorkshop">Siege Workshop</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.siege.max">
+                                            <p class="description">Max built.</button>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="!BUILD_REQ.siege.req && !BUILD_REQ.siege.max">
+                                            <p class="description">Requires Walls</p>
+                                        </div>
+                                        <div class="row" class="descriptionRow" v-if="BUILD_REQ.siege.req && !BUILD_REQ.siege.max">
+                                            <p class="description">Build catapults</p>
+                                        </div>
+                                        <div class="row" class="priceRow" v-if="BUILD_REQ.siege.req && !BUILD_REQ.siege.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Lumber:</button>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="siegeLumber">-{{SIEGE_FACTORS.LUMBER_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.siege.req && !BUILD_REQ.siege.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Stone:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="siegeStone">-{{SIEGE_FACTORS.STONE_COST}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="priceRow" v-if="BUILD_REQ.siege.req && !BUILD_REQ.siege.max">
+                                            <div class="col-lg-6">
+                                                <p class="priceItem">Gold:</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p class="price" id="siegeGold">-{{SIEGE_FACTORS.GOLD_COST}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" v-if="workshopPage">
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="about" v-if="about">
+            </div>
+            <div class="row" id="about" v-if="home">
+            </div>
+            <form v-on:submit.prevent="devCode" id="devText2">
+                <input type="text" v-model="devCode" id="devText">
+            </form>
+        </div>
+        
+    <script src="../js/game.js"></script>
+    </body>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <a id="footerLink" href="#">Website Github</a>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </div>
+</html>

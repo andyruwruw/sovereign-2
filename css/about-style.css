@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=VT323');
+@import url('https://fonts.googleapis.com/css?family=Oswald:200,300');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300');
+
+body
+{
+    width: 100%;
+    height: 100%;
+    
+}
+#background
+{
+    background-image: url("https://wallup.net/wp-content/uploads/2017/03/28/433987-digital_art-pixel_art-pixelated-pixels-nature-landscape-Asian_architecture-house-video_games-retro_games-8-bit-street-night.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#header
+{
+    width: 100%;
+    height: 65px;
+    padding-bottom: 20px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+#menuButtons
+{
+    width: 100%;
+    height: 50px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.247) 0%, rgba(0, 0, 0, 0) 100% 100%), url("https://img.itch.zone/aW1hZ2UvMTIxNjU4LzU2MDQxMC5wbmc=/original/hCUwLQ.png");
+    background-repeat: repeat;
+    background-position: 100px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+#headerTitle
+{
+    color: rgb(185, 185, 185);
+    padding-top: 5px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+
+    margin-left: 0px;
+    margin-right: 0px;
+    width: auto;
+    text-align: left;
+    margin-top: 0px;
+    text-transform: none;
+    display: block;
+    margin-bottom: 0px;
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
+    background-color: rgba(0,0,0,0);
+}
+.headerButton
+{
+    display: inline-block;
+    border: none;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: center;
+    color: rgb(185, 185, 185);
+    width: 90px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+.headerButton:hover
+{
+    padding-top: 16px;
+    color: rgb(185, 185, 185);
+    font-size: 130%;
+}
+#footer
+{
+    position: fixed;
+    width: 100%;
+
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+#footerLink
+{
+    display: block;
+}
+
+#about
+{
+    padding-top: 20px;
+    width: 80%;
+    height: 100%;
+}
+
+#makingOfButton
+{
+
+    background-color: rgba(35,31,53, 0);
+}
+
+#howToPlayButton
+{
+    background-color: rgba(35,31,53, 0);
+}
+#actionsButton
+{
+    background-image: url("https://i.ibb.co/X2P8Dn4/button.jpg");
+    background-size: cover;
+}
+#buildingsButton
+{
+    background-image: url("https://i.ibb.co/tQPjzQF/greenbutton-00000.jpg");
+    background-size: cover;
+}
+#disastersButton
+{
+    background-image: url("https://i.ibb.co/WG75HYT/dark-purple-00000.jpg");
+    background-size: cover;
+    background-color: rgb(35,31,53);
+}
+
+#specialsButton
+{
+    background-image: url("https://i.ibb.co/y8Gwjjs/dark-red-00000.jpg");
+    background-size: cover;
+    background-color: rgb(35,31,53);
+}
+
+.pageButton
+{
+    display: block;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    width: 100%;
+    height: 100%;
+    font-size: 200%;
+    color: white;
+    border: 0px;
+    margin: 0 auto;
+}
+
+
+#about
+{
+    padding: 5px;
+    margin-bottom: 100px;
+}
+p
+{
+    width: 100%;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: block;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 125%;
+}
+#lessMargin
+{
+    margin-bottom: 5px;
+}
+h1
+{
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-transform: uppercase;
+    display: block;
+    color: white;
+    margin-bottom: 20px;
+    background-image: url("https://img.itch.zone/aW1hZ2UvMTIxNjU4LzU2MDQxMC5wbmc=/original/hCUwLQ.png");
+    background-repeat: repeat;
+    background-position: 300px;
+}
+a
+{
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 100%;
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    display: block;
+    color: white;
+    background-image: url("https://img.itch.zone/aW1hZ2UvMTIxNjU4LzU2MDQxMC5wbmc=/original/hCUwLQ.png");
+    background-repeat: repeat;
+    background-position: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: 125%;
+}
+#goodbye
+{
+    width: 100%;
+}
+#darker
+{
+    color: rgba(146, 162, 255, 0.897);
+}
+#quote
+{
+    display: block;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+img
+{
+    width: 100%;
+    margin-top: 20px;
+    height: 80%;
+}
+#helloworld
+{
+    width: 25%;
+    height: 100%;
+    margin-top: 10px;
+    display: block;
+    margin: auto;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+#helloDiv
+{
+    width: 100;
+    display: block;
+    color: white;
+    background-image: url("https://img.itch.zone/aW1hZ2UvMTIxNjU4LzU2MDQxMC5wbmc=/original/hCUwLQ.png");
+    background-repeat: repeat;
+    background-position: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: 125%;
+}
+#sideButtonsDiv
+{
+    width: 100%;
+    height: 50px;
+    background-image: url("https://img.itch.zone/aW1hZ2UvMTIxNjU4LzU2MDQxMC5wbmc=/original/hCUwLQ.png");
+    background-repeat: repeat;
+    background-position: 100px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.sideButtons
+{
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    display: block;
+    height: 50px;
+    width: 100%;
+    color: white;
+    margin: auto;
+    font-size: 150%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+}
+.waystonotdie
+{
+    width: 100%;
+    margin-bottom: 100px;
+}
+h2
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 125%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    margin-top: 30px;
+}

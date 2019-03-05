@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+        <link rel="stylesheet" href="css/home-style.css" />
+        <meta name="viewport"/>
+        <title>Sovereign</title>
+        <audio id="click">
+            <source src="sounds/click.wav" type="audio/wav">
+        </audio>
+        <audio id="thunder">
+            <source src="sounds/storm.wav" type="audio/wav">
+        </audio>
+    </head>
+
+    <body id="background">
+        <div class="container" id="headerContainer">
+            <div class="row" id="header">
+                <div class="col-lg-6">
+                    <h1 id="headerTitle">S O V E R E I G N</h1>
+                </div>
+                <div class="col-lg-2">
+                    <a href="pages/../index.html" class="headerButton">HOME</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="pages/program.html" class="headerButton">PLAY</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="pages/about.html" class="headerButton">ABOUT</a>
+                </div>
+            </div>
+        </div>
+        <h1 id="rule">HOW WILL YOU RULE?</h1>
+        <a href="pages/program.html" onclick="playSound" id="playButton">S T A R T</a>
+
+        <script>
+            function playSound()
+            {
+                var media = document.getElementById("thunder");
+                media.volume = .5;
+                const playPromise = media.play();
+                if (playPromise !== null){
+                    playPromise.catch(() => { media.play(); })
+                }
+                var media = document.getElementById("click");
+                media.volume = .5;
+                const playPromise = media.play();
+                if (playPromise !== null){
+                    playPromise.catch(() => { media.play(); })
+                }
+            }
+        </script>
+    </body>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <a id="footerLink" href="#">Website Github</a>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </div>
+</html>
