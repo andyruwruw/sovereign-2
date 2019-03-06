@@ -33,6 +33,20 @@ body
     margin-top: 50px;
     margin-bottom: 20px;
 }
+.bold
+{
+    font-weight: bold;
+    padding: 3px;
+}
+.center
+{
+    text-align: center;
+    font-size: 125%;
+    width: 100%;
+}
+.clear
+{
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));}
 #headerTitle
 {
 

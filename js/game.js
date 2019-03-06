@@ -146,6 +146,12 @@ window.onload = function()
             disasterNum: 0,
             moreStats:0,
             gameOverNoisePlayed: 0,
+            
+            firstRobbery: 0,
+            firstPlague: 0,
+            firstFire: 0,
+            firstStorm: 0,
+            firstFamine: 0,
 
             finalDay: 0,
             finalMonth: 0,
@@ -166,8 +172,10 @@ window.onload = function()
             speed: 10,
             
 
-            tutorialHADBEENSHOWN: {time: 0,one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
-                                    eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0},
+            tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
+                                    eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
+                                nineteen: 0, twenty: 0, twentyone: 0, twentytwo: 0, twentythree: 0, twentyfour: 0, twentyfive: 0, twentysix: 0, twentyseven: 0,
+                                twentyeight: 0, twentynine: 0, thirty: 0, thirtyone: 0, thirtytwo: 0},
         },
         methods: 
         {
@@ -198,6 +206,7 @@ window.onload = function()
                     }
                 }
             },
+            
             tutorial()
             {
                 if (this.tutorialBool && tutorialToggle)
@@ -216,13 +225,13 @@ window.onload = function()
                     if (this.dayTime > 2 && this.numGatherWood == 0 && this.tutorialHADBEENSHOWN.one == 0 && !this.isGameOver)
                     {
                         this.tutorialHADBEENSHOWN.one = 1;
-                        this.tutorialMessages.push({text: "Welcome to Sovereign.\n\nThese optional tutorial messages will help you limp through your first game.\nAll the odds are stacked against you. See how long you can last!\n\nMake sure you see the full screen, zoom out with your browswer if needed.\n\n-----------------------------------------------------------\n\nLets start with gathering some wood.\nWe'll need it if we're going to build anything.", time: 20, done: 0, index: 0})
+                        this.tutorialMessages.push({text: "Welcome to Sovereign.\n\nThese optional tutorial messages will help you limp through your first game.\nSome stats display information when hovering as well.\n\nAll the odds are stacked against you. See how long you can last!\n\nMake sure you see the full screen, zoom out with your browser if needed.\n\n-----------------------------------------------------------\n\nLet's start with Gathering some Wood.\nWe'll need it if we're going to build anything.", time: 20, done: 0, index: 0})
                     }
                     if ((this.dayTime > 25 || this.monthTime > 1 || this.yearTime > 1) && this.numGatherWood >= 5 && this.tutorialHADBEENSHOWN.two == 0 && !this.isGameOver)
                     {
                         this.tutorialHADBEENSHOWN.two = 1;
                         console.log("Holding a baby's hand.");
-                        this.tutorialMessages.push({text: "Now let's add more space for others.\n\nGo to the workshop and build a house.", time: 20, done: 0, index: 0})
+                        this.tutorialMessages.push({text: "Now let's add more space for others.\n\nGo to the Workshop and build a House.", time: 20, done: 0, index: 0})
                     }
                     if (this.buildingNum.houses == 2 && this.tutorialHADBEENSHOWN.three == 0 && !this.isGameOver)
                     {
@@ -259,14 +268,14 @@ window.onload = function()
                     {
                         if (this.tutorialHADBEENSHOWN.time < 200)
                         {
-                            console.log(this.tutorialHADBEENSHOWN.time);
+            
                             this.tutorialHADBEENSHOWN.time += 1
                         }
                         else
                         {
                             this.tutorialHADBEENSHOWN.eight = 1;
                             console.log("ERROR ERROR ERROR, jk");
-                            this.tutorialMessages.push({text: "Next we should work towards getting a lumber mill.\n\nIt'll be way faster than Gathering Wood. Even with free civilians to help.\n\nKeep gathering wood until you can get a workshop.", time: 20, done: 0, index: 0})
+                            this.tutorialMessages.push({text: "Next we should work towards getting a Lumber Mill.\n\nIt'll be way faster than Gathering Wood. Even with free civilians to help.\n\nKeep gathering wood until you can get a workshop.", time: 20, done: 0, index: 0})
                         }  
                     }
                     if ((this.dayTime > 31 || this.monthTime > 1 || this.yearTime > 1) && this.numHuntFood == 0 && this.tutorialHADBEENSHOWN.nine == 0 && !this.isGameOver)
@@ -279,8 +288,185 @@ window.onload = function()
                     {
                         this.tutorialHADBEENSHOWN.ten = 1;
                         console.log("var ComputerHappy = 1;");
-                        this.tutorialMessages.push({text: "Almost there!\n\nThe workshop allows the builder to make all sorts of stuff. Lets continue to focus on getting that Lumber mill.\n\nRemember if you're at max population to build another house!\m\mFree citizens help with Gathering Wood.", time: 20, done: 0, index: 0})
+                        this.tutorialMessages.push({text: "Almost there!\n\nThe Workshop allows the builder to make all sorts of stuff.\n\nLets continue to focus on getting that Lumber Mill.\n\nRemember if you're at max population to build another House!\n\nFree citizens help with Gathering Wood.", time: 20, done: 0, index: 0})
                     }
+
+                    if (this.buildingNum.lumbermill == 1 && this.tutorialHADBEENSHOWN.eleven == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.eleven = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Perfect!\n\nWe can now start generating a lot more wood.\n\nHead over to the Town Center page and assign workers to the Lumber Mill!", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.laborDistribution.lumber >= 1 && this.tutorialHADBEENSHOWN.nineteen == 0 && !this.isGameOver)
+                    {
+                        if (this.tutorialHADBEENSHOWN.time3 < 300)
+                        {
+                            this.tutorialHADBEENSHOWN.time3 += 1
+                        }
+                        else
+                        {
+                            this.tutorialHADBEENSHOWN.nineteen = 1;
+                            console.log("what do these NUMBERS MEAN");
+                            this.tutorialMessages.push({text: "Fantastic.\n\nNext we should build a mine to start getting stone.\n\nMake sure not to neglect keeping available beds open for immigrants.\n\nBuild houses when needed.\n\nYou also might find a farm at this point useful, but optional.\n\nLet's get a mine!", time: 20, done: 0, index: 0})
+                        }
+                    }
+                    if (this.buildingNum.mine == 1 && this.tutorialHADBEENSHOWN.twenty == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twenty = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Fantastic.\n\nDon't forget to assign people to that so we get some STONE!\n\nStone is going to be useful to work towards a Tavern, which if staffed provides gold.\n\nTaxing is a good way to get quick cash but not fanastic.\n\nI wouldn't recommend going past 2%.", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.laborDistribution.mine >= 1 && this.tutorialHADBEENSHOWN.twentyone == 0 && !this.isGameOver)
+                    {
+                        if (this.tutorialHADBEENSHOWN.time4 < 400)
+                        {
+                            this.tutorialHADBEENSHOWN.time4 += 1
+                        }
+                        else
+                        {
+                            this.tutorialHADBEENSHOWN.twentyone = 1;
+                            console.log("what do these NUMBERS MEAN");
+                            this.tutorialMessages.push({text: "Alrighty perfect.\n\nWe're now making monthly stone!\n\nDon't forget you can make multiple Lumber Mills and Mines to add to the yeild.\n\nLet's work towards that Tavern.\n\nDont' forget to keep up with Farms and Houses!", time: 20, done: 0, index: 0})
+                        }
+                    }
+
+                    if (this.buildingNum.tavern == 1 && this.tutorialHADBEENSHOWN.twentytwo == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentytwo = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "The Tavern is a great way to make gold with happy citizens!\n\nBe sure to staff it right away.\n\nWe're going to need to work towards a Market next.\n\nTaxes from the Market as well as it's abilities will help us out of a lot of tricky situations.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.buildingNum.market == 1 && this.tutorialHADBEENSHOWN.twentythree == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentythree = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "The Market page is a powerful tool.\n\nYou can exchange resources for gold and vice versa.\n\nSpecial Monthly Items are crucial for success.\n\nKeep a careful watch on those.\n\nNow that we have a Market, it's time for defenses.\n\nBuild a Barracks.", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.citizensStat.population >=25 && this.resourceStat.weaponsNum == 0 && this.tutorialHADBEENSHOWN.twentyfour == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentyfour = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Looks like we're getting dangerously close to being big enough to be invaded.\n\nAt population 30 we'll need defenses to survive.\n\nMaking Weapons is a quick and easy way to add to defenses.\n\nThey allow citizens to fight.\n\nThey're a short term solution if you can't create an army yet.", time: 20, done: 0, index: 0})
+                    }
+
+
+                    if (this.buildingNum.barracks == 1 && this.tutorialHADBEENSHOWN.twentyfive == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentyfive = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "We can now start strong defenses.\n\nSoldiers are expensive.\n\nSure they cost a Weapon and gold, but they also have monthly wages.\n\nThey're worth the investment early on, but Walls and Catapults are the real deal.\n\nLet's work towards those.", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.citizensStat.population >= 30 && this.tutorialHADBEENSHOWN.twentysix == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentysix = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "We can finally build a Town Square!\n\nNot only does building it boost stats, but Town Faires are a great source of happiness.\n\nThey take time to plan, but their Satisfaction Boost lasts and add way more then Feasts!\n\nThey're cheap so build one right away!", time: 20, done: 0, index: 0})
+                    }
+                    if ((this.monthTime > 2 || this.yearTime > 1) && this.resourceStat.food <= 5 && this.tutorialHADBEENSHOWN.twentyseven == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentyseven = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "HEY!\n\nYou're pretty low on food there!\n\nBuild a Farm\nHunt Food\nBuy Some at the Market\n\nAnd don't forget to assign people to work at the Farms!", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.buildingNum.walls == 1 && this.tutorialHADBEENSHOWN.twentyeight == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentyeight = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Walls are a great source of defense.\n\nNot only do they naturally add defense, they allow you to train archers.\n\nYou can now make a Seige Workshop as well now and create catapults.\n\nDon't forget that multiple Walls can be built up!", time: 20, done: 0, index: 0})
+                    }
+                    
+                    if (this.buildingNum.siege == 1 && this.tutorialHADBEENSHOWN.twentynine == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentynine = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "A Siege Workshop allows you to build Catapults.\n\nCatapults add a lot of defense but are pricey.\n\nNot only do they cost Lumber and Gold, but two Soldiers as well.\n\nYou can unassign them on the Town Square Page.", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.buildingNum.farm == 1 && this.tutorialHADBEENSHOWN.thirty == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twentynine = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Farms are Fantastic.\n\nYou can have up to 50 workers with max farms.\n\nAlways keep someone in a Farm.\n\nThey don't feel too useful at first, but wait 'til your first Famine.", time: 20, done: 0, index: 0})
+                    }
+
+                    if (this.specialItemUsed == 1 && this.tutorialHADBEENSHOWN.thirtyone == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.thirtyone = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Looks like you bought your first monthly special.\n\nStrange people visit the Market each month, always a good idea to check out what they have to offer.\n\nOffers include risk, expensive prices, and moral dilemmas.\n\nUse your money wisely. Special Offers are the difference between winning and losing.\n\nSpecial Offers:\n\nMarching Army\nRefugee Group\nForcing Night Labor\nTraveling Performers\nMercenaries\nStrange Wizard", time: 20, done: 0, index: 0})
+                    }
+
+
+
+                    if (this.firstFamine == 1 && this.tutorialHADBEENSHOWN.twelve == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.twelve = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "That's a BUMMER!\n\nFamines are a bit issue if you don't have enough food.\n\n  Citizens need twice as much food.\n  Farms produce 1/3 of their usual.\n\nAssign everyone you can to farms, buy food if you have a market.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.firstFire == 1 && this.tutorialHADBEENSHOWN.thirteen == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.thirteen = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Uh oh!\n\nFires are relatively harmless to everything except houses\n\nThey have a given chance of destroying your houses and causing people to leave.\n\nRebuild the houses before citizens wander off!", time: 20, done: 0, index: 0})
+                    }
+                    if (this.firstPlague == 1 && this.tutorialHADBEENSHOWN.fourteen == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.fourteen = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Plagues suck.\n\nThey kill off citizens and get everyone bummed out!", time: 20, done: 0, index: 0})
+                    }
+                    if (this.firstRobbery == 1 && this.tutorialHADBEENSHOWN.fifteen == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.fifteen = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "YOU'VE BEEN ROBBED.\n\nStrong defenses will make it harder for them to get off with so much!", time: 20, done: 0, index: 0})
+                    }
+                    if (this.firstStorm == 1 && this.tutorialHADBEENSHOWN.sixteen == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.sixteen = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "That's quite a storm you just had.\n\nStorms endanger your farms leaving them at risk for distruction.\n\nIf a farm was destroyed, don't forget to go to the Town Center Page and reassign your wandering farmers!", time: 20, done: 0, index: 0})
+                    }
+                    if (this.invasionNum == 1 && this.tutorialHADBEENSHOWN.seventeen == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.seventeen = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "Looks like you just had your first invasion.\n\nInvasions can get nasty.\n\nThe enemies strength is determined by your population.\n\nHow badly you lose will determine how many people die, how much they take, and whether your people get depressed.\n\nDon't forget that soldier are the first to die.\n\nAfter every invasion be sure to check your defenses again.\n\nThe bottom left of your screen displays Boosts, Depressions and Powerups.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.disasterNum == 1 && this.tutorialHADBEENSHOWN.eightteen == 0 && !this.isGameOver)
+                    {
+                        if (this.tutorialHADBEENSHOWN.time2 < 250)
+                        {
+                            console.log(this.tutorialHADBEENSHOWN.time2);
+                            this.tutorialHADBEENSHOWN.time2 += 1
+                        }
+                        else
+                        {
+                            this.tutorialHADBEENSHOWN.eightteen = 1;
+                            console.log("what do these NUMBERS MEAN");
+                            this.tutorialMessages.push({text: "Disasters and Invasions have a chance of occuring about once a month.\n\nCitezens can get really bummed out about them.\n\nThe most likely way you'll lose is if you don't react to disasters by giving your citzens reason's to smile.\n\nHold Feasts\nHold Faires\nBuild a Tavern\nBuild a Market\nLower Taxes\nTraveling Performers\n\nIf you drop below 20%, you're done.", time: 20, done: 0, index: 0})
+                        }
+                    }
+
+                    /*
+                    tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
+                        eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
+                    nineteen: 0, twenty: 0, twentyone: 0, twentytwo: 0, twentythree: 0, twentyfour: 0, twentyfive: 0, twentysix: 0, twentyseven: 0,
+                    twentyeight: 0, twentynine: 0, thirty: 0, thirtyone: 0},
+                    */
+                    if ((this.tutorialHADBEENSHOWN.one == 1) && (this.tutorialHADBEENSHOWN.two == 1) && (this.tutorialHADBEENSHOWN.three == 1) && (this.tutorialHADBEENSHOWN.four == 1) && (this.tutorialHADBEENSHOWN.five == 1) && (this.tutorialHADBEENSHOWN.six == 1) && (this.tutorialHADBEENSHOWN.seven == 1) && (this.tutorialHADBEENSHOWN.eight == 1) && (this.tutorialHADBEENSHOWN.nine == 1) && (this.tutorialHADBEENSHOWN.ten == 1) && (this.tutorialHADBEENSHOWN.eleven == 1) && (this.tutorialHADBEENSHOWN.twelve == 1) && (this.tutorialHADBEENSHOWN.thirteen == 1) && (this.tutorialHADBEENSHOWN.fourteen == 1) && (this.tutorialHADBEENSHOWN.fifteen == 1) && (this.tutorialHADBEENSHOWN.sixteen == 1) && (this.tutorialHADBEENSHOWN.seventeen == 1) && (this.tutorialHADBEENSHOWN.eightteen == 1) && (this.tutorialHADBEENSHOWN.nineteen == 1) && (this.tutorialHADBEENSHOWN.twenty == 1) && (this.tutorialHADBEENSHOWN.twentyone == 1) && (this.tutorialHADBEENSHOWN.twentytwo == 1) && (this.tutorialHADBEENSHOWN.twentythree == 1) && (this.tutorialHADBEENSHOWN.twentyfour == 1) && (this.tutorialHADBEENSHOWN.twentyfive == 1) && (this.tutorialHADBEENSHOWN.twentysix == 1) && (this.tutorialHADBEENSHOWN.twentyseven == 1) && (this.tutorialHADBEENSHOWN.twentyeight == 1) && (this.tutorialHADBEENSHOWN.twentynine == 1) && (this.tutorialHADBEENSHOWN.thirty == 1) && (this.tutorialHADBEENSHOWN.thirtyone == 1) && (this.tutorialHADBEENSHOWN.thirtytwo == 0))
+                    {
+                        this.tutorialHADBEENSHOWN.thirtytwo = 1;
+                        console.log("what do these NUMBERS MEAN");
+                        this.tutorialMessages.push({text: "That's all the tutorials have to offer!\n\nYou're on your own now.\n\nIf you need more help, there's an about page with info.\n\nBest of luck to you and may you reign for years to come.\n\nEmail me your high scores!\n\nandrew@youngshome.com", time: 20, done: 0, index: 0})
+                    }
+
                 }
             },
             disableTutorials()
@@ -2699,7 +2885,7 @@ window.onload = function()
 
             disasterRobbers()
             {
-                
+                this.firstRobbery = 1;
                 var resources = [0,0,0,0];
                 this.disasterNum += 1;
                 if (this.resourceStat.food > 0)
@@ -2894,6 +3080,7 @@ window.onload = function()
 
             disasterFamine()
             {
+                this.firstFamine = 1;
                 this.disasterNum += 1;
                 this.famine = this.FAMINE_FACTORS.FOOD_LOSS;
                 this.specialsArray.push({time: 120, starttime: 120, id: "famineSpan", title: "Famine"});
@@ -2903,6 +3090,7 @@ window.onload = function()
 
             disasterFire()
             {
+                this.firstFire = 1;
                 this.disasterNum += 1;
                 var string = "";
                 this.playSound(this.SOUNDS.fire.sound, this.SOUNDS.fire.volume);
@@ -2945,6 +3133,7 @@ window.onload = function()
 
             disasterStorm()
             {
+                this.firstStorm = 1;
                 this.disasterNum += 1;
                 this.playSound(this.SOUNDS.storm.sound, this.SOUNDS.storm.volume);
                 this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Storm&nbsp;Depression"});
@@ -2994,6 +3183,7 @@ window.onload = function()
 
             disasterPlague()
             {
+                this.firstPlague = 1;
                 this.disasterNum += 1;
                 this.playSound(this.SOUNDS.cough.sound, this.SOUNDS.cough.volume);
                 var string = "";

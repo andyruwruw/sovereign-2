@@ -45,15 +45,17 @@
             </div>
             <div class="row" id="makingOf" v-if="start">
                 <img src="https://i.ibb.co/P6XS7Ym/soverign-about-00000.jpg">
+                <p class="bold center">1,636 Lines of HTML, 1,672 Lines of CSS, and 4,442 Lines of JavaScript.</p>
             </div>
             <div class="row" id="makingOf" v-if="makeingOf">
                 <h1>Making Of</h1>
                 <p>I'm currently enrolled in a web design class at Brigham Young University!</p>
-                <p>I began working on this project after our first lab. This was going to be a direct rip off of "A Dark Room", an amazing text based game I had played years ago.</p>
-                <p>But my childhood memories of playing "Age of Mythology" heavely influenced the logistics game as well. As an homage to those days, 50% of the sound effects are directly from "Age of Mythology".</p>
+                <p>I began working on this project after our first lab MONTHS ago. This was going to be a direct rip off of "A Dark Room", an amazing text based game I had played years ago.</p>
+                <p>But my childhood memories of playing "Age of Mythology" heavily influenced the logistics game as well. As an homage to those days, 50% of the sound effects are directly from "Age of Mythology".</p>
                 <a href="http://adarkroom.doublespeakgames.com/">A Dark Room</a>
-                <p>I did a ton of research online and was using an HTML tool called Canvas to display everything. It was a nightmare.</p>
-                <p>I had no idea what I was doing and it turned out REALLY bad.</p>
+                <p>I did a ton of research online and was using an HTML tool called Canvas to display everything.</p>
+                <p class="bold">It was a nightmare.</p>
+                <p>I had no idea what I was doing and the hundreds of hours I put into it were my own fault.</p>
                 <p>I had to define what a BUTTON was by finding the "X" "Y" of each click and hard coding button positions in. Everything was painful.</p>
                 <p>80% of the code and functions were THERE, I just lacked the time to sit down for hours programming in buttons to displaying them.</p>
                 <p>You can find that failed project here.</p>
@@ -61,11 +63,16 @@
                 <p>I abandoned that and worked on my labs and other fun projects -- like a website that will 100% give you a seizure.</p>
                 <a href="http://seizure.andrewdanielyoung.com/">This Will Cause Seizures</a>
                 <p>Then we learned about Vue in class! I knew I had two weeks til my Creative Project using Vue was due, so I got a head start.</p>
-                <p>It was a nightmare to convert the thousands of lines I had written for the original game to something Vue could understand. 
+                <p>It was a nightmare to convert the thousands of lines I had written for the original game to something Vue could understand.</p>
                 <p>More time even to use layers and layers of Bootstrap Grids to display the screen.</p>
                 <p>More time even to decide I wanted sound effects and search for the perfect ones online. </p>
                 <p>MORE time even to add "this." to EVERY VARIABLE.</p>
-                <p>Looking back there are so many things I could have done better. There are a bunch of repeating code that could have been solved with a clever method and better data structures.</p>
+                <p>In total, I have no doubt logged over 200 hours into this one project.</p>
+                <p class="bold">1,636 Lines of HTML, 1,672 Lines of CSS, and 4,442 Lines of JavaScript.</p>
+                <p>It's been quite the monster to sort through just to find what I need to edit.</p>
+                <p>Looking back there are so many things I could have done better. I mean given that for every line of HTML, I had a line of CSS, screams something could have been done better.</p>
+                <p>I will say this, a large portion of the code, which came from the original canvas project, was before I had learned much. The idea of pushing objects to an array to be read by a function that displayed them as a comment and kept track of their time was a MIND blower to me back when I wrote it.</p>
+                <p>There are a bunch of repeating code that could have been solved with a clever method and better data structures.</p>
                 <p>I also just read on Vue's website about components which apprently it said clearly:</p>
                 <p id="quote">"In a Vue application, we don’t want all of our data, methods, computed properties, etc. living on the root instance. Over time, that would become unmanageable".</p>
                 <p>All those hours of scrolling through thousands of lines.</p>
@@ -83,11 +90,20 @@
                 <p>My efforts to fufill that in this instance were special market items of which can be morally offputing.</p>
                 <p id="goodbye">I hope you enjoy the game!</p>
                 <p>It was a lot of work and a lot of fun to write.</p>
+                <p>I'm very proud of this project and will never forget all the zombie like coding days I spent on it.</p>
+                <p>To anyone out there who wishes they knew how to code, I barely know anything. I just put in the time. Emphasis on time.</p>
+                <p>I researched what I needed to know, and made the best due I could with the knowledge I have.</p>
+                <p>You can too!</p>
                 <p id="goodbye">Big thanks to "Ctr-F" and "Double-Click" for being my pals through it all.</p>
+                <p>But in all realness, big thanks to Rex Boyce, Dominick Lanni, Cole Hanson, Ali Young, Cyrus Cowley and Chris Tabaska for helping me debug and balance.</p>
+                <p>And to everyone else for the support while I missed tons of homework assignments and school -- off stuck in my keyboard.</p>
                 <p id="darker">Next project is a maze game called "The Libary Game"!</p>
-                <p>Rules are you have to be in a public area with volume on full blast. The ball follows your mouse as you go through the maze of moving objects, and if you touch anything your computer plays really loud embarassing sounds which get increasingly worse! HAHA.</p>
+                <p>Rules are you have to be in a public area with volume on full blast. The ball follows your mouse as you go through the maze of moving objects, and if you touch anything your computer plays really loud embarassing sounds which get increasingly worse!</p>
+                <p>HA HA!</p>
                 <p>Farewell</p>
                 <p id="goodbye">-Andrew Young</p>
+                <p>PS: Email me your high scores!</p>
+                <p>andrew@youngshome.com</p>
             </div>
             <div class="row" id="howToPlay" v-if="howToPlay">
                 <h1>Sovereign is all about Balance.</h1>
@@ -175,10 +191,11 @@
         <div class="container">
             <div class="row">
                     <div class="col-lg-6">
-                            <a id="footerLink" href="https://github.com/andyruwruw/gamesovereign.git">Website Github</a>
+                            <a class="clear" id="footerLink" href="https://github.com/andyruwruw/gamesovereign.git">Website Github</a>
                         </div>
                         <div class="col-lg-6">
-                                <a id="footerLink" href="#">Zoom out if you cannot see the full window.</a></div>
+                            <a class="clear"id="footerLink" href="#">Zoom out if you cannot see the full window.</a>
+                        </div>
             </div>
         </div>
     </div>
