@@ -166,32 +166,36 @@ window.onload = function()
             speed: 10,
             
 
-            tutorialHADBEENSHOWN: {time: 0,one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0},
+            tutorialHADBEENSHOWN: {time: 0,one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
+                                    eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0},
         },
         methods: 
         {
             // -----------------------------Time Keepers
             refreshData()
             {
-                if (!this.isGameOver)
+                if (!this.showModal)
                 {
-                    this.finalDay = this.dayTime;
-                    this.finalMonth = this.monthTime
-                    this.finalYear = this.yearTime;
-                }
-                this.gameOver();
-                this.townTypeCalc();
-                this.checkDevCode();
-                this.defenseUpdates();
-                this.monthlyIncomeCalc();
-                this.satisfactionUpdates();
-                this.updateColors();
-                this.commentWriter();
-                this.elapsedTime();
-                this.tutorial();
-                if (this.citizensStat.population > this.highestPopulation)
-                {
-                    this.highestPopulation = this.citizensStat.population;
+                    if (!this.isGameOver)
+                    {
+                        this.finalDay = this.dayTime;
+                        this.finalMonth = this.monthTime
+                        this.finalYear = this.yearTime;
+                    }
+                    this.gameOver();
+                    this.townTypeCalc();
+                    this.checkDevCode();
+                    this.defenseUpdates();
+                    this.monthlyIncomeCalc();
+                    this.satisfactionUpdates();
+                    this.updateColors();
+                    this.commentWriter();
+                    this.elapsedTime();
+                    this.tutorial();
+                    if (this.citizensStat.population > this.highestPopulation)
+                    {
+                        this.highestPopulation = this.citizensStat.population;
+                    }
                 }
             },
             tutorial()
@@ -202,6 +206,7 @@ window.onload = function()
                     {
                             if (!this.tutorialMessages[i].done)
                             {
+                                this.playSound("squeak", .1);
                                 this.tutorialBools[this.tutorialMessages[i].index].done = 1;
                                 this.tutorialMessageCurrent = this.tutorialMessages[i].text;
                                 this.tutorialMessages[i].done = 1;
@@ -211,7 +216,7 @@ window.onload = function()
                     if (this.dayTime > 2 && this.numGatherWood == 0 && this.tutorialHADBEENSHOWN.one == 0 && !this.isGameOver)
                     {
                         this.tutorialHADBEENSHOWN.one = 1;
-                        this.tutorialMessages.push({text: "Lets start with gathering some wood.\nWe'll need it if we're going to build anything.", time: 20, done: 0, index: 0})
+                        this.tutorialMessages.push({text: "Welcome to Sovereign.\n\nThese optional tutorial messages will help you limp through your first game.\nAll the odds are stacked against you. See how long you can last!\n\nMake sure you see the full screen, zoom out with your browswer if needed.\n\n-----------------------------------------------------------\n\nLets start with gathering some wood.\nWe'll need it if we're going to build anything.", time: 20, done: 0, index: 0})
                     }
                     if ((this.dayTime > 25 || this.monthTime > 1 || this.yearTime > 1) && this.numGatherWood >= 5 && this.tutorialHADBEENSHOWN.two == 0 && !this.isGameOver)
                     {
@@ -252,16 +257,29 @@ window.onload = function()
         
                     if (this.buildingNum.houses >= 2 && this.tutorialHADBEENSHOWN.eight == 0 && !this.isGameOver)
                     {
-                        if (this.tutorialHADBEENSHOWN.time < 10)
+                        if (this.tutorialHADBEENSHOWN.time < 200)
                         {
+                            console.log(this.tutorialHADBEENSHOWN.time);
                             this.tutorialHADBEENSHOWN.time += 1
                         }
                         else
                         {
                             this.tutorialHADBEENSHOWN.eight = 1;
                             console.log("ERROR ERROR ERROR, jk");
-                            this.tutorialMessages.push({text: "Next we should work towards getting a lumber mill.\n\nIt'll be way faster than Gathering Wood.\n\nKeep gathering wood until you can get a workshop.", time: 20, done: 0, index: 0})
+                            this.tutorialMessages.push({text: "Next we should work towards getting a lumber mill.\n\nIt'll be way faster than Gathering Wood. Even with free civilians to help.\n\nKeep gathering wood until you can get a workshop.", time: 20, done: 0, index: 0})
                         }  
+                    }
+                    if ((this.dayTime > 31 || this.monthTime > 1 || this.yearTime > 1) && this.numHuntFood == 0 && this.tutorialHADBEENSHOWN.nine == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.nine = 1;
+                        console.log("Let's go to another website and look at more numbers!");
+                        this.tutorialMessages.push({text: "Pretty good.\n\nWe'll get hungry if we don't have enough food too!\n\nTry hunting for food as well.\n\nYour food is displayed in the top left, as well as the amount you need each month!", time: 20, done: 0, index: 0})
+                    }
+                    if (this.buildingNum.carpenter == 1 && this.tutorialHADBEENSHOWN.ten == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.ten = 1;
+                        console.log("var ComputerHappy = 1;");
+                        this.tutorialMessages.push({text: "Almost there!\n\nThe workshop allows the builder to make all sorts of stuff. Lets continue to focus on getting that Lumber mill.\n\nRemember if you're at max population to build another house!\m\mFree citizens help with Gathering Wood.", time: 20, done: 0, index: 0})
                     }
                 }
             },
