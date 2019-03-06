@@ -1,4 +1,5 @@
 
+var tutorialToggle = 1;
 window.onload = function() 
 {
     let game = new Vue                                  // VUE OBJECT
@@ -72,7 +73,7 @@ window.onload = function()
             LM_FACTORS       : {PER_LAND: 3,  LUMBER_COST: 300, WORKER_SLOTS: 5,  INCOME_PER_WORKER: 60},
             BRK_FACTORS      : {PER_LAND: 1,  LUMBER_COST: 200, STONE_COST: 100},
             MINE_FACTORS     : {PER_LAND: 3,  LUMBER_COST: 500, WORKER_SLOTS: 5, INCOME_PER_WORKER: 25},
-            TAVERN_FACTORS   : {PER_LAND: 1,  LUMBER_COST: 400, STONE_COST: 200,  WORKER_SLOTS: 3, INCOME_PER_WORKER: 10, SAT_BOOST: 0.1},
+            TAVERN_FACTORS   : {PER_LAND: 1,  LUMBER_COST: 400, STONE_COST: 200,  WORKER_SLOTS: 5, INCOME_PER_WORKER: 10, SAT_BOOST: 0.1},
             MARKET_FACTORS   : {PER_LAND: 1,  LUMBER_COST: 400, GOLD_COST: 100,   GOLD_INCOME: 50, SAT_BOOST: 0.05},
             WALL_FACTORS     : {PER_LAND: 5,  LUMBER_COST: 300, STONE_COST: 500,  DEFENSE_BONUS: 0.10},
             SIEGE_FACTORS    : {PER_LAND: 1,  LUMBER_COST: 500, STONE_COST: 500,  GOLD_COST: 500},
@@ -131,8 +132,8 @@ window.onload = function()
             MERCENARIES_FACTORS: {GOLD_COST: 300, MONTHS: 3, FOOD_COST: 200},
             WIZARD_FACTORS: {GOLD_COST: -600, CHANCE: .2},
             specialsArray: [],
-            timeSinceInvasion: 60,
-            timeSinceDisaster: 40,
+            timeSinceInvasion: 40,
+            timeSinceDisaster: 60,
             specialItem: 1,
             specialItemUsed: 0,
             refugeeBool: 0,
@@ -144,6 +145,7 @@ window.onload = function()
             invasionNum: 0,
             disasterNum: 0,
             moreStats:0,
+            gameOverNoisePlayed: 0,
 
             finalDay: 0,
             finalMonth: 0,
@@ -151,12 +153,20 @@ window.onload = function()
             tutorialBool: 1,
             numGatherWood: 0,
             numHuntFood: 0,
+            showModal: false,
 
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
 
             i: 0,
             j: 0,
             tutorialMessages: [],
+            tutorialMessageBool: 0,
+            tutorialBools: [{done: 0}],
+            tutorialMessageCurrent: "",
+            speed: 10,
+            
+
+            tutorialHADBEENSHOWN: {time: 0,one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0},
         },
         methods: 
         {
@@ -186,24 +196,78 @@ window.onload = function()
             },
             tutorial()
             {
-                if (this.tutorialBool)
+                if (this.tutorialBool && tutorialToggle)
                 {
                     for (var i = 0; i < this.tutorialMessages.length; i++)
                     {
-                        if (this.tutorialMessages[i].time <= 0)
+                            if (!this.tutorialMessages[i].done)
+                            {
+                                this.tutorialBools[this.tutorialMessages[i].index].done = 1;
+                                this.tutorialMessageCurrent = this.tutorialMessages[i].text;
+                                this.tutorialMessages[i].done = 1;
+                                this.showModal = true;
+                            } 
+                    }
+                    if (this.dayTime > 2 && this.numGatherWood == 0 && this.tutorialHADBEENSHOWN.one == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.one = 1;
+                        this.tutorialMessages.push({text: "Lets start with gathering some wood.\nWe'll need it if we're going to build anything.", time: 20, done: 0, index: 0})
+                    }
+                    if ((this.dayTime > 25 || this.monthTime > 1 || this.yearTime > 1) && this.numGatherWood >= 5 && this.tutorialHADBEENSHOWN.two == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.two = 1;
+                        console.log("Holding a baby's hand.");
+                        this.tutorialMessages.push({text: "Now let's add more space for others.\n\nGo to the workshop and build a house.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.buildingNum.houses == 2 && this.tutorialHADBEENSHOWN.three == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.three = 1;
+                        console.log("Computing the meaning of life...");
+                        this.tutorialMessages.push({text: "Visitors come every month and will stay if you have house space and satisfied citizens!\n\nYour population shows citizens and available beds.\n\nBe careful with satisfaction, if it goes below 20% you get BANISHED!", time: 20, done: 0, index: 0})
+                    }
+                    if (this.workshopPage && this.tutorialHADBEENSHOWN.four == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.four = 1;
+                        console.log("I'm losing my bits.");
+                        this.tutorialMessages.push({text: "The Workshop page allows you to build.\n\nThe builder needs materials for each item which are listed below.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.townCenterPage && this.tutorialHADBEENSHOWN.five == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.five = 1;
+                        console.log("I'm a speedy speedy boy.");
+                        this.tutorialMessages.push({text: "The Town Center page allows you to re-assign citizens to different tasks.\n\nBuildings need workers to function so don't forget to keep them staffed!\n\nYou can also boost satisfaction with feasts and faires.\n\nWatch out! Citizens hate taxes.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.barracksPage && this.tutorialHADBEENSHOWN.six == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.six = 1;
+                        console.log("Are you listening");
+                        this.tutorialMessages.push({text: "The Barracks page is where you can build up your defenses.\n\nInvasions start occuring after your population reaches 30.\n\nEnemy strength depends on your population size.\n\nAll forms of military cost monthly wages so maintain balance.\n\nBe Prepared.", time: 20, done: 0, index: 0})
+                    }
+                    if (this.marketPage && this.tutorialHADBEENSHOWN.seven == 0 && !this.isGameOver)
+                    {
+                        this.tutorialHADBEENSHOWN.seven = 1;
+                        console.log("Let's go to another website and look at more numbers!");
+                        this.tutorialMessages.push({text: "The Market page allows you to transfer resources into gold and vice versa.\n\nSpecial market items can be the key to surviving.\n\nKeep an eye out the deal each month, and make good choices.", time: 20, done: 0, index: 0})
+                    }
+        
+                    if (this.buildingNum.houses >= 2 && this.tutorialHADBEENSHOWN.eight == 0 && !this.isGameOver)
+                    {
+                        if (this.tutorialHADBEENSHOWN.time < 10)
                         {
-                            this.tutorialMessages.splice(i,1);
+                            this.tutorialHADBEENSHOWN.time += 1
                         }
                         else
                         {
-                            this.tutorialMessages[i].time -= 1;
-                        }
-                    }
-                    if (this.dayTime > 2 && this.numGatherWood == 0)
-                    {
-                        this.tutorialMessages.push({text: "Lets start with gathering some wood. We'll need it if we're to build anything.", time: 5})
+                            this.tutorialHADBEENSHOWN.eight = 1;
+                            console.log("ERROR ERROR ERROR, jk");
+                            this.tutorialMessages.push({text: "Next we should work towards getting a lumber mill.\n\nIt'll be way faster than Gathering Wood.\n\nKeep gathering wood until you can get a workshop.", time: 20, done: 0, index: 0})
+                        }  
                     }
                 }
+            },
+            disableTutorials()
+            {
+                this.tutorialBool = 0;
             },
             elapsedTime()
             {
@@ -391,11 +455,15 @@ window.onload = function()
                     {
                         this.citizensStat.population = 0;
                         console.log("death");
-                        this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
                         this.deathString = "You stumble down clutching your stomach. You're the last alive, but not much longer. No one hears as you succumb to a painful death by starvation."
                         this.isGameOver = 1;
                         notGameOver = 0;
-                        pauseMusic();
+                        if (this.gameOverNoisePlayed == 0)
+                        {
+                            this.gameOverNoisePlayed = 1;
+                            this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
+                            pauseMusic();
+                        }
                     }
                     else
                     {
@@ -1144,6 +1212,7 @@ window.onload = function()
                         this.resourceStat.lumber += this.GATHER_WOOD_FACTORS.LUMBER + this.GATHER_WOOD_FACTORS.FREE * 5;
                     }
                     this.commentArray.push({text: "Builder: We have returned with the lumber!", timer: 5, noise: 0, played: 0, bold: 0});
+                    this.numGatherWood += 1;
                 }
                 else
                 {
@@ -1179,6 +1248,7 @@ window.onload = function()
                     }
                     
                     this.commentArray.push({text: "Builder: The hunting party has returned successful!", timer: 5, noise: 0, played: 0, bold: 0});
+                    this.numHuntFood += 1;
                 }
                 else
                 {
@@ -1223,7 +1293,6 @@ window.onload = function()
                 if (this.isGameOver)
                 {
                     console.log("Oh no, I'm terminated.");
-                    this.interval = 1;
                     this.forestPage = false;
                     this.workshopPage = false;
                     this.townCenterPage = false;
@@ -1337,11 +1406,15 @@ window.onload = function()
                 if (this.citizensStat.satisfaction <= .20)
                 {
                     console.log("death");
-                    this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
                     this.deathString = "The citizens are beyond trusting you again. They storm your home and throw you out of the town. As you stumble into the forest you'll look back, they won't.";
                     this.isGameOver = 1;
                     notGameOver = 0;
-                    pauseMusic();
+                    if (this.gameOverNoisePlayed == 0)
+                    {
+                        this.gameOverNoisePlayed = 1;
+                        this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
+                        pauseMusic();
+                    }
                 }
 
 
@@ -2775,11 +2848,15 @@ window.onload = function()
                         {
                             this.citizensStat.population = 0;
                             console.log("death");
-                            this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
                             this.isGameOver = 1;
                             notGameOver = 0;
                             this.deathString = "An invading army overpowers what weak resistance you possesed. Smoke rises from the burnt ruins of what used to be yours. All has been lost, and so will your name.";
-                            pauseMusic();
+                            if (this.gameOverNoisePlayed == 0)
+                            {
+                                this.gameOverNoisePlayed = 1;
+                                this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
+                                pauseMusic();
+                            }
                             string += " Everyone perished...";
 
                         }
@@ -2919,11 +2996,15 @@ window.onload = function()
                     if (this.citizensStat.population - deadPeople <= 0)
                     {
                         console.log("death");
-                        this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
                         this.isGameOver = 1;
                         notGameOver = 0;
                         this.deathString = "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.";
-                        pauseMusic();
+                        if (this.gameOverNoisePlayed == 0)
+                        {
+                            this.gameOverNoisePlayed = 1;
+                            this.playSound(this.SOUNDS.gameover.sound, this.SOUNDS.gameover.volume);
+                            pauseMusic();
+                        }
                     }
                     else
                     {
@@ -3587,7 +3668,7 @@ window.onload = function()
             },
             gameStart()
             {
-                this.interval = setInterval(this.refreshData, 10);
+                this.interval = setInterval(this.refreshData, this.speed);
             },
         },
         computed: 
@@ -3872,6 +3953,11 @@ window.onload = function()
     })
 }
 
+Vue.component('modal', {
+    template: '#modal-template',
+    props: ['tutorial']
+  })
+
 // MUSIC FUNCTIONS
 var notGameOver = 1;
 function playMusic()
@@ -3905,4 +3991,9 @@ function playPage() {
 
  function playAbout() {
     game.pageChangeAbout();    
+ }
+
+ function tutorialsOff()
+ {
+        tutorialToggle = 0;
  }
