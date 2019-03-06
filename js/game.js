@@ -148,65 +148,19 @@ window.onload = function()
             finalDay: 0,
             finalMonth: 0,
             finalYear: 0,
+            tutorialBool: 1,
+            numGatherWood: 0,
+            numHuntFood: 0,
 
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
 
             i: 0,
             j: 0,
+            tutorialMessages: [],
         },
         methods: 
         {
             // -----------------------------Time Keepers
-            resetGameDate()
-            {
-                this.townType = "H A M L E T";
-                this.DISASTER_FACTORS.DISASTER_CHANCE = 0.4;
-                this.DISASTER_FACTORS.INVASION = 0.3;
-                this.interval = 1;
-                this.BUILD_REQ = {farm:{max:0}, house:{max:0}, workshop:{max:0}, lumber:{req:0, max:0},  barracks:{req:0, max:0},  mine:{req:0, max:0},   tavern:{req:0, max:0}, 
-                market:{req:0, max:0},  wall:{req:0, max:0},      siege:{req:0, max:0},  townsqr:{pop: 0, req:0, max:0}};
-                this.townSquareBool = 0;
-                this.startTime = 0;
-                this.refugees = 0;
-                this.isGameOver = 1;
-                this.currentPage = 1;
-                this.forestPage = true;
-                this.workshopPage = false;
-                this.townCenterPage = false;
-                this.barracksPage = false;
-                this.marketPage = false;
-                this.satBoosts = [{sat: 0, startSat: 0, time: 1000000, startTime: 1000000, lag: 0}];
-                this.actionCooldowns = {gatherWood: {done: 1, time: 0}, huntFood: {done: 1, time: 0}, townFaire: {done: 1, time: 0}};
-                this.resourceStat = {lumber: 0, food: 6, stone: 0, gold: 0, weaponsNum: 0, landNum: 1};
-                this.citizensStat = {population: 2, satisfaction: 0.75, taxRate: 0.00, beds: 5};
-                this.buildingNum = {houses: 1, farm: 0, carpenter: 0, lumbermill: 0, barracks: 0, mine: 0, tavern: 0, market: 0, walls: 0, siege: 0, townsqr: 0};
-                this.laborDistribution = {farm: 0, lumber: 0, soldier: 0, mine: 0, tavern: 0, archer: 0, catapult: 0, free: 0};
-                this.monthlyIncome = {lumberRate: 0, foodRate: 0, stoneRate: 0, goldRate: 0};
-                this.chancesRatios = {defense: 0.0};
-                this.landNum = 1;
-                this.commentArray = [{text: "Builder: Thank you, there are more people we can help.", timer: 10, noise: 0, played: 0, bold: 1}];
-                this.dayTime = 0;
-                this.monthTime = 0;
-                this.yearTime = 0;
-                this.buttonsColor = { gatherWood: 1,huntFood: 1,house: 1,farm: 1,workshop: 1,townsqr: 0,lumbermill: 0,mine: 0,tavern: 0,market: 0,barracks: 0,walls: 0,siege: 0,
-                    farmAdd: 0,farmSub: 0,lumberAdd: 0,lumberSub: 0,mineAdd: 0,mineSub: 0,tavernAdd: 0,tavernSub: 0,soldierSub: 0,archerSub: 0,catapultSub: 0,
-                    holdFeast: 1,townFaire: 0,makeWeapons: 0,trainSoldier: 0,trainArcher: 0,buildCatapult: 0,};
-                this.specialsArray = [];
-                this.timeSinceInvasion = 60;
-                this.timeSinceDisaster = 40;
-                this.specialItem = 1;
-                this.specialItemUsed = 0;
-                this.refugeeBool = 0;
-                this.mercenaryProtection = 0;
-                this.mercenaryTimer = 0;
-                this.productivety = 1;
-                this.famine = 1;
-                this.i= 0;
-                this.j= 0;
-                this.gameStart();
-
-  
-            },
             refreshData()
             {
                 if (!this.isGameOver)
@@ -224,9 +178,31 @@ window.onload = function()
                 this.updateColors();
                 this.commentWriter();
                 this.elapsedTime();
+                this.tutorial();
                 if (this.citizensStat.population > this.highestPopulation)
                 {
                     this.highestPopulation = this.citizensStat.population;
+                }
+            },
+            tutorial()
+            {
+                if (this.tutorialBool)
+                {
+                    for (var i = 0; i < this.tutorialMessages.length; i++)
+                    {
+                        if (this.tutorialMessages[i].time <= 0)
+                        {
+                            this.tutorialMessages.splice(i,1);
+                        }
+                        else
+                        {
+                            this.tutorialMessages[i].time -= 1;
+                        }
+                    }
+                    if (this.dayTime > 2 && this.numGatherWood == 0)
+                    {
+                        this.tutorialMessages.push({text: "Lets start with gathering some wood. We'll need it if we're to build anything.", time: 5})
+                    }
                 }
             },
             elapsedTime()
