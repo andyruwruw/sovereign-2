@@ -288,7 +288,7 @@ window.onload = function()
                     {
                         this.tutorialHADBEENSHOWN.ten = 1;
                         console.log("var ComputerHappy = 1;");
-                        this.tutorialMessages.push({text: "Almost there!\n\nThe Workshop allows the builder to make all sorts of stuff.\n\nLets continue to focus on getting that Lumber Mill.\n\nRemember if you're at max population to build another House!\n\nFree citizens help with Gathering Wood.", time: 20, done: 0, index: 0})
+                        this.tutorialMessages.push({text: "Almost there!\n\nThe Workshop allows the builder to make all sorts of stuff.\n\nLet's continue to focus on getting that Lumber Mill.\n\nRemember if you're at max population to build another House!\n\nFree citizens help with Gathering Wood.", time: 20, done: 0, index: 0})
                     }
 
                     if (this.buildingNum.lumbermill == 1 && this.tutorialHADBEENSHOWN.eleven == 0 && !this.isGameOver)
