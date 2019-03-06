@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+body
+{
+    width: 100%;
+    height: 100%;
+    
+}
+#background
+{
+    background-image: url("https://i.ibb.co/Sc1YxVp/fireplace.gif");
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+#header
+{
+    width: 100%;
+    height: 65px;
+    padding-bottom: 20px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+#headerTitle
+{
+    color: rgb(185, 185, 185);
+    padding-top: 5px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+.headerButton
+{
+    display: inline-block;
+    border: none;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    text-align: center;
+    color: rgb(185, 185, 185);
+    width: 90px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 99% 100%);
+}
+.headerButton:hover
+{
+    padding-top: 16px;
+    color: rgb(185, 185, 185);
+    font-size: 130%;
+}
+#footer
+{
+    position: fixed;
+    width: 100%;
+
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+#footerLink
+{
+    display: block;
+}
+#rule
+{
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 1000%;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    padding-top: 8%;
+    color: rgba(255, 255, 255, 0.863);
+}
+#playButton
+{
+    text-align: center;
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: block;
+    width: 230px;
+    font-size: 270%;
+    height: 88px;
+    margin: auto;
+    color: black;  
+    padding-top: 10px;
+    margin-top: 60px;
+}
+#playButton:hover
+{
+    text-align: center;
+    background-image: url("https://i.ibb.co/nfNPCjK/goldbutton-00000.jpg");
+    background-size: cover;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: block;
+    width: 230px;
+    font-size: 270%;
+    height: 88px;
+    margin: auto;
+    color: rgb(87, 1, 1); 
+    font-weight: bold; 
+    padding-top: 10px;
+    margin-top: 60px;
+}
+p
+{
+    color: white;
+    font-size: 400%;
+    display: block;
+    margin: auto;
+    margin-top: 20%;
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+#interaction
+{
+    color: rgba(165, 165, 165, 0.637);
+    font-size: 250%;
+    display: block;
+    width: 300px;
+    height: 75px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    margin: auto;
+    text-align: center;
+    margin-top: 40px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+#toGame
+{
+    position: fixed;
+    color: rgba(165, 165, 165, 0.473);
+    font-size: 400%;
+    display: block;
+    width: 100%;
+    bottom: 40px;
+    left: 0px;
+    height: 75px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    margin: auto;
+    text-align: center;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+#display
+{
+    width: 100%;
+}
+
+#span
+{
+    height: 25%;
+}
+
+#footerLink
+{
+    color: rgba(156, 156, 156, 0.712);
+}

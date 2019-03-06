@@ -1,6 +1,6 @@
 window.onload = function() 
 {
-    let about = new Vue                                  // VUE OBJECT
+    let game = new Vue                                  // VUE OBJECT
     ({
         el: '#about',
         data: {

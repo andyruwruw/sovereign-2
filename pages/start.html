@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+        <link rel="stylesheet" href="../css/start-style.css" />
+        <meta name="viewport"/>
+        <title>Sovereign</title>
+        <audio id="myMusic">
+            <source src="../sounds/gametheme.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="fire">
+            <source src="../sounds/fireplace.wav" type="audio/wav">
+        </audio>
+        <audio id="knock">
+            <source src="../sounds/knock.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="rainy">
+            <source src="../sounds/rainy.wav" type="audio/wav">
+        </audio>
+        <audio id="thunder">
+            <source src="../sounds/thunder.wav" type="audio/wav">
+        </audio>
+    </head>
+
+    <body id="background" onclick="playSound();">
+        <div class="container" id="headerContainer">
+            <div class="row" id="header">
+                <div class="col-lg-6">
+                    <h1 id="headerTitle">S O V E R E I G N</h1>
+                </div>
+                <div class="col-lg-2">
+                    <a href="../index.html" class="headerButton">HOME</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="program.html" class="headerButton">PLAY</a>
+                </div>
+                <div class="col-lg-2">
+                    <a href="about.html" class="headerButton">ABOUT</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="start" class="container" onclick="playSound();">
+            <div id="span" v-if="!startBool"></div>
+            <p id="text"></p>
+            <div id="display">
+                <a href="program.html" id="interaction" v-if="game">B E G I N</a>
+                <button id="interaction" v-on:click="clickFunction"  v-if="!game">CLICK TO START</button>
+            </div>
+            <a href="program.html" id="toGame">S K I P</a>
+        </div>
+        
+
+        <script>
+            function playSound()
+            {
+                playFire();
+                playRain();
+                playMusic();
+            }
+            function playMusic()
+            {
+                var media = document.getElementById("myMusic");
+                media.volume = .4;
+                const playPromise = media.play();
+                if (playPromise !== null){
+                    playPromise.catch(() => { media.play(); })
+                }
+            }
+            function playFire()
+            {
+                var media = document.getElementById("fire");
+                media.volume = .6;
+                const playPromise = media.play();
+                if (playPromise !== null){
+                    playPromise.catch(() => { media.play(); })
+                }
+            }
+            function playRain()
+            {
+                var media = document.getElementById("rainy");
+                media.volume = .1;
+                const playPromise = media.play();
+                if (playPromise !== null){
+                    playPromise.catch(() => { media.play(); })
+                }
+            }
+        </script>
+        <script src="../js/start.js"></script>
+
+    </body>
+    
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <a id="footerLink" href="#">Website Github</a>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </div>
+</html>
