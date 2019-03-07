@@ -12,7 +12,7 @@ window.onload = function()
             disasters: 0,
             specials: 0,
             cheats: 0,
-            SOUNDS: {click: {sound: "click", volume: .3}
+            SOUNDS: {click: {sound: "click", volume: .2}
         
                     },
             starving: 1,
