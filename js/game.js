@@ -2918,7 +2918,7 @@ window.onload = function()
                             return null;
                         }
                         this.resourceStat.food -= loss;
-                        resourceType = " stone.";
+                        resourceType = " food.";
                         this.playSound(this.SOUNDS.robbed.sound, this.SOUNDS.robbed.volume);
                         done = 1;
                     }
