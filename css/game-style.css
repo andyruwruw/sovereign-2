@@ -1103,6 +1103,10 @@ button
   .modal-default-button {
     float: right;
   }
+  .modal-off-button {
+    float: left;
+    margin-right: auto !important;
+  }
   
   /*
    * The following styles are auto-applied to elements with
