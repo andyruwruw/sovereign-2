@@ -30,6 +30,7 @@
     </head>
 
     <body id="background" onclick="playSound();">
+        <div id="loading"></div>
         <div class="container" id="headerContainer">
             <div class="row" id="header">
                 <div class="col-lg-6">
@@ -93,6 +94,22 @@
                 }
             }
         </script>
+        <script>
+            function onReady(callback) {
+                var intervalId = window.setInterval(function() {
+                    if (document.getElementsByTagName('body')[0] !== undefined) {
+                    window.clearInterval(intervalId);
+                    callback.call(this);
+                    }
+                }, 1000);
+                }
+    
+                onReady(function() {
+                    document.getElementById("start").style.display = "block";
+                    document.getElementById("headerContainer").style.display = "block";
+                    document.getElementById("loading").style.display = "none";
+                });
+            </script>
         <script src="../js/start.js"></script>
 
     </body>

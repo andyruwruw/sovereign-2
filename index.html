@@ -31,9 +31,11 @@
                 </div>
             </div>
         </div>
+        <div id="display">
         <h1 id="rule">HOW WILL YOU RULE?</h1>
         <a href="pages/start.html" onclick="playSound" id="playButton">S T A R T</a>
-
+        </div>
+        <div id="loading"></div>
         <script>
             function playSound()
             {
@@ -50,6 +52,22 @@
                     playPromise.catch(() => { media.play(); })
                 }
             }
+        </script>
+        <script>
+            function onReady(callback) {
+                var intervalId = window.setInterval(function() {
+                    if (document.getElementsByTagName('body')[0] !== undefined) {
+                    window.clearInterval(intervalId);
+                    callback.call(this);
+                    }
+                }, 1000);
+                }
+    
+            onReady(function() {
+                document.getElementById("display").style.display = "block";
+                document.getElementById("headerContainer").style.display = "block";
+                document.getElementById("loading").style.display = "none";
+            });
         </script>
     </body>
     <div id="footer">

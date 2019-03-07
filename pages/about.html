@@ -15,6 +15,7 @@
     </head>
 
     <body id="background">
+        <div id="loading"></div>
         <div class="container" id="headerContainer">
             <div class="row" id="header">
                 <div class="col-lg-6">
@@ -256,6 +257,22 @@
             </div>
         </div>
         <script src="../js/about.js"></script>
+        <script>
+            function onReady(callback) {
+                var intervalId = window.setInterval(function() {
+                    if (document.getElementsByTagName('body')[0] !== undefined) {
+                    window.clearInterval(intervalId);
+                    callback.call(this);
+                    }
+                }, 1000);
+                }
+    
+            onReady(function() {
+                document.getElementById("about").style.display = "block";
+                document.getElementById("headerContainer").style.display = "block";
+                document.getElementById("loading").style.display = "none";
+            });
+        </script>
     </body>
     <div id="footer">
         <div class="container">

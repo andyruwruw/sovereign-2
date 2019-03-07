@@ -108,3 +108,24 @@ body
 {
     color: rgba(156, 156, 156, 0.712);
 }
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(21, 20, 31);
+    background-image: url("https://i.ibb.co/f8WbDzG/loadingfinal.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  #display
+  {
+      display: none;
+  }
+  #headerContainer
+  {
+      display:none;
+  }
