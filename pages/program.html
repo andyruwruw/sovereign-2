@@ -153,7 +153,7 @@
         <div id="game" class="container" onclick="playMusic();">
             <div class="row" id="gameoverDiv" v-if="isGameOver">
                 <h2 id="gameOver">GAME OVER</h2>
-                <div id="clear2" class="fulllength">
+                <div id="clear2" class="fulllength" v-if="!moreStats">
                     <h3 id="deathReason">{{deathString}}</h3>
                 </div>
                 <div id="clear" class="fulllength">
@@ -164,13 +164,32 @@
                 </div>
                 <div id="moreStatsDiv" class="fulllength row" v-if="moreStats">
                     <div class="col-lg-4">
-                        <h3 id="timeLasted">Maximum Population: {{highestPopulation}}</h3>
+                        <h3 id="timeLasted">Maximum Population:</h3>
+                        <h3 id="timeLastedNum">{{highestPopulation}}</h3>
                     </div>
                     <div class="col-lg-4">
-                        <h3 id="timeLasted">Total Invasions: {{invasionNum}}</h3>
+                        <h3 id="timeLasted">Total Invasions:</h3>
+                        <h3 id="timeLastedNum">{{invasionNum}}</h3>
                     </div>
                     <div class="col-lg-4">
-                        <h3 id="timeLasted">Total Disasters: {{disasterNum}}</h3>
+                        <h3 id="timeLasted">Total Disasters:</h3>
+                        <h3 id="timeLastedNum">{{disasterNum}}</h3>
+                    </div>
+                </div>
+                <div id="moreStatsDiv" class="fulllength row" v-if="moreStats">
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Average Satisfaction:</h3>
+                        <h3 id="timeLastedNum">{{satisfactionAvgCalc}}%</h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Cheats</h3>
+                        <h3 id="timeLasted">Used:</h3>
+                        <h3 id="timeLastedNum">{{cheatsUsed}}</h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Actions</h3>
+                        <h3 id="timeLasted">Per Month:</h3>
+                        <h3 id="timeLastedNum">{{monthActions.average}}</h3>
                     </div>
                 </div>
             </div>

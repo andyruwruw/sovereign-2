@@ -9,7 +9,7 @@ window.onload = function()
             about: 0,
             play: 1,
             home: 0,
-
+            cheatsActivated: 0,
             devCode: "",
             SOUNDS: {menuTab: {sound: "menuTabSound", volume: .1},   
                     builder: {sound: "builder", volume: .25},
@@ -161,13 +161,14 @@ window.onload = function()
             numGatherWood: 0,
             numHuntFood: 0,
             showModal: false,
+            averageSat: {sat: .6, time: 1},
             disasterBoosted: 0,
 
             rampDifficulty: 0,
             DIFFICULTY: 0,
 
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
-
+            monthActions: {thismonth: 0, average: 0},
             i: 0,
             j: 0,
             tutorialMessages: [],
@@ -472,8 +473,12 @@ window.onload = function()
             {
                 this.tutorialBool = 0;
             },
-            ondDay()
+            oneDay()
             {
+                
+                this.averageSat.time += 1;
+                this.averageSat.sat = (((this.averageSat.time - 1) * this.averageSat.sat) / this.averageSat.time) + (this.citizensStat.satisfaction * (1 / this.averageSat.time));
+
                 if (this.citizensStat.population > this.highestPopulation)
                 {
                     this.highestPopulation = this.citizensStat.population;
@@ -635,7 +640,7 @@ window.onload = function()
                     {
                         this.secondsTime = 0;
 
-                        this.ondDay();
+                        this.oneDay();
 
                         if (this.dayTime < 31)
                         {
@@ -656,6 +661,18 @@ window.onload = function()
                                     this.DISASTER_FACTORS.INVASION += .025;
                                 }
                             }
+                            var totalMonths = this.monthTime + this.yearTime * 12;
+                            if (this.monthTime > 0)
+                            {
+                                this.monthActions.average = Math.round(((this.monthActions.average * totalMonths) / (totalMonths + 1)) + (this.monthActions.thismonth * (1 / totalMonths)));
+                                console.log(Math.round(((this.average * totalMonths) / (totalMonths + 1)) + (this.monthActions.thismonth * (1 / totalMonths))));
+                            }
+                            else
+                            {
+                                this.monthActions.average = this.monthActions.thismonth;
+                            }
+
+                            this.monthActions.thismonth = 0;
 
                             if (this.famine < 1)
                             {
@@ -1673,6 +1690,7 @@ window.onload = function()
                 {
                     this.citizensStat.satisfaction = baseSatisfaction;
                 }
+
                 if (this.citizensStat.satisfaction <= .20)
                 {
                     console.log("death");
@@ -1910,9 +1928,9 @@ window.onload = function()
             // -----------------------------Actions
             gatherWood()
             {
-
                 if (this.actionCooldowns.gatherWood.time <= 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.actionCooldowns.gatherWood.time = this.GATHER_WOOD_FACTORS.TIME;
                     this.actionCooldowns.gatherWood.done = 0;
@@ -1927,9 +1945,9 @@ window.onload = function()
             },
             huntFood()
             {
-
                 if (this.actionCooldowns.huntFood.time <= 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.actionCooldowns.huntFood.time = this.HUNT_FACTORS.TIME;
                     this.actionCooldowns.huntFood.done = 0;
@@ -1951,6 +1969,7 @@ window.onload = function()
                     {
                         if ((this.resourceStat.food >= this.TOWN_FAIR_FACTORS.FOOD) && (this.resourceStat.gold >= this.TOWN_FAIR_FACTORS.GOLD))
                         {
+                            this.monthActions.thismonth += 1;
                             this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                             this.resourceStat.food -= this.TOWN_FAIR_FACTORS.FOOD;
                             this.resourceStat.gold -= this.TOWN_FAIR_FACTORS.GOLD;
@@ -1985,6 +2004,7 @@ window.onload = function()
             {   
                 if ((this.resourceStat.food >= this.FEAST_FACTORS.FOOD))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.feast.sound, this.SOUNDS.feast.volume);
                     this.resourceStat.food -= this.FEAST_FACTORS.FOOD;
@@ -2004,6 +2024,7 @@ window.onload = function()
 
                 if (this.citizensStat.taxRate < 100.00 && (this.citizensStat.satisfaction >= (this.CITIZEN_FACTORS.TAX_TO_SAT / 100) + .2))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.citizensStat.taxRate += 0.01;
                 }
@@ -2024,6 +2045,7 @@ window.onload = function()
 
                 if (this.citizensStat.taxRate > 0.00)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.citizensStat.taxRate -= 0.01;
                 }
@@ -2039,6 +2061,7 @@ window.onload = function()
 
                 if ((this.laborDistribution.free > 0) && (this.laborDistribution.farm < this.buildingNum.farm * this.FARM_FACTORS.WORKER_SLOTS))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.free -= 1;
                     this.laborDistribution.farm += 1;
@@ -2064,6 +2087,7 @@ window.onload = function()
 
                 if (this.laborDistribution.farm > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.farm -= 1;
                     this.laborDistribution.free += 1;
@@ -2079,6 +2103,7 @@ window.onload = function()
 
                 if ((this.laborDistribution.free > 0) && (this.laborDistribution.lumber < this.buildingNum.lumbermill * this.LM_FACTORS.WORKER_SLOTS))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.free -= 1;
                     this.laborDistribution.lumber += 1;
@@ -2101,9 +2126,9 @@ window.onload = function()
             },
             subLumberLabor()
             {
-
                 if (this.laborDistribution.lumber > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.lumber -= 1;
                     this.laborDistribution.free += 1;
@@ -2116,9 +2141,9 @@ window.onload = function()
             },
             addMineLabor()
             {
-
                 if ((this.laborDistribution.free > 0) && (this.laborDistribution.mine < this.buildingNum.mine * this.MINE_FACTORS.WORKER_SLOTS))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.free -= 1;
                     this.laborDistribution.mine += 1;
@@ -2140,11 +2165,10 @@ window.onload = function()
                 }
             },
             subMineLabor()
-            {
-
-                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
+            {  
                 if (this.laborDistribution.mine > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.mine -= 1;
                     this.laborDistribution.free += 1;
@@ -2160,6 +2184,7 @@ window.onload = function()
 
                 if (this.laborDistribution.soldier > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.soldier -= 1;
                     this.laborDistribution.free += 1;
@@ -2172,9 +2197,9 @@ window.onload = function()
             },
             subArcherLabor()
             {
-
                 if (this.laborDistribution.archer > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.archer -= 1;
                     this.laborDistribution.free += 1;
@@ -2187,9 +2212,9 @@ window.onload = function()
             },
             subCatapultLabor()
             {
-
                 if (this.laborDistribution.catapult > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.catapult -= 1;
                     this.laborDistribution.free += 2;
@@ -2205,6 +2230,7 @@ window.onload = function()
 
                 if ((this.laborDistribution.free > 0) && (this.laborDistribution.tavern < this.buildingNum.tavern * this.TAVERN_FACTORS.WORKER_SLOTS))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.free -= 1;
                     this.laborDistribution.tavern += 1;
@@ -2230,6 +2256,7 @@ window.onload = function()
 
                 if (this.laborDistribution.tavern > 0)
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.tavern -= 1;
                     this.laborDistribution.free += 2;
@@ -2245,6 +2272,7 @@ window.onload = function()
             {
                 if ((this.buildingNum.barracks == 1) && (this.resourceStat.gold >= this.SOLDIER_FACTORS.GOLD_TRAIN) && (this.laborDistribution.free > 0) && (this.resourceStat.weaponsNum >= this.SOLDIER_FACTORS.WEAPON_TRAIN))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.soldier += 1;
                     this.laborDistribution.free -= 1;
@@ -2279,6 +2307,7 @@ window.onload = function()
 
                 if ((this.buildingNum.walls >= 1) && (this.resourceStat.gold >= this.ARCHER_FACTORS.GOLD_TRAIN) && (this.laborDistribution.free > 0) && (this.resourceStat.weaponsNum >= this.ARCHER_FACTORS.WEAPON_TRAIN) && (this.buildingNum.walls > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.archer += 1;
                     this.laborDistribution.free -= 0;
@@ -2317,6 +2346,7 @@ window.onload = function()
 
                 if ((this.resourceStat.gold >= this.CATAPULT_FACTORS.GOLD_TRAIN) && (this.laborDistribution.soldier >= 2) && (this.resourceStat.lumber >= this.CATAPULT_FACTORS.LUMBER_COST) && (this.buildingNum.siege > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.catapult.sound, this.SOUNDS.catapult.volume);
                     this.laborDistribution.catapult += 1;
@@ -2353,9 +2383,9 @@ window.onload = function()
             },
             makeWeapons()
             {
-
                 if ((this.resourceStat.stone >= this.WEAPON_FACTORS.STONE_COST) && (this.resourceStat.gold >= this.WEAPON_FACTORS.GOLD_COST))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.weapon.sound, this.SOUNDS.weapon.volume);
                     this.resourceStat.weaponsNum += 1;
@@ -2383,6 +2413,7 @@ window.onload = function()
 
                 if ((this.resourceStat.lumber >= this.HOUSE_FACTORS.LUMBER_COST) && (this.buildingNum.houses <= (this.HOUSE_FACTORS.PER_LAND * this.resourceStat.landNum)))
                 {
+                    this.monthActions.thismonth += 1;
                     console.log("I imagine a particularly shaggy hut.");
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.house.sound, this.SOUNDS.house.volume);
@@ -2419,9 +2450,9 @@ window.onload = function()
             // START A FARM
             startFarm()
             {
-
                 if ((this.resourceStat.lumber >= this.FARM_FACTORS.LUMBER_COST) && (this.buildingNum.farm < (this.FARM_FACTORS.PER_LAND * this.resourceStat.landNum)))
                 {
+                    this.monthActions.thismonth += 1;
                     console.log("Cyber Fruit, Cyber Grain, Cyber Veggies!");
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.farm.sound, this.SOUNDS.farm.volume);
@@ -2459,6 +2490,7 @@ window.onload = function()
                 console.log("Great, now I can make more 0s 1s.");
                 if ((this.resourceStat.lumber >= this.CW_FACTORS.LUMBER_COST) && (this.buildingNum.carpenter < (this.CW_FACTORS.PER_LAND * this.resourceStat.landNum)))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.workshop.sound, this.SOUNDS.workshop.volume);
                     this.buildingNum.carpenter += 1;
@@ -2504,6 +2536,7 @@ window.onload = function()
                 console.log("Ok thats another 1 there.");
                 if ((this.resourceStat.lumber >= this.LM_FACTORS.LUMBER_COST) && (this.buildingNum.lumbermill < this.LM_FACTORS.PER_LAND) && (this.buildingNum.carpenter == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.lumbermill.sound, this.SOUNDS.lumbermill.volume);
                     this.buildingNum.lumbermill += 1;
@@ -2543,6 +2576,7 @@ window.onload = function()
                 console.log("We should mine for bit coins instead. Better use of my processor.");
                 if ((this.resourceStat.lumber >= this.MINE_FACTORS.LUMBER_COST) && (this.buildingNum.mine < (this.MINE_FACTORS.PER_LAND * this.resourceStat.landNum)) && (this.buildingNum.carpenter == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.mine.sound, this.SOUNDS.mine.volume);
                     this.buildingNum.mine += 1;
@@ -2585,6 +2619,7 @@ window.onload = function()
                 console.log("Ooo protect against cyber invaders.");
                 if ((this.resourceStat.lumber >= this.BRK_FACTORS.LUMBER_COST) && (this.resourceStat.stone >= this.BRK_FACTORS.STONE_COST) && (this.buildingNum.barracks < (this.BRK_FACTORS.PER_LAND * this.resourceStat.landNum)) && (this.buildingNum.carpenter == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.barracks.sound, this.SOUNDS.barracks.volume);
                     this.buildingNum.barracks += 1;
@@ -2637,6 +2672,7 @@ window.onload = function()
                 console.log("So I'm assuming they only server root beer here.");
                 if ((this.resourceStat.lumber >= this.TAVERN_FACTORS.LUMBER_COST) && (this.resourceStat.stone >= this.TAVERN_FACTORS.STONE_COST) && (this.buildingNum.tavern < (this.TAVERN_FACTORS.PER_LAND * this.resourceStat.landNum)) && (this.buildingNum.carpenter == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.tavern2.sound, this.SOUNDS.tavern.volume);
                     this.buildingNum.tavern += 1;
@@ -2685,6 +2721,7 @@ window.onload = function()
             {
                 if ((this.resourceStat.lumber >= this.MARKET_FACTORS.LUMBER_COST) && (this.resourceStat.gold >= this.MARKET_FACTORS.GOLD_COST) && (this.buildingNum.market < (this.MARKET_FACTORS.PER_LAND * this.resourceStat.landNum)) && (this.buildingNum.carpenter == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.market.sound, this.SOUNDS.market.volume);
                     this.buildingNum.market += 1;
@@ -2734,6 +2771,7 @@ window.onload = function()
 
                 if ((this.resourceStat.lumber >= this.WALL_FACTORS.LUMBER_COST) && (this.resourceStat.stone >= this.WALL_FACTORS.STONE_COST) && (this.buildingNum.walls < (this.WALL_FACTORS.PER_LAND * this.resourceStat.landNum)) && (this.buildingNum.barracks == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.wall.sound, this.SOUNDS.wall.volume);
                     this.buildingNum.walls += 1;
@@ -2788,6 +2826,7 @@ window.onload = function()
 
                 if ((this.resourceStat.lumber >= this.SIEGE_FACTORS.LUMBER_COST) && (this.resourceStat.stone >= this.SIEGE_FACTORS.STONE_COST) && (this.resourceStat.gold >= this.SIEGE_FACTORS.GOLD_COST) && (this.buildingNum.siege < (this.SIEGE_FACTORS.PER_LAND)) && (this.buildingNum.walls > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                     this.buildingNum.siege += 1;
@@ -2842,6 +2881,7 @@ window.onload = function()
 
                 if ((this.citizensStat.population >= this.TOWN_SQR_FACTORS.POPULATION) && (this.resourceStat.lumber >= this.TOWN_SQR_FACTORS.LUMBER_COST) && (this.resourceStat.gold >= this.TOWN_SQR_FACTORS.GOLD_COST) && (this.buildingNum.townsqr < (this.TOWN_SQR_FACTORS.PER_LAND)) && (this.buildingNum.carpenter == 1))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.townsqr2.sound, this.SOUNDS.townsqr2.volume);
                     this.buildingNum.townsqr += 1;
@@ -2892,54 +2932,64 @@ window.onload = function()
                     this.playSound(this.SOUNDS.pop.sound, this.SOUNDS.pop.volume);
                     this.babyBoom(100);
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "*BLESS*")
                 {
                     this.playSound(this.SOUNDS.angel.sound, this.SOUNDS.angel.volume);
                     this.bless(10000);
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "ADD DAYS")
                 {
                     this.playSound(this.SOUNDS.time.sound, this.SOUNDS.time.volume);
                     this.addDays(15);
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "ANTI VAX MOVEMENT")
                 {
                     this.disasterPlague();
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "WHO NEEDS FIREMEN")
                 {
                     this.disasterFire();
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "LISTENS TO TOTO")
                 {
                     this.disasterFamine();
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "WAVES AT OTHER KINGDOM")
                 {
                     this.disasterInvasion();
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "OCEANS 11")
                 {
                     this.disasterRobbers();
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "IS IT 2012 YET")
                 {
                     this.disasterStorm();
                     this.devCode = "";
+                    this.cheatsActivated = 1;
                 }
                 else if (this.devCode == "WALKING ON SUNSHINE ON LOOP")
                 {
                     this.devCode = "";
                     this.satBoosts.push({sat: 1, startSat: 1, time: 1000000000000000000, startTime: 1, lag: 0, ramp: 10, full: 10});
                     sunshine = 1;
+                    this.cheatsActivated = 1;
                 }
             },
             addDays(num)
@@ -3544,6 +3594,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.FOOD_FACTORS.WORTH))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.gold -= this.FOOD_FACTORS.WORTH * this.marketMultiplyer;
                     this.resourceStat.food += 1 * this.marketMultiplyer;
@@ -3564,6 +3615,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.food > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.food -= 1 * this.marketMultiplyer;
                     this.resourceStat.gold += this.FOOD_FACTORS.WORTH * this.marketMultiplyer;
@@ -3584,6 +3636,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.LUMBER_FACTORS.WORTH))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.gold -= this.LUMBER_FACTORS.WORTH * this.marketMultiplyer;
                     this.resourceStat.lumber += 1 * this.marketMultiplyer;
@@ -3604,6 +3657,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.lumber > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.lumber -= 1 * this.marketMultiplyer;
                     this.resourceStat.gold += this.LUMBER_FACTORS.WORTH * this.marketMultiplyer;
@@ -3624,6 +3678,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.STONE_FACTORS.WORTH))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.gold -= this.STONE_FACTORS.WORTH * this.marketMultiplyer;
                     this.resourceStat.stone += 1 * this.marketMultiplyer;
@@ -3644,6 +3699,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.stone > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.stone -= 1 * this.marketMultiplyer;
                     this.resourceStat.gold += this.STONE_FACTORS.WORTH * this.marketMultiplyer;
@@ -3664,6 +3720,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.WEAPON_FACTORS.WORTH))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.gold -= this.WEAPON_FACTORS.WORTH * this.marketMultiplyer;
                     this.resourceStat.weaponsNum += 1 * this.marketMultiplyer;
@@ -3684,6 +3741,7 @@ window.onload = function()
 
                 if ((this.buildingNum.market == 1) && (this.resourceStat.weaponsNum > 0))
                 {
+                    this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
                     this.resourceStat.weaponsNum -= 1 * this.marketMultiplyer;
                     this.resourceStat.gold += this.WEAPON_FACTORS.WORTH * this.marketMultiplyer;
@@ -3704,6 +3762,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.citizensStat.population >= this.SLAVE_TRADE_FACTORS.CIT + 2 && this.citizensStat.satisfaction > .2 - this.SLAVE_TRADE_FACTORS.SAT_DROP)
                 {
+                    this.monthActions.thismonth += 1;
                     this.citizensStat.population -= this.SLAVE_TRADE_FACTORS.CIT;
                     this.killPeople(this.SLAVE_TRADE_FACTORS.CIT, 0);
                     this.resourceStat.gold += this.SLAVE_TRADE_FACTORS.GOLD;
@@ -3736,6 +3795,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.resourceStat.weaponsNum >= this.TRAVELING_ARMY_FACTORS.WEAPON_COST && this.laborDistribution.soldier >= this.TRAVELING_ARMY_FACTORS.SOLDIER_COST)
                 {
+                    this.monthActions.thismonth += 1;
                     this.citizensStat.population -= this.TRAVELING_ARMY_FACTORS.SOLDIER_COST;
                     this.laborDistribution.soldier -= this.TRAVELING_ARMY_FACTORS.SOLDIER_COST
                     this.resourceStat.gold += this.TRAVELING_ARMY_FACTORS.GOLD;
@@ -3781,6 +3841,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.resourceStat.food >= this.REFUGEE_GROUP_FACTORS.FOOD_COST && this.resourceStat.gold >= this.REFUGEE_GROUP_FACTORS.GOLD_COST)
                 {
+                    this.monthActions.thismonth += 1;
                     this.refugees += this.REFUGEE_GROUP_FACTORS.BOOST;
                     this.resourceStat.gold -= this.REFUGEE_GROUP_FACTORS.GOLD_COST;
                     this.resourceStat.food -= this.REFUGEE_GROUP_FACTORS.FOOD_COST;
@@ -3810,6 +3871,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.resourceStat.gold >= this.LATE_NIGHTS.GOLD_COST && this.citizensStat.satisfaction > .2 - this.LATE_NIGHTS.SAT_DROP)
                 {
+                    this.monthActions.thismonth += 1;
                     this.resourceStat.gold -= this.LATE_NIGHTS.GOLD_COST;
                     this.productivety = this.LATE_NIGHTS.BOOST;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
@@ -3839,6 +3901,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.resourceStat.gold >= this.TRAVELING_PERFORMERS_FACTORS.GOLD_COST)
                 {
+                    this.monthActions.thismonth += 1;
                     //travelingPerformersSpan
                     this.resourceStat.gold -= this.TRAVELING_PERFORMERS_FACTORS.GOLD_COST;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
@@ -3864,6 +3927,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.resourceStat.gold >= this.MERCENARIES_FACTORS.GOLD_COST && this.resourceStat.food > this.MERCENARIES_FACTORS.FOOD_COST)
                 {
+                    this.monthActions.thismonth += 1;
                     this.resourceStat.gold -= this.MERCENARIES_FACTORS.GOLD_COST;
                     this.resourceStat.food -= this.MERCENARIES_FACTORS.FOOD_COST;
                     this.mercenaryProtection = 1;
@@ -3905,6 +3969,7 @@ window.onload = function()
             {
                 if (this.buildingNum.market >= 1 && this.resourceStat.gold >= this.WIZARD_FACTORS.GOLD_COST)
                 {
+                    this.monthActions.thismonth += 1;
                     this.resourceStat.gold -= this.WIZARD_FACTORS.GOLD_COST;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.wizard.sound, this.SOUNDS.wizard.volume);
@@ -4011,6 +4076,21 @@ window.onload = function()
         },
         computed: 
         {
+            satisfactionAvgCalc()
+            {
+                return Math.round(this.averageSat.sat * 100);
+            },
+            cheatsUsed()
+            {
+                if (this.cheatsActivated)
+                {
+                    return "Yes"
+                }
+                else
+                {
+                    return "No"
+                }
+            },
             twnSqrPop()
             {
                 if (this.citizensStat.population >= this.TOWN_SQR_FACTORS.POPULATION)
