@@ -2908,7 +2908,7 @@ window.onload = function()
                 var loss;
                 var done = 0;
                 var resourceType;
-                for (var i = 0; i < 2; i++)
+                for (var i = 0; i < 4; i++)
                 {
                     if (resources[random] == 1 && random == 0 && !done)
                     {
