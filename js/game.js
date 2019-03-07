@@ -79,12 +79,12 @@ window.onload = function()
             SIEGE_FACTORS    : {PER_LAND: 1,  LUMBER_COST: 500, STONE_COST: 500,  GOLD_COST: 500},
             TOWN_SQR_FACTORS : {PER_LAND: 1,  LUMBER_COST: 50,  GOLD_COST: 50,    POPULATION: 30, SAT_BOOST: 0.05},
             DISASTER_FACTORS : {TIME: 20, DISASTER_CHANCE: 0.4, INVASION: 0.3, FIRE: 0.1, ROBBERS: 0.1, STORM: 0.1, PLAGUE: 0.1, FAMINE: 0.1, BEASTS: 0.1, DEPRESSION_YEARS: 5},
-            INVASION_FACTORS : {TIME: 25, SAT_DEPRESSION: -.15, SAT_BOOST: .10},
+            INVASION_FACTORS : {TIME: 25, SAT_DEPRESSION: -.2, SAT_BOOST: .10},
             STARVE_FACTORS : {SAT_DEPRESSION: -.30},
-            PLAGUE_FACTORS : {CIT_LOSS: 0.25, SAT_DEPRESSION: -.15},
+            PLAGUE_FACTORS : {CIT_LOSS: 0.25, SAT_DEPRESSION: -.20},
             FAMINE_FACTORS : {FOOD_LOSS: 0.5, SAT_DEPRESSION: -.20},
-            ROBBERS_FACTORS : {RESOURCE_LOSS: .2, SAT_DEPRESSION: -.1},
-            STORM_FACTORS: {SAT_DEPRESSION: -.1, FARM_CHANCE: .6},
+            ROBBERS_FACTORS : {RESOURCE_LOSS: .2, SAT_DEPRESSION: -.15},
+            STORM_FACTORS: {SAT_DEPRESSION: -.15, FARM_CHANCE: .6},
             FIRE_FACTORS : {SAT_DEPRESSION: -.2, HOUSE_CHANCE: .6},
             interval: 1,
             BUILD_REQ : {farm:{max:0}, house:{max:0}, workshop:{max:0}, lumber:{req:0, max:0},  barracks:{req:0, max:0},  mine:{req:0, max:0},   tavern:{req:0, max:0}, 
@@ -1356,6 +1356,21 @@ window.onload = function()
                 {
                     this.timeSinceInvasion = this.INVASION_FACTORS.TIME + Math.floor(Math.random() / 18 * 100)
                     var disasterSelect = Math.round(100 * Math.random()) % 4;
+                    if (disasterSelect == 0)
+                    {
+                        for (var i = 0; i < this.specialsArray.length; i++)
+                        {
+                            if (this.specialsArray[i].title == "Famine")
+                            {
+                                while (disasterSelect != 0)
+                                {
+                                    disasterSelect = Math.round(100 * Math.random()) % 4;
+                                }
+                                break;
+                            }
+                        }
+                    }
+
                     switch (disasterSelect)
                     {
                         case 0:
