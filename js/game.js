@@ -3767,17 +3767,14 @@ window.onload = function()
                 if (this.marketMultiplyer == 1)
                 {
                     this.marketMultiplyer = 10;
-                    document.getElementById("marketMultiplyerButton").innerHTML = "x10";
                 }
                 else if (this.marketMultiplyer == 10)
                 {
                     this.marketMultiplyer = 100;
-                    document.getElementById("marketMultiplyerButton").innerHTML = "x100";
                 }
                 else if (this.marketMultiplyer == 100)
                 {
                     this.marketMultiplyer = 1;
-                    document.getElementById("marketMultiplyerButton").innerHTML = "x1";
                 }
             },
             harborRefugees()
