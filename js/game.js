@@ -1601,7 +1601,7 @@ window.onload = function()
                     {
                         if (this.satBoosts[i].sat < 0)
                         {
-                            baseSatisfaction += (this.satBoosts[i].sat * .6);
+                            baseSatisfaction += (this.satBoosts[i].sat * .75);
                         }
                         else
                         {
