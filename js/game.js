@@ -4323,17 +4323,32 @@ function playMusic()
         if (!musicOff && sunshine)
         {
             musicOff = 1;
-            pauseMusic();
+            var media = document.getElementById("myMusic");
+            const playPromise = media.pause();
+            if (playPromise !== null){
+                playPromise.catch(() => { media.pause(); })
+            }
         }
     }
 }
 
 function pauseMusic()
 {
-    var media = document.getElementById("myMusic");
-    const playPromise = media.pause();
-    if (playPromise !== null){
-        playPromise.catch(() => { media.pause(); })
+    if (!sunshine)
+    {
+        var media = document.getElementById("myMusic");
+        const playPromise = media.pause();
+        if (playPromise !== null){
+            playPromise.catch(() => { media.pause(); })
+        }
+    }
+    else
+    {
+        var media = document.getElementById("sunshine");
+        const playPromise = media.pause();
+        if (playPromise !== null){
+            playPromise.catch(() => { media.pause(); })
+        }
     }
 }
 
@@ -4352,8 +4367,20 @@ function playPage() {
  function tutorialsOff()
  {
     tutorialToggle = 0;
+    var media = document.getElementById("click");
+    media.volume = .2;
+    const playPromise = media.play();
+    if (playPromise !== null){
+        playPromise.catch(() => { media.play(); })
+    }
+
+ }
+
+ function rodeo()
+ {
+    tutorialToggle = 0;
     var media = document.getElementById("rodeo");
-    media.volume = .5;
+    media.volume = .4;
     const playPromise = media.play();
     if (playPromise !== null){
         playPromise.catch(() => { media.play(); })
