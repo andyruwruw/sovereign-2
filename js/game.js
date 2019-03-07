@@ -1,5 +1,6 @@
 var sunshine = 0;
 var hardmode = 0;
+var hardhardMode = 0;
 var tutorialToggle = 1;
 window.onload = function() 
 {
@@ -584,23 +585,48 @@ window.onload = function()
                 {
                     document.getElementById("specialsDiv").style.backgroundColor = "rgba(114, 114, 114, 0.274)";
                 }
-                for (var i = 0; i < this.specialsArray.length; i++)
+                if (this.specialsArray.length <= 6)
                 {
-                        divString += "</div><div class=\"row\"><div class=\"col-lg-12 center\"><div id=\"specialsBar\"><div class=\"" + this.specialsArray[i].id + "\" id=\"special" + i + "\"><p id=\"specialTitle\">" + this.specialsArray[i].title + "</p></div></div><div id=\"progressBarSpace\" v-else></div></div></div>";
-                        trackIds.push(this.specialsArray[i].id);
+                    for (var i = 0; i < this.specialsArray.length; i++)
+                    {
+                            divString += "</div><div class=\"row\"><div class=\"col-lg-12 center\"><div id=\"specialsBar\"><div class=\"" + this.specialsArray[i].id + "\" id=\"special" + i + "\"><p id=\"specialTitle\">" + this.specialsArray[i].title + "</p></div></div><div id=\"progressBarSpace\" v-else></div></div></div>";
+                            trackIds.push(this.specialsArray[i].id);
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < 6; i++)
+                    {
+                            divString += "</div><div class=\"row\"><div class=\"col-lg-12 center\"><div id=\"specialsBar\"><div class=\"" + this.specialsArray[i].id + "\" id=\"special" + i + "\"><p id=\"specialTitle\">" + this.specialsArray[i].title + "</p></div></div><div id=\"progressBarSpace\" v-else></div></div></div>";
+                            trackIds.push(this.specialsArray[i].id);
+                    }
                 }
                 if (!this.isGameOver)
                 {
                     document.getElementById("specialsDiv").innerHTML = divString;
                 }
                 divString = "";
-                for (var i = 0; i < this.specialsArray.length; i++)
+                if (this.specialsArray.length <= 6)
                 {
-                    if (!this.isGameOver)
+                    for (var i = 0; i < this.specialsArray.length; i++)
                     {
-                        document.getElementById("special" + i).style.width = (this.specialsArray[i].time / this.specialsArray[i].starttime * 100) + "%";
+                        if (!this.isGameOver)
+                        {
+                            document.getElementById("special" + i).style.width = (this.specialsArray[i].time / this.specialsArray[i].starttime * 100) + "%";
+                        }
                     }
                 }
+                else
+                {
+                    for (var i = 0; i < 6; i++)
+                    {
+                        if (!this.isGameOver)
+                        {
+                            document.getElementById("special" + i).style.width = (this.specialsArray[i].time / this.specialsArray[i].starttime * 100) + "%";
+                        }
+                    }
+                }
+
                 
 
                 if (this.timeSinceInvasion > 0)
@@ -1362,7 +1388,15 @@ window.onload = function()
                 
                 if (this.DISASTER_FACTORS.DISASTER_CHANCE >= Math.random())
                 {
-                    this.timeSinceInvasion = this.INVASION_FACTORS.TIME + Math.floor(Math.random() / 18 * 100)
+                    if (!hardhardMode)
+                    {
+                        this.timeSinceInvasion = this.INVASION_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
+                    }
+                    else
+                    {
+                        this.timeSinceInvasion = this.INVASION_FACTORS.TIME;
+                    }
+                    
                     var disasterSelect = Math.round(100 * Math.random()) % 4;
                     if (disasterSelect == 0)
                     {
@@ -1408,7 +1442,15 @@ window.onload = function()
                 console.log("What? Sorry. I was using this time to think about something useful.");
                 if (this.DISASTER_FACTORS.INVASION >= Math.random())
                 {
-                    this.timeSinceDisaster = this.DISASTER_FACTORS.TIME + Math.floor(Math.random() / 18 * 100)
+                    if (!hardhardMode)
+                    {
+                        this.timeSinceDisaster = this.DISASTER_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
+                    }
+                    else
+                    {
+                        this.timeSinceDisaster = this.DISASTER_FACTORS.TIME;
+                    }
+                    
                     if (this.citizensStat.population <= 30)
                     {
                         this.disasterRobbers();
@@ -3014,6 +3056,22 @@ window.onload = function()
                     sunshine = 1;
                     this.cheatsActivated = 1;
                 }
+                else if (this.devCode == "*SMITE*")
+                {
+                    this.playSound("hard", .5);
+                    this.devCode = "";
+                    hardhardMode = 1;
+                    this.DISASTER_FACTORS.DISASTER_CHANCE = 1;
+                    this.DISASTER_FACTORS.TIME = 5;
+                    this.DISASTER_FACTORS.INVASION = 1;
+                    this.DISASTER_FACTORS.TIME = 7;
+                    this.CITIZEN_FACTORS.FOOD_NEEDS = 5;
+                    this.disasterStorm();
+                    this.timeSinceInvasion = 5,
+                    this.timeSinceDisaster = 4,
+                    this.DISASTER_FACTORS
+                    this.cheatsActivated = 1;
+                }
             },
             addDays(num)
             {
@@ -4407,20 +4465,32 @@ function playMusic()
 {
     if (notGameOver)
     {
-        if (!sunshine)
+        if (!sunshine && !hardhardMode)
         {
+            console.log("thats broke");
             var media = document.getElementById("myMusic");
         }
-        else
+        else if (sunshine)
         {
             var media = document.getElementById("sunshine");
         }
-        media.volume = 0.3;
+        else
+        {
+            var media = document.getElementById("hardmusic");
+        }
+        if (hardhardMode && !sunshine)
+        {
+            media.volume = 0.5;
+        }
+        else
+        {
+            media.volume = 0.3;
+        }
         const playPromise = media.play();
         if (playPromise !== null){
             playPromise.catch(() => { media.play(); })
         }
-        if (!musicOff && sunshine)
+        if (!musicOff && (sunshine || hardhardMode))
         {
             musicOff = 1;
             var media = document.getElementById("myMusic");
@@ -4434,7 +4504,7 @@ function playMusic()
 
 function pauseMusic()
 {
-    if (!sunshine)
+    if (!sunshine && !hardhardMode)
     {
         var media = document.getElementById("myMusic");
         const playPromise = media.pause();
@@ -4442,9 +4512,17 @@ function pauseMusic()
             playPromise.catch(() => { media.pause(); })
         }
     }
-    else
+    else if (sunshine)
     {
         var media = document.getElementById("sunshine");
+        const playPromise = media.pause();
+        if (playPromise !== null){
+            playPromise.catch(() => { media.pause(); })
+        }
+    }
+    else
+    {
+        var media = document.getElementById("hardmusic");
         const playPromise = media.pause();
         if (playPromise !== null){
             playPromise.catch(() => { media.pause(); })
