@@ -476,6 +476,147 @@ window.onload = function()
             {
                 this.tutorialBool = 0;
             },
+            ondDay()
+            {
+                if (this.citizensStat.population >= 75 && this.disasterBoosted == 0)
+                {
+                    console.log("ADDED DIFFICUTLY");
+                    this.DISASTER_FACTORS.DISASTER_CHANCE += .2;
+                    this.DISASTER_FACTORS.INVASION += .2;
+                    this.disasterBoosted = 1;
+                }
+                else if (this.citizensStat.population < 75 && this.disasterBoosted == 1)
+                {
+                    this.DISASTER_FACTORS.DISASTER_CHANCE -= .2;
+                    this.DISASTER_FACTORS.INVASION -= .2;
+                    this.disasterBoosted = 0;
+                }
+                console.log(this.DISASTER_FACTORS.DISASTER_CHANCE);
+                console.log(this.DISASTER_FACTORS.INVASION);
+                if (this.mercenaryTimer > 0)
+                {
+                    this.mercenaryTimer -= 1;
+                }
+                else
+                {
+                    this.mercenaryProtection = 0;
+                }
+
+                if (this.gracePeriod > 0)
+                {
+                    this.gracePeriod -= 1;
+                }
+                
+                for (var i = 0; i < this.satBoosts.length; i++)
+                {
+                    if (this.satBoosts[i].ramp < this.satBoosts[i].full)
+                    {
+                        this.satBoosts[i].ramp += 1;
+                        this.satBoosts[i].sat = (this.satBoosts[i].startSat * (this.satBoosts[i].ramp / this.satBoosts[i].full));
+                    }
+                    else if (this.satBoosts[i].lag > 0)
+                    {
+                        this.satBoosts[i].lag -= 1;
+                        this.satBoosts[i].sat = this.satBoosts[i].startSat;
+                    }
+                    else
+                    {
+                        if (this.satBoosts[i].time <= 0)
+                        {
+                            this.satBoosts.splice(i, 1);
+                            continue;
+                        }
+                        else
+                        {
+                            this.satBoosts[i].time -= 1;
+                            this.satBoosts[i].sat = (this.satBoosts[i].startSat * (this.satBoosts[i].time / this.satBoosts[i].startTime));
+                        }
+
+                    }
+                }
+
+                if (this.citizensStat.population > this.buildingNum.houses * this.HOUSE_FACTORS.BEDS)
+                {
+                    console.log("beep bop boop.");
+                    var leaving = this.citizensStat.population - this.buildingNum.houses * this.HOUSE_FACTORS.BEDS;
+                    if (leaving == 1)
+                    {
+                        this.citizensStat.population -= 1;
+                        this.killPeople(leaving, 0);
+                        this.commentArray.push({text: "Builder: " + leaving + " person couldn't find a place to live and left!", timer: 5, noise: 0, played: 0, bold: 1});
+                    }
+                    if (leaving > 1)
+                    {
+                        this.citizensStat.population -= leaving;
+                        this.killPeople(leaving, 0);
+                        this.commentArray.push({text: "Builder: " + leaving + " people couldn't find a place to live and left!", timer: 5, noise: 0, played: 0, bold: 1});
+                    }
+                }
+                var divString = "";
+                var trackIds = [];
+        
+                for (var i = 0; i < this.specialsArray.length; i++)
+                {
+                    
+                    this.specialsArray[i].time -= 1;
+                    if (this.specialsArray[i].time <= 0)
+                    {
+                        this.specialsArray.splice(i, 1);
+                    }
+                }
+                if (this.specialsArray.length == 0 && !this.isGameOver)
+                {
+                    document.getElementById("specialsDiv").style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+                else if (!this.isGameOver)
+                {
+                    document.getElementById("specialsDiv").style.backgroundColor = "rgba(114, 114, 114, 0.274)";
+                }
+                for (var i = 0; i < this.specialsArray.length; i++)
+                {
+                        divString += "</div><div class=\"row\"><div class=\"col-lg-12 center\"><div id=\"specialsBar\"><div class=\"" + this.specialsArray[i].id + "\" id=\"special" + i + "\"><p id=\"specialTitle\">" + this.specialsArray[i].title + "</p></div></div><div id=\"progressBarSpace\" v-else></div></div></div>";
+                        trackIds.push(this.specialsArray[i].id);
+                }
+                if (!this.isGameOver)
+                {
+                    document.getElementById("specialsDiv").innerHTML = divString;
+                }
+                divString = "";
+                for (var i = 0; i < this.specialsArray.length; i++)
+                {
+                    if (!this.isGameOver)
+                    {
+                        document.getElementById("special" + i).style.width = (this.specialsArray[i].time / this.specialsArray[i].starttime * 100) + "%";
+                    }
+                }
+                
+
+                if (this.timeSinceInvasion > 0)
+                {
+                    console.log(this.timeSinceInvasion);
+                    this.timeSinceInvasion -= 1;
+                }
+                else if (this.timeSinceInvasion == 0)
+                {
+                    console.log(this.timeSinceInvasion);
+                    this.timeSinceInvasion = this.INVASION_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
+                    this.invasionChance();
+                }
+
+                
+                if (this.timeSinceDisaster > 0)
+                {
+                    console.log(this.timeSinceDisaster);
+                    this.timeSinceDisaster -= 1;
+                    
+                }
+                else if (this.timeSinceDisaster == 0)
+                {
+                    console.log(this.timeSinceDisaster);
+                    this.timeSinceDisaster = this.DISASTER_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
+                    this.disasterChance();
+                }
+            },
             elapsedTime()
             {
                 this.reduceTimers();
@@ -495,171 +636,33 @@ window.onload = function()
                     {
                         this.secondsTime = 0;
 
-                        if (this.citizensStat.population >= 75 && this.disasterBoosted == 0)
-                        {
-                            console.log("ADDED DIFFICUTLY");
-                            this.DISASTER_FACTORS.DISASTER_CHANCE += .2;
-                            this.DISASTER_FACTORS.INVASION += .2;
-                            this.disasterBoosted = 1;
-                        }
-                        else if (this.citizensStat.population < 75 && this.disasterBoosted == 1)
-                        {
-                            this.DISASTER_FACTORS.DISASTER_CHANCE -= .2;
-                            this.DISASTER_FACTORS.INVASION -= .2;
-                            this.disasterBoosted = 0;
-                        }
-
-                        console.log(this.DISASTER_FACTORS.DISASTER_CHANCE);
-                        console.log(this.DISASTER_FACTORS.INVASION);
-                        if (this.mercenaryTimer > 0)
-                        {
-                            this.mercenaryTimer -= 1;
-                        }
-                        else
-                        {
-                            this.mercenaryProtection = 0;
-                        }
-
-                        if (this.gracePeriod > 0)
-                        {
-                            this.gracePeriod -= 1;
-                        }
-
-
-                        for (var i = 0; i < this.satBoosts.length; i++)
-                        {
-                            if (this.satBoosts[i].ramp < this.satBoosts[i].full)
-                            {
-                                this.satBoosts[i].ramp += 1;
-                                this.satBoosts[i].sat = (this.satBoosts[i].startSat * (this.satBoosts[i].ramp / this.satBoosts[i].full));
-                            }
-                            else if (this.satBoosts[i].lag > 0)
-                            {
-                                this.satBoosts[i].lag -= 1;
-                                this.satBoosts[i].sat = this.satBoosts[i].startSat;
-                            }
-                            else
-                            {
-                                if (this.satBoosts[i].time <= 0)
-                                {
-                                    this.satBoosts.splice(i, 1);
-                                    continue;
-                                }
-                                else
-                                {
-                                    this.satBoosts[i].time -= 1;
-                                    this.satBoosts[i].sat = (this.satBoosts[i].startSat * (this.satBoosts[i].time / this.satBoosts[i].startTime));
-                                }
-
-                            }
-                        }
-
-                        if (this.citizensStat.population > this.buildingNum.houses * this.HOUSE_FACTORS.BEDS)
-                        {
-                            console.log("beep bop boop.");
-                            var leaving = this.citizensStat.population - this.buildingNum.houses * this.HOUSE_FACTORS.BEDS;
-                            if (leaving == 1)
-                            {
-                                this.citizensStat.population -= 1;
-                                this.killPeople(leaving, 0);
-                                this.commentArray.push({text: "Builder: " + leaving + " person couldn't find a place to live and left!", timer: 5, noise: 0, played: 0, bold: 1});
-                            }
-                            if (leaving > 1)
-                            {
-                                this.citizensStat.population -= leaving;
-                                this.killPeople(leaving, 0);
-                                this.commentArray.push({text: "Builder: " + leaving + " people couldn't find a place to live and left!", timer: 5, noise: 0, played: 0, bold: 1});
-                            }
-                        }
-                        var divString = "";
-                        var trackIds = [];
-                
-                        for (var i = 0; i < this.specialsArray.length; i++)
-                        {
-                            
-                            this.specialsArray[i].time -= 1;
-                            if (this.specialsArray[i].time <= 0)
-                            {
-                                this.specialsArray.splice(i, 1);
-                            }
-                        }
-                        if (this.specialsArray.length == 0 && !this.isGameOver)
-                        {
-                            document.getElementById("specialsDiv").style.backgroundColor = "rgba(0, 0, 0, 0)";
-                        }
-                        else if (!this.isGameOver)
-                        {
-                            document.getElementById("specialsDiv").style.backgroundColor = "rgba(114, 114, 114, 0.274)";
-                        }
-                        for (var i = 0; i < this.specialsArray.length; i++)
-                        {
-                                divString += "</div><div class=\"row\"><div class=\"col-lg-12 center\"><div id=\"specialsBar\"><div class=\"" + this.specialsArray[i].id + "\" id=\"special" + i + "\"><p id=\"specialTitle\">" + this.specialsArray[i].title + "</p></div></div><div id=\"progressBarSpace\" v-else></div></div></div>";
-                                trackIds.push(this.specialsArray[i].id);
-                        }
-                        if (!this.isGameOver)
-                        {
-                            document.getElementById("specialsDiv").innerHTML = divString;
-                        }
-                        divString = "";
-                        for (var i = 0; i < this.specialsArray.length; i++)
-                        {
-                            if (!this.isGameOver)
-                            {
-                                document.getElementById("special" + i).style.width = (this.specialsArray[i].time / this.specialsArray[i].starttime * 100) + "%";
-                            }
-                        }
-                        
-
-                        if (this.timeSinceInvasion > 0)
-                        {
-                            console.log(this.timeSinceInvasion);
-                            this.timeSinceInvasion -= 1;
-                        }
-                        else if (this.timeSinceInvasion == 0)
-                        {
-                            console.log(this.timeSinceInvasion);
-                            this.timeSinceInvasion = this.INVASION_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
-                            this.invasionChance();
-                        }
-
-                        
-                        if (this.timeSinceDisaster > 0)
-                        {
-                            console.log(this.timeSinceDisaster);
-                            this.timeSinceDisaster -= 1;
-                            
-                        }
-                        else if (this.timeSinceDisaster == 0)
-                        {
-                            console.log(this.timeSinceDisaster);
-                            this.timeSinceDisaster = this.DISASTER_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
-                            this.disasterChance();
-                        }
-
+                        this.ondDay();
 
                         if (this.dayTime < 31)
                         {
-                            this.dayTime += 1;
-                            
+                            this.dayTime += 1; 
                         }
                         else
                         {
                             this.dayTime = 0;
+
                             if (this.rampDifficulty)
                             {
                                 if (this.DISASTER_FACTORS.DISASTER_CHANCE < 1)
                                 {
                                     this.DISASTER_FACTORS.DISASTER_CHANCE += .025;
                                 }
-                                if (this.DISASTER_CHANCE.INVASION < 1)
+                                if (this.DISASTER_FACTORS.INVASION < 1)
                                 {
                                     this.DISASTER_FACTORS.INVASION += .025;
                                 }
                             }
+
                             if (this.famine < 1)
                             {
                                 this.famine += .2
                             }
+
                             if (this.monthTime < 11)
                             {
                                 this.monthTime += 1;
