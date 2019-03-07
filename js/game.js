@@ -3155,6 +3155,8 @@ window.onload = function()
                         {
                             string = " A farm was damaged beyond repair.";
                         } 
+                        this.BUILD_REQ.farm.max = 0;
+                        this.buttonsColor.farm = 1;
                         this.buildingNum.farm -= 1;
                         if (this.laborDistribution.farm >= 5)
                         {
