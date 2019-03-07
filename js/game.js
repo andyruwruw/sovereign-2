@@ -146,7 +146,7 @@ window.onload = function()
             disasterNum: 0,
             moreStats:0,
             gameOverNoisePlayed: 0,
-            gracePeriod: 90,
+            gracePeriod: 120,
             
             firstRobbery: 0,
             firstPlague: 0,
