@@ -2958,7 +2958,14 @@ window.onload = function()
                         this.playSound(this.SOUNDS.robbed.sound, this.SOUNDS.robbed.volume);
                         done = 1;
                     }
-                    random += 1;
+                    if (random == 3)
+                    {
+                        random = 0;
+                    }
+                    else
+                    {
+                        random += 1;
+                    }
                 }
                 this.specialsArray.push({time: 20, starttime: 20, id: "defeatSpan", title: "Robbed&nbsp;Depression"});
                 this.satBoosts.push({sat: 0, startSat: this.ROBBERS_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
