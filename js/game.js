@@ -460,7 +460,7 @@ window.onload = function()
                     nineteen: 0, twenty: 0, twentyone: 0, twentytwo: 0, twentythree: 0, twentyfour: 0, twentyfive: 0, twentysix: 0, twentyseven: 0,
                     twentyeight: 0, twentynine: 0, thirty: 0, thirtyone: 0},
                     */
-                    if ((this.tutorialHADBEENSHOWN.one == 1) && (this.tutorialHADBEENSHOWN.two == 1) && (this.tutorialHADBEENSHOWN.three == 1) && (this.tutorialHADBEENSHOWN.four == 1) && (this.tutorialHADBEENSHOWN.five == 1) && (this.tutorialHADBEENSHOWN.six == 1) && (this.tutorialHADBEENSHOWN.seven == 1) && (this.tutorialHADBEENSHOWN.eight == 1) && (this.tutorialHADBEENSHOWN.nine == 1) && (this.tutorialHADBEENSHOWN.ten == 1) && (this.tutorialHADBEENSHOWN.eleven == 1) && (this.tutorialHADBEENSHOWN.twelve == 1) && (this.tutorialHADBEENSHOWN.thirteen == 1) && (this.tutorialHADBEENSHOWN.fourteen == 1) && (this.tutorialHADBEENSHOWN.fifteen == 1) && (this.tutorialHADBEENSHOWN.sixteen == 1) && (this.tutorialHADBEENSHOWN.seventeen == 1) && (this.tutorialHADBEENSHOWN.eightteen == 1) && (this.tutorialHADBEENSHOWN.nineteen == 1) && (this.tutorialHADBEENSHOWN.twenty == 1) && (this.tutorialHADBEENSHOWN.twentyone == 1) && (this.tutorialHADBEENSHOWN.twentytwo == 1) && (this.tutorialHADBEENSHOWN.twentythree == 1) && (this.tutorialHADBEENSHOWN.twentyfour == 1) && (this.tutorialHADBEENSHOWN.twentyfive == 1) && (this.tutorialHADBEENSHOWN.twentysix == 1) && (this.tutorialHADBEENSHOWN.twentyseven == 1) && (this.tutorialHADBEENSHOWN.twentyeight == 1) && (this.tutorialHADBEENSHOWN.twentynine == 1) && (this.tutorialHADBEENSHOWN.thirty == 1) && (this.tutorialHADBEENSHOWN.thirtyone == 1) && (this.tutorialHADBEENSHOWN.thirtytwo == 0))
+                    if ((this.tutorialHADBEENSHOWN.one == 1) && (this.tutorialHADBEENSHOWN.two == 1) && (this.tutorialHADBEENSHOWN.three == 1) && (this.tutorialHADBEENSHOWN.four == 1) && (this.tutorialHADBEENSHOWN.five == 1) && (this.tutorialHADBEENSHOWN.six == 1) && (this.tutorialHADBEENSHOWN.seven == 1) && (this.tutorialHADBEENSHOWN.eight == 1) && (this.tutorialHADBEENSHOWN.ten == 1) && (this.tutorialHADBEENSHOWN.eleven == 1) && (this.tutorialHADBEENSHOWN.twelve == 1) && (this.tutorialHADBEENSHOWN.thirteen == 1) && (this.tutorialHADBEENSHOWN.fourteen == 1) && (this.tutorialHADBEENSHOWN.fifteen == 1) && (this.tutorialHADBEENSHOWN.sixteen == 1) && (this.tutorialHADBEENSHOWN.seventeen == 1) && (this.tutorialHADBEENSHOWN.eightteen == 1) && (this.tutorialHADBEENSHOWN.nineteen == 1) && (this.tutorialHADBEENSHOWN.twenty == 1) && (this.tutorialHADBEENSHOWN.twentyone == 1) && (this.tutorialHADBEENSHOWN.twentytwo == 1) && (this.tutorialHADBEENSHOWN.twentythree == 1) && (this.tutorialHADBEENSHOWN.twentyfive == 1) && (this.tutorialHADBEENSHOWN.twentysix == 1) && (this.tutorialHADBEENSHOWN.twentyeight == 1) && (this.tutorialHADBEENSHOWN.twentynine == 1) && (this.tutorialHADBEENSHOWN.thirty == 1) && (this.tutorialHADBEENSHOWN.thirtytwo == 0))
                     {
                         this.tutorialHADBEENSHOWN.thirtytwo = 1;
                         console.log("what do these NUMBERS MEAN");
@@ -674,7 +674,7 @@ window.onload = function()
                         this.citizensStat.population += deadPeople;
                         this.killPeople(deadPeople, 0);
                         this.commentArray.push({text: "Builder: Sire, our people are dying of stavation, we lost " + Math.abs(deadPeople) + " good people.", timer: 5, noise: 0, played: 0, bold: 1});
-                        this.satBoosts.push({sat: this.STARVE_FACTORS.SAT_DEPRESSION, startSat: this.STARVE_FACTORS.SAT_DEPRESSION, time: 30, startTime: 30, lag: 0, ramp: 0, full: 10});
+                        this.satBoosts.push({sat: 0, startSat: this.STARVE_FACTORS.SAT_DEPRESSION, time: 30, startTime: 30, lag: 0, ramp: 0, full: 10});
                         this.specialsArray.push({time: 30, starttime: 30, id: "Mourn", title: "Mourning"});
                     }
                     this.resourceStat.food = 0;
@@ -1479,7 +1479,7 @@ window.onload = function()
                     this.buttonsColor.townFaire = 1;
                     this.playSound(this.SOUNDS.faire.sound, this.SOUNDS.faire.volume);
                     this.specialsArray.push({time: 60, starttime: 60, id: "travelingPerformersSpan", title: "Faire&nbsp;Joy"});
-                    this.satBoosts.push({sat: this.TOWN_FAIR_FACTORS.SAT_BOOST, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 60, startTime: 60, lag: 0, ramp: 0, full: 5});
+                    this.satBoosts.push({sat: 0, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 60, startTime: 60, lag: 0, ramp: 0, full: 10});
                     this.commentArray.push({text: "Builder: The faire was a huge success! Moral is high.", timer: 5, noise: 0, played: 0, bold: 0});
                 }
                 else
@@ -1934,7 +1934,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.feast.sound, this.SOUNDS.feast.volume);
                     this.resourceStat.food -= this.FEAST_FACTORS.FOOD;
                     this.specialsArray.push({time: 20, starttime: 20, id: "travelingPerformersSpan", title: "Feast&nbsp;Joy"});
-                    this.satBoosts.push({sat: this.TOWN_FAIR_FACTORS.SAT_BOOST, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0, ramp: 0, full: 5});
+                    this.satBoosts.push({sat: 0, startSat: this.TOWN_FAIR_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0, ramp: 0, full: 5});
                     this.commentArray.push({text: "Builder: Everyone loved the feast!", timer: 5, noise: 0, played: 0, bold: 0});
                 }
                 else
@@ -2961,7 +2961,7 @@ window.onload = function()
                     random += 1;
                 }
                 this.specialsArray.push({time: 20, starttime: 20, id: "defeatSpan", title: "Robbed&nbsp;Depression"});
-                this.satBoosts.push({sat: this.ROBBERS_FACTORS.SAT_DEPRESSION, startSat: this.ROBBERS_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
+                this.satBoosts.push({sat: 0, startSat: this.ROBBERS_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
                 this.commentArray.push({text: "Builder: We were robbed in the middle of the night! We lost " + loss + " " + resourceType, timer: 10, noise: 1, played: 0, bold: 1});
             },
 
@@ -2993,7 +2993,7 @@ window.onload = function()
                     {
                         deadPeople = Math.ceil(this.citizensStat.population * (enemyStrength - kingdomStrength));
                         this.specialsArray.push({time: 20, starttime: 20, id: "defeatSpan", title: "Ransacked&nbsp;Depression"});
-                        this.satBoosts.push({sat: this.INVASION_FACTORS.SAT_DEPRESSION, startSat: this.INVASION_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
+                        this.satBoosts.push({sat: 0, startSat: this.INVASION_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
                         if (enemyStrength - kingdomStrength >= .2)
                         {
                             deadPeople = Math.ceil(this.citizensStat.population * (enemyStrength - kingdomStrength + (Math.random() / 10)));
@@ -3023,7 +3023,7 @@ window.onload = function()
                     else
                     {
                         this.specialsArray.push({time: 20, starttime: 20, id: "victorySpan", title: "Victory&nbsp;Celebrations"});
-                        this.satBoosts.push({sat: this.INVASION_FACTORS.SAT_BOOST, startSat: this.INVASION_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0, ramp: 0, full: 3});
+                        this.satBoosts.push({sat: 0, startSat: this.INVASION_FACTORS.SAT_BOOST, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
                         deadPeople = Math.floor((this.citizensStat.population * enemyStrength / 3) - (this.citizensStat.population * (kingdomStrength - enemyStrength)));
                         if (deadPeople < 0)
                         {
@@ -3084,7 +3084,7 @@ window.onload = function()
                 this.disasterNum += 1;
                 this.famine = this.FAMINE_FACTORS.FOOD_LOSS;
                 this.specialsArray.push({time: 120, starttime: 120, id: "famineSpan", title: "Famine"});
-                this.satBoosts.push({sat: this.FAMINE_FACTORS.SAT_DEPRESSION, startSat: this.FAMINE_FACTORS.SAT_DEPRESSION, time: 120, startTime: 120, lag: 30, ramp: 0, full: 15});
+                this.satBoosts.push({sat: 0, startSat: this.FAMINE_FACTORS.SAT_DEPRESSION, time: 120, startTime: 120, lag: 30, ramp: 0, full: 15});
                 this.commentArray.push({text: "Builder: Sire, a famine has struck.", timer: 10, noise: 1, played: 0, bold: 1});
             },
 
@@ -3127,7 +3127,7 @@ window.onload = function()
                     string = "Luckily the fire was contained.";
                 }
                 this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Fire&nbsp;Depression"});
-                this.satBoosts.push({sat: this.FIRE_FACTORS.SAT_DEPRESSION, startSat: this.FIRE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
+                this.satBoosts.push({sat: 0, startSat: this.FIRE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
                 this.commentArray.push({text: "Builder: Sire! The villiage is on fire! " + string, timer: 10, noise: 1, played: 0, bold: 1});
             },
 
@@ -3137,7 +3137,7 @@ window.onload = function()
                 this.disasterNum += 1;
                 this.playSound(this.SOUNDS.storm.sound, this.SOUNDS.storm.volume);
                 this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Storm&nbsp;Depression"});
-                this.satBoosts.push({sat: this.STORM_FACTORS.SAT_DEPRESSION, startSat: this.STORM_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
+                this.satBoosts.push({sat: 0, startSat: this.STORM_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
                 var string = "";
                 if (Math.random() < this.STORM_FACTORS.FARM_CHANCE)
                 {
@@ -3221,7 +3221,7 @@ window.onload = function()
                     
                     this.killPeople(deadPeople, 0);
                     this.specialsArray.push({time: 20, starttime: 20, id: "disaster", title: "Plague&nbsp;Depression"});
-                    this.satBoosts.push({sat: this.PLAGUE_FACTORS.SAT_DEPRESSION, startSat: this.PLAGUE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 7});
+                    this.satBoosts.push({sat: 0, startSat: this.PLAGUE_FACTORS.SAT_DEPRESSION, time: 20, startTime: 20, lag: 0, ramp: 0, full: 10});
                 }
                 this.commentArray.push({text: "Builder: Sire, a plague has swept through the town, " + string, timer: 10, noise: 1, played: 0, bold: 1});
             },
@@ -3595,7 +3595,7 @@ window.onload = function()
                     this.resourceStat.gold += this.SLAVE_TRADE_FACTORS.GOLD;
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.slaves.sound, this.SOUNDS.slaves.volume);
-                    this.satBoosts.push({sat: this.SLAVE_TRADE_FACTORS.SAT_DROP, startSat: this.SLAVE_TRADE_FACTORS.SAT_DROP, time: 90, startTime: 90, lag: 0, ramp: 0, full: 3});
+                    this.satBoosts.push({sat: 0, startSat: this.SLAVE_TRADE_FACTORS.SAT_DROP, time: 90, startTime: 90, lag: 0, ramp: 0, full: 15});
                     this.specialsArray.push({time: 90, starttime: 90, id: "Betrayal", title: "Betrayal"});
                     this.commentArray.push({text: "Slaver: Pleasure doing business with you sire.", timer: 5, noise: 1, played: 1, bold: 1});
                     this.commentArray.push({text: "The builder falls silent...", timer: 5, noise: 1, played: 1, bold: 1});
@@ -3685,7 +3685,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.lateNights.sound, this.SOUNDS.lateNights.volume);
                     this.specialsArray.push({time: 90, starttime: 90, id: "Betrayal", title: "Betrayal"});
-                    this.satBoosts.push({sat: this.LATE_NIGHTS.SAT_DROP, startSat: this.LATE_NIGHTS.SAT_DROP, time: 60, startTime: 60, lag: 30, ramp: 0, full: 3});
+                    this.satBoosts.push({sat: 0, startSat: this.LATE_NIGHTS.SAT_DROP, time: 60, startTime: 60, lag: 30, ramp: 0, full: 15});
                     this.commentArray.push({text: "The villiagers are worked through the nights. The builder falls silent.", timer: 5, noise: 1, played: 1, bold: 1});
                     this.specialItemUsed = 1;
                 }
@@ -3714,7 +3714,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.playSound(this.SOUNDS.faire.sound, this.SOUNDS.faire.volume);
                     this.specialsArray.push({time: 60, starttime: 60, id: "travelingPerformersSpan", title: "Joy&nbsp;from&nbsp;Performers"});
-                    this.satBoosts.push({sat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, startSat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, time: 30, startTime: 30, lag: 30, ramp: 0, full: 4});
+                    this.satBoosts.push({sat: 0, startSat: this.TRAVELING_PERFORMERS_FACTORS.SAT_BOOST, time: 30, startTime: 30, lag: 30, ramp: 0, full: 4});
                     this.commentArray.push({text: "The performances and music were beyond anything the villiagers had ever seen before.", timer: 5, noise: 1, played: 1, bold: 1});
                     this.commentArray.push({text: "Builder: That was fantastic!", timer: 5, noise: 1, played: 0, bold: 1});
                     this.specialItemUsed = 1;
