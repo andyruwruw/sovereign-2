@@ -649,7 +649,7 @@ window.onload = function()
                             {
                                 this.monthTime = 0;
                                 this.yearTime += 1;
-                                if (this.yearTime == 3)
+                                if (this.yearTime == 2)
                                 {
                                     this.rampDifficulty = 1;
                                 }
