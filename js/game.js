@@ -389,7 +389,7 @@ window.onload = function()
 
                     if (this.buildingNum.farm == 1 && this.tutorialHADBEENSHOWN.thirty == 0 && !this.isGameOver)
                     {
-                        this.tutorialHADBEENSHOWN.twentynine = 1;
+                        this.tutorialHADBEENSHOWN.thirty = 1;
                         console.log("what do these NUMBERS MEAN");
                         this.tutorialMessages.push({text: "Farms are Fantastic.\n\nYou can have up to 50 workers with max farms.\n\nAlways keep someone in a Farm.\n\nThey don't feel too useful at first, but wait 'til your first Famine.", time: 20, done: 0, index: 0})
                     }
