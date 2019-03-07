@@ -1,4 +1,5 @@
 var sunshine = 0;
+var hardmode = 0;
 var tutorialToggle = 1;
 window.onload = function() 
 {
@@ -147,7 +148,7 @@ window.onload = function()
             moreStats:0,
             gameOverNoisePlayed: 0,
             gracePeriod: 120,
-            
+            hardmodeActivated: 0,
             firstRobbery: 0,
             firstPlague: 0,
             firstFire: 0,
@@ -475,7 +476,14 @@ window.onload = function()
             },
             oneDay()
             {
-                
+                if (hardmode && !this.hardmodeActivated)
+                {
+                    this.hardmodeActivated = 1;
+                    console.log("Okay Cowboy, Difficulty INCREASED.");
+                    this.DISASTER_FACTORS.DISASTER_CHANCE += .1;
+                    this.DISASTER_FACTORS.INVASION += .1;
+                    this.CITIZEN_FACTORS.FOOD_NEEDS *= 1.5;
+                }
                 this.averageSat.time += 1;
                 this.averageSat.sat = (((this.averageSat.time - 1) * this.averageSat.sat) / this.averageSat.time) + (this.citizensStat.satisfaction * (1 / this.averageSat.time));
 
@@ -1424,7 +1432,7 @@ window.onload = function()
                     famineNeeds = 2;
                 }
                 foodIncome += (this.laborDistribution.farm * this.FARM_FACTORS.INCOME_PER_WORKER * this.productivety * this.famine);
-                foodIncome -= (this.citizensStat.population * this.CITIZEN_FACTORS.FOOD_NEEDS * famineNeeds);
+                foodIncome -= Math.round(this.citizensStat.population * this.CITIZEN_FACTORS.FOOD_NEEDS * famineNeeds);
                 this.monthlyIncome.foodRate = Math.round(foodIncome);
                 // Lumber
                 var lumberIncome = 0;
@@ -4470,6 +4478,7 @@ function playPage() {
 
  function rodeo()
  {
+    hardmode = 1;
     tutorialToggle = 0;
     var media = document.getElementById("rodeo");
     media.volume = .4;
