@@ -491,8 +491,7 @@ window.onload = function()
                     this.DISASTER_FACTORS.INVASION -= .2;
                     this.disasterBoosted = 0;
                 }
-                console.log(this.DISASTER_FACTORS.DISASTER_CHANCE);
-                console.log(this.DISASTER_FACTORS.INVASION);
+
                 if (this.mercenaryTimer > 0)
                 {
                     this.mercenaryTimer -= 1;
