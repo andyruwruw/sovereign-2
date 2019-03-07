@@ -162,6 +162,9 @@ window.onload = function()
             numHuntFood: 0,
             showModal: false,
 
+            rampDifficulty: 0,
+            DIFFICULTY: 0,
+
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
 
             i: 0,
@@ -623,6 +626,17 @@ window.onload = function()
                         else
                         {
                             this.dayTime = 0;
+                            if (this.rampDifficulty)
+                            {
+                                if (this.DISASTER_FACTORS.DISASTER_CHANCE < 1)
+                                {
+                                    this.DISASTER_FACTORS.DISASTER_CHANCE += .025;
+                                }
+                                if (this.DISASTER_CHANCE.INVASION < 1)
+                                {
+                                    this.DISASTER_FACTORS.INVASION += .025;
+                                }
+                            }
                             if (this.famine < 1)
                             {
                                 this.famine += .2
@@ -635,6 +649,10 @@ window.onload = function()
                             {
                                 this.monthTime = 0;
                                 this.yearTime += 1;
+                                if (this.yearTime == 3)
+                                {
+                                    this.rampDifficulty = 1;
+                                }
                             }
                             this.newMonth();
                             this.immigrationChance();
@@ -1686,14 +1704,14 @@ window.onload = function()
                 }
                 if (this.citizensStat.population >= 75)
                 {
-                    this.DISASTER_FACTORS.DISASTER_CHANCE = .53;
-                    this.DISASTER_FACTORS.INVASION = .43;
+                    this.DISASTER_FACTORS.DISASTER_CHANCE += .2;
+                    this.DISASTER_FACTORS.INVASION += .2;
 
                 }
                 else
                 {
-                    this.DISASTER_FACTORS.DISASTER_CHANCE = .4;
-                    this.DISASTER_FACTORS.INVASION = .3;
+                    this.DISASTER_FACTORS.DISASTER_CHANCE -= .2;
+                    this.DISASTER_FACTORS.INVASION -= .2;
                 }
             },
             // -----------------------------MISC
