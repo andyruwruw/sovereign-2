@@ -1,4 +1,4 @@
-
+var sunshine = 0;
 var tutorialToggle = 1;
 window.onload = function() 
 {
@@ -1554,7 +1554,16 @@ window.onload = function()
                 defenseStats += (this.laborDistribution.archer * this.ARCHER_FACTORS.BOOST);
                 defenseStats += (this.laborDistribution.catapult * this.CATAPULT_FACTORS.BOOST);
                 defenseStats += (this.buildingNum.walls * this.WALL_FACTORS.DEFENSE_BONUS);
-                defenseStats += (this.resourceStat.weaponsNum * this.WEAPON_FACTORS.DEFENSE)
+                var availableCit = (this.citizensStat.population - 2 - this.laborDistribution.soldier - this.laborDistribution.archer - (this.laborDistribution.catapult * 2))
+                if (this.resourceStat.weaponsNum <= availableCit)
+                {
+                    defenseStats += (this.resourceStat.weaponsNum * this.WEAPON_FACTORS.DEFENSE)
+                }
+                else
+                {
+                    defenseStats += (availableCit * this.WEAPON_FACTORS.DEFENSE)
+                }
+                
                 if (defenseStats > 1)
                 {
                     this.chancesRatios.defense = 1;
@@ -2926,6 +2935,12 @@ window.onload = function()
                     this.disasterStorm();
                     this.devCode = "";
                 }
+                else if (this.devCode == "WALKING ON SUNSHINE ON LOOP")
+                {
+                    this.devCode = "";
+                    this.satBoosts.push({sat: 1, startSat: 1, time: 1000000000000000000, startTime: 1, lag: 0, ramp: 10, full: 10});
+                    sunshine = 1;
+                }
             },
             addDays(num)
             {
@@ -4286,18 +4301,33 @@ Vue.component('modal', {
 
 // MUSIC FUNCTIONS
 var notGameOver = 1;
+var musicOff = 0;
+
 function playMusic()
 {
     if (notGameOver)
     {
-        var media = document.getElementById("myMusic");
+        if (!sunshine)
+        {
+            var media = document.getElementById("myMusic");
+        }
+        else
+        {
+            var media = document.getElementById("sunshine");
+        }
         media.volume = 0.3;
         const playPromise = media.play();
         if (playPromise !== null){
             playPromise.catch(() => { media.play(); })
         }
+        if (!musicOff && sunshine)
+        {
+            musicOff = 1;
+            pauseMusic();
+        }
     }
 }
+
 function pauseMusic()
 {
     var media = document.getElementById("myMusic");
