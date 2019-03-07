@@ -1,4 +1,4 @@
-# gamesovereign
+# About Sovereign
 
 I'm currently enrolled in a web design class at Brigham Young University!
 
