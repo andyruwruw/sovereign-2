@@ -146,7 +146,7 @@ window.onload = function()
             disasterNum: 0,
             moreStats:0,
             gameOverNoisePlayed: 0,
-            gracePeriod: 100,
+            gracePeriod: 90,
             
             firstRobbery: 0,
             firstPlague: 0,
@@ -161,6 +161,7 @@ window.onload = function()
             numGatherWood: 0,
             numHuntFood: 0,
             showModal: false,
+            disasterBoosted: 0,
 
             rampDifficulty: 0,
             DIFFICULTY: 0,
@@ -493,6 +494,23 @@ window.onload = function()
                     else // -----------------------------------------------------DAY
                     {
                         this.secondsTime = 0;
+
+                        if (this.citizensStat.population >= 75 && this.disasterBoosted == 0)
+                        {
+                            console.log("ADDED DIFFICUTLY");
+                            this.DISASTER_FACTORS.DISASTER_CHANCE += .2;
+                            this.DISASTER_FACTORS.INVASION += .2;
+                            this.disasterBoosted = 1;
+                        }
+                        else if (this.citizensStat.population < 75 && this.disasterBoosted == 1)
+                        {
+                            this.DISASTER_FACTORS.DISASTER_CHANCE -= .2;
+                            this.DISASTER_FACTORS.INVASION -= .2;
+                            this.disasterBoosted = 0;
+                        }
+
+                        console.log(this.DISASTER_FACTORS.DISASTER_CHANCE);
+                        console.log(this.DISASTER_FACTORS.INVASION);
                         if (this.mercenaryTimer > 0)
                         {
                             this.mercenaryTimer -= 1;
@@ -506,6 +524,7 @@ window.onload = function()
                         {
                             this.gracePeriod -= 1;
                         }
+
 
                         for (var i = 0; i < this.satBoosts.length; i++)
                         {
@@ -649,7 +668,7 @@ window.onload = function()
                             {
                                 this.monthTime = 0;
                                 this.yearTime += 1;
-                                if (this.yearTime == 2)
+                                if (this.yearTime == 1)
                                 {
                                     this.rampDifficulty = 1;
                                 }
@@ -1702,17 +1721,7 @@ window.onload = function()
                     }
                     this.townType = this.TOWN_TYPES[3];
                 }
-                if (this.citizensStat.population >= 75)
-                {
-                    this.DISASTER_FACTORS.DISASTER_CHANCE += .2;
-                    this.DISASTER_FACTORS.INVASION += .2;
 
-                }
-                else
-                {
-                    this.DISASTER_FACTORS.DISASTER_CHANCE -= .2;
-                    this.DISASTER_FACTORS.INVASION -= .2;
-                }
             },
             // -----------------------------MISC
             placeHolder()
