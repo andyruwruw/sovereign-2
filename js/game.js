@@ -193,20 +193,16 @@ window.onload = function()
                         this.finalDay = this.dayTime;
                         this.finalMonth = this.monthTime
                         this.finalYear = this.yearTime;
-                    }
-                    this.gameOver();
-                    this.townTypeCalc();
-                    this.checkDevCode();
-                    this.defenseUpdates();
-                    this.monthlyIncomeCalc();
-                    this.satisfactionUpdates();
-                    this.updateColors();
-                    this.commentWriter();
-                    this.elapsedTime();
-                    this.tutorial();
-                    if (this.citizensStat.population > this.highestPopulation)
-                    {
-                        this.highestPopulation = this.citizensStat.population;
+                        this.gameOver();
+                        this.townTypeCalc();
+                        this.checkDevCode();
+                        this.defenseUpdates();
+                        this.monthlyIncomeCalc();
+                        this.satisfactionUpdates();
+                        this.updateColors();
+                        this.commentWriter();
+                        this.elapsedTime();
+                        this.tutorial();
                     }
                 }
             },
@@ -478,6 +474,10 @@ window.onload = function()
             },
             ondDay()
             {
+                if (this.citizensStat.population > this.highestPopulation)
+                {
+                    this.highestPopulation = this.citizensStat.population;
+                }
                 if (this.citizensStat.population >= 75 && this.disasterBoosted == 0)
                 {
                     console.log("ADDED DIFFICUTLY");
