@@ -146,6 +146,7 @@ window.onload = function()
             disasterNum: 0,
             moreStats:0,
             gameOverNoisePlayed: 0,
+            gracePeriod: 100,
             
             firstRobbery: 0,
             firstPlague: 0,
@@ -171,7 +172,6 @@ window.onload = function()
             tutorialMessageCurrent: "",
             speed: 10,
             
-
             tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
                                     eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
                                 nineteen: 0, twenty: 0, twentyone: 0, twentytwo: 0, twentythree: 0, twentyfour: 0, twentyfive: 0, twentysix: 0, twentyseven: 0,
@@ -498,6 +498,11 @@ window.onload = function()
                         else
                         {
                             this.mercenaryProtection = 0;
+                        }
+
+                        if (this.gracePeriod > 0)
+                        {
+                            this.gracePeriod -= 1;
                         }
 
                         for (var i = 0; i < this.satBoosts.length; i++)
@@ -1593,7 +1598,21 @@ window.onload = function()
                 baseSatisfaction -= (this.citizensStat.taxRate * this.CITIZEN_FACTORS.TAX_TO_SAT);
                 for (var i = 0; i < this.satBoosts.length; i++)
                 {
-                    baseSatisfaction += this.satBoosts[i].sat;
+                    if (this.gracePeriod > 0)
+                    {
+                        if (this.satBoosts[i].sat < 0)
+                        {
+                            baseSatisfaction += (this.satBoosts[i].sat * .6);
+                        }
+                        else
+                        {
+                            baseSatisfaction += this.satBoosts[i].sat;
+                        }
+                    }
+                    else
+                    {
+                        baseSatisfaction += this.satBoosts[i].sat;
+                    }
                 }
                 if (baseSatisfaction > 1.0)
                 {
