@@ -443,7 +443,6 @@ window.onload = function()
                     {
                         if (this.tutorialHADBEENSHOWN.time2 < 250)
                         {
-                            console.log(this.tutorialHADBEENSHOWN.time2);
                             this.tutorialHADBEENSHOWN.time2 += 1
                         }
                         else
@@ -1864,7 +1863,6 @@ window.onload = function()
                     this.barracksPage = false;
                     this.marketPage = true;
                     this.currentPage = 5;
-                    console.log(this.currentPage);
                 }
                 else if (!this.isGameOver)
                 {
@@ -3487,7 +3485,7 @@ window.onload = function()
                     }
                     if (deadPeople != 0)
                     {
-                        console.log("");
+                        console.log("Something bad happened?");
                     }
                 }
             },
