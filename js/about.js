@@ -11,6 +11,7 @@ window.onload = function()
             buildings: 0,
             disasters: 0,
             specials: 0,
+            cheats: 0,
             SOUNDS: {click: {sound: "click", volume: .3}
         
                     },
@@ -30,6 +31,7 @@ window.onload = function()
                 this.disasters = 0;
                 this.specials = 0;
                 this.start = 0;
+                this.cheats = 0;
             },
             howToPlayPage()
             {
@@ -41,6 +43,7 @@ window.onload = function()
                 this.disasters = 0;
                 this.specials = 0;
                 this.start = 0;
+                this.cheats = 0;
             },
             actionsPage()
             {
@@ -52,6 +55,7 @@ window.onload = function()
                 this.disasters = 0;
                 this.specials = 0;
                 this.start = 0;
+                this.cheats = 0;
             },
             buildingsPage()
             {
@@ -63,6 +67,7 @@ window.onload = function()
                 this.disasters = 0;
                 this.specials = 0;
                 this.start = 0;
+                this.cheats = 0;
             },
             disastersPage()
             {
@@ -74,6 +79,7 @@ window.onload = function()
                 this.disasters = 1;
                 this.specials = 0;
                 this.start = 0;
+                this.cheats = 0;
             },
             specialsPage()
             {
@@ -85,6 +91,19 @@ window.onload = function()
                 this.disasters = 0;
                 this.specials = 1;
                 this.start = 0;
+                this.cheats = 0;
+            },
+            cheatsPage()
+            {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
+                this.makeingOf = 0;
+                this.howToPlay = 0;
+                this.actions = 0;
+                this.buildings = 0;
+                this.disasters = 0;
+                this.specials = 0;
+                this.start = 0;
+                this.cheats = 1;
             },
             starvingPage()
             {

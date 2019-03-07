@@ -2854,7 +2854,7 @@ window.onload = function()
                     this.disasterFire();
                     this.devCode = "";
                 }
-                else if (this.devCode == "THERES NOTHING THAT A HUNDRED MEN OR MORE COULD EVER DO")
+                else if (this.devCode == "LISTENS TO TOTO")
                 {
                     this.disasterFamine();
                     this.devCode = "";
