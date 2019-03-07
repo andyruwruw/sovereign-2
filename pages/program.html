@@ -1224,6 +1224,7 @@
                 default content
               -->
         </div>
+        <div id="loading"></div>
         <script type="text/x-template" id="modal-template">
             <transition name="modal">
                 <div class="modal-mask">
@@ -1259,15 +1260,32 @@
             </transition>
         </script>
         <script src="../js/game.js"></script>
+        <script>
+        function onReady(callback) {
+            var intervalId = window.setInterval(function() {
+                if (document.getElementsByTagName('body')[0] !== undefined) {
+                window.clearInterval(intervalId);
+                callback.call(this);
+                }
+            }, 1000);
+            }
+
+            onReady(function() {
+                document.getElementById("game").style.display = "block";
+                document.getElementById("headerContainer").style.display = "block";
+                document.getElementById("loading").style.display = "none";
+            });
+        </script>
     </body>
     <div id="footer">
         <div class="container">
             <div class="row">
-                    <div class="col-lg-6">
-                            <a id="footerLink" href="https://github.com/andyruwruw/gamesovereign.git">Website Github</a>
-                        </div>
-                        <div class="col-lg-6">
-                                <a id="footerLink" href="#">Zoom out if you cannot see the full window.</a></div>
+                <div class="col-lg-6">
+                    <a id="footerLink" href="https://github.com/andyruwruw/gamesovereign.git">Website Github</a>
+                </div>
+                <div class="col-lg-6">
+                    <a id="footerLink" href="#">Zoom out if you cannot see the full window.</a>
+                </div>
             </div>
         </div>
     </div>
