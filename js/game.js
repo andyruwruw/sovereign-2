@@ -3201,7 +3201,15 @@ window.onload = function()
                 else
                 {
                     var deadPeople = Math.floor(this.citizensStat.population * chance);
-                    string = deadPeople + " coughed to their deaths.";
+                    if (deadPeople > 1)
+                    {
+                        string = deadPeople + " coughed to their deaths.";
+                    }
+                    else
+                    {
+                        string = deadPeople + " coughed to their death.";
+                    }
+                    
                     
                     if (this.citizensStat.population - deadPeople <= 0)
                     {
