@@ -4351,5 +4351,12 @@ function playPage() {
 
  function tutorialsOff()
  {
-        tutorialToggle = 0;
+    tutorialToggle = 0;
+    var media = document.getElementById("rodeo");
+    media.volume = .5;
+    const playPromise = media.play();
+    if (playPromise !== null){
+        playPromise.catch(() => { media.play(); })
+    }
+
  }
