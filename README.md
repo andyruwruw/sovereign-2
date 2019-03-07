@@ -16,11 +16,9 @@ I had to define what a BUTTON was by finding the "X" "Y" of each click and hard 
 
 80% of the code and functions were THERE, I just lacked the time to sit down for hours programming in buttons to displaying them.
 
-You can find that failed project here.
-sovereign.andrewdanielyoung.com
+You can find that failed project [here](http://sovereign.andrewdanielyoung.com/).
 
-I abandoned that and worked on my labs and other fun projects -- like a website that will 100% give you a seizure.
-seizure.andrewdanielyoung.com
+I abandoned that and worked on my labs and other fun projects -- [like a website that will 100% give you a seizure.](http://seizure.andrewdanielyoung.com/).
 
 Then we learned about Vue in class! I knew I had two weeks til my Creative Project using Vue was due, so I got a head start.
 
