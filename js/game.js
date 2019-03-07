@@ -2844,6 +2844,36 @@ window.onload = function()
                     this.addDays(15);
                     this.devCode = "";
                 }
+                else if (this.devCode == "ANTI VAX MOVEMENT")
+                {
+                    this.disasterPlague();
+                    this.devCode = "";
+                }
+                else if (this.devCode == "WHO NEEDS FIREMEN")
+                {
+                    this.disasterFire();
+                    this.devCode = "";
+                }
+                else if (this.devCode == "THERES NOTHING THAT A HUNDRED MEN OR MORE COULD EVER DO")
+                {
+                    this.disasterFamine();
+                    this.devCode = "";
+                }
+                else if (this.devCode == "WAVES AT OTHER KINGDOM")
+                {
+                    this.disasterInvasion();
+                    this.devCode = "";
+                }
+                else if (this.devCode == "OCEANS 11")
+                {
+                    this.disasterRobbers();
+                    this.devCode = "";
+                }
+                else if (this.devCode == "IS IT 2012 YET")
+                {
+                    this.disasterStorm();
+                    this.devCode = "";
+                }
             },
             addDays(num)
             {
