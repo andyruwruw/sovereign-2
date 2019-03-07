@@ -153,7 +153,7 @@ window.onload = function()
             firstFire: 0,
             firstStorm: 0,
             firstFamine: 0,
-
+            marketMultiplyer: 1,
             finalDay: 0,
             finalMonth: 0,
             finalYear: 0,
@@ -1548,7 +1548,7 @@ window.onload = function()
                     }
                     var availableBeds = (this.buildingNum.houses * this.HOUSE_FACTORS.BEDS) - this.citizensStat.population;
                     var possibleImg = newVisitors;
- 
+
                     var imgOutcome = "but none were able to stay."
                     var immigrantCit = 0;
                     
@@ -2205,7 +2205,7 @@ window.onload = function()
             // -------------------------------Military
             trainTroops()
             {
-                if ((this.resourceStat.gold >= this.SOLDIER_FACTORS.GOLD_TRAIN) && (this.laborDistribution.free > 0) && (this.resourceStat.weaponsNum >= this.SOLDIER_FACTORS.WEAPON_TRAIN))
+                if ((this.buildingNum.barracks == 1) && (this.resourceStat.gold >= this.SOLDIER_FACTORS.GOLD_TRAIN) && (this.laborDistribution.free > 0) && (this.resourceStat.weaponsNum >= this.SOLDIER_FACTORS.WEAPON_TRAIN))
                 {
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.soldier += 1;
@@ -2213,6 +2213,12 @@ window.onload = function()
                     this.resourceStat.gold -= this.SOLDIER_FACTORS.GOLD_TRAIN;
                     this.resourceStat.weaponsNum -= this.SOLDIER_FACTORS.WEAPON_TRAIN;
                     this.commentArray.push({text: "Builder: A new soldier was trained.", timer: 5, noise: 0, played: 0, bold: 0});
+                }
+                else if (this.buildingNum.barracks < 1)
+                {
+                    this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
+                    this.commentArray.push({text: "Builder: We need a barracks to train an archer.", timer: 5, noise: 1, played: 0, bold: 0});
+                    return null;
                 }
                 else if (this.resourceStat.gold < this.SOLDIER_FACTORS.GOLD_TRAIN)
                 {
@@ -2233,7 +2239,7 @@ window.onload = function()
             trainArchers()
             {
 
-                if ((this.resourceStat.gold >= this.ARCHER_FACTORS.GOLD_TRAIN) && (this.laborDistribution.free > 0) && (this.resourceStat.weaponsNum >= this.ARCHER_FACTORS.WEAPON_TRAIN) && (this.buildingNum.walls > 0))
+                if ((this.buildingNum.walls >= 1) && (this.resourceStat.gold >= this.ARCHER_FACTORS.GOLD_TRAIN) && (this.laborDistribution.free > 0) && (this.resourceStat.weaponsNum >= this.ARCHER_FACTORS.WEAPON_TRAIN) && (this.buildingNum.walls > 0))
                 {
                     this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                     this.laborDistribution.archer += 1;
@@ -3495,8 +3501,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.FOOD_FACTORS.WORTH))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.gold -= this.FOOD_FACTORS.WORTH;
-                    this.resourceStat.food += 1;
+                    this.resourceStat.gold -= this.FOOD_FACTORS.WORTH * this.marketMultiplyer;
+                    this.resourceStat.food += 1 * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3515,8 +3521,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.food > 0))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.food -= 1;
-                    this.resourceStat.gold += this.FOOD_FACTORS.WORTH;
+                    this.resourceStat.food -= 1 * this.marketMultiplyer;
+                    this.resourceStat.gold += this.FOOD_FACTORS.WORTH * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3535,8 +3541,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.LUMBER_FACTORS.WORTH))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.gold -= this.LUMBER_FACTORS.WORTH;
-                    this.resourceStat.lumber += 1;
+                    this.resourceStat.gold -= this.LUMBER_FACTORS.WORTH * this.marketMultiplyer;
+                    this.resourceStat.lumber += 1 * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3555,8 +3561,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.lumber > 0))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.lumber -= 1;
-                    this.resourceStat.gold += this.LUMBER_FACTORS.WORTH;
+                    this.resourceStat.lumber -= 1 * this.marketMultiplyer;
+                    this.resourceStat.gold += this.LUMBER_FACTORS.WORTH * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3575,8 +3581,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.STONE_FACTORS.WORTH))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.gold -= this.STONE_FACTORS.WORTH;
-                    this.resourceStat.stone += 1;
+                    this.resourceStat.gold -= this.STONE_FACTORS.WORTH * this.marketMultiplyer;
+                    this.resourceStat.stone += 1 * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3595,8 +3601,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.stone > 0))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.stone -= 1;
-                    this.resourceStat.gold += this.STONE_FACTORS.WORTH;
+                    this.resourceStat.stone -= 1 * this.marketMultiplyer;
+                    this.resourceStat.gold += this.STONE_FACTORS.WORTH * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3615,8 +3621,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.gold >= this.WEAPON_FACTORS.WORTH))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.gold -= this.WEAPON_FACTORS.WORTH;
-                    this.resourceStat.weaponsNum += 1;
+                    this.resourceStat.gold -= this.WEAPON_FACTORS.WORTH * this.marketMultiplyer;
+                    this.resourceStat.weaponsNum += 1 * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3635,8 +3641,8 @@ window.onload = function()
                 if ((this.buildingNum.market == 1) && (this.resourceStat.weaponsNum > 0))
                 {
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
-                    this.resourceStat.weaponsNum -= 1;
-                    this.resourceStat.gold += this.WEAPON_FACTORS.WORTH;
+                    this.resourceStat.weaponsNum -= 1 * this.marketMultiplyer;
+                    this.resourceStat.gold += this.WEAPON_FACTORS.WORTH * this.marketMultiplyer;
                 }
                 else if (this.buildingNum.market != 1)
                 {
@@ -3709,6 +3715,25 @@ window.onload = function()
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough soldiers to give to them...", timer: 5, noise: 1, played: 0, bold: 0});
+                }
+            },
+            marketMultiplyerFunction()
+            {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
+                if (this.marketMultiplyer == 1)
+                {
+                    this.marketMultiplyer = 10;
+                    document.getElementById("marketMultiplyerButton").innerHTML = "x10";
+                }
+                else if (this.marketMultiplyer == 10)
+                {
+                    this.marketMultiplyer = 100;
+                    document.getElementById("marketMultiplyerButton").innerHTML = "x100";
+                }
+                else if (this.marketMultiplyer == 100)
+                {
+                    this.marketMultiplyer = 1;
+                    document.getElementById("marketMultiplyerButton").innerHTML = "x1";
                 }
             },
             harborRefugees()
