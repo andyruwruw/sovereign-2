@@ -130,7 +130,7 @@ window.onload = function()
             LATE_NIGHTS: {GOLD_COST: 300, BOOST: 2, SAT_DROP: -.2},
             TRAVELING_PERFORMERS_FACTORS: {GOLD_COST: 300, SAT_BOOST: .3, LASTS: 60},
             MERCENARIES_FACTORS: {GOLD_COST: 300, MONTHS: 3, FOOD_COST: 200},
-            WIZARD_FACTORS: {GOLD_COST: -600, CHANCE: .2},
+            WIZARD_FACTORS: {GOLD_COST: 600, CHANCE: .2},
             specialsArray: [],
             timeSinceInvasion: 40,
             timeSinceDisaster: 60,
