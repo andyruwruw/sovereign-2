@@ -291,6 +291,11 @@ h2
     padding-left: 40px;
     padding-bottom: 40px;
 }
+#moreStatsHighscore
+{
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
 #stats
 {
     background-image: linear-gradient(210deg, rgba(136, 116, 78, 0.1) 0%, rgba(0, 0, 0, .1) 75% 100%), url("https://i.ibb.co/g6fLNSZ/stats-00000.jpg");
@@ -1255,6 +1260,8 @@ button
     display: block;
     margin: auto;
     background-color: rgba(44, 44, 44, 0);
+    background-image: linear-gradient(to right, rgba(189, 189, 189,0) 0%, rgba(224, 224, 224,0) 0% 100%);
+    border: 0px;
     font-family: 'ZCOOL QingKe HuangYou', cursive;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -1268,6 +1275,8 @@ button
     display: block;
     margin: auto;
     background-color: rgba(44, 44, 44, 0);
+    background-image: linear-gradient(to right, rgba(189, 189, 189,0) 0%, rgba(224, 224, 224,0) 0% 100%);
+    border: 0px;
     font-family: 'ZCOOL QingKe HuangYou', cursive;
     color: rgba(199, 197, 197, 0.568);
     text-align: center;
@@ -1298,10 +1307,24 @@ button
     color: rgb(255, 255, 255);
     text-align: center;
     text-transform: uppercase;
-    font-size: 190%;
+    font-size: 250%;
     padding-left: 40px;
     padding-top: 25px;
 }
+#highscoreNote
+{
+    display: block;
+    margin: auto;
+    background-color: rgba(44, 44, 44, 0);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 150%;
+    padding-left: 40px;
+    padding-top: 50px;
+}
+
 .add-highscorePadding
 {
     padding-left: 40px;
@@ -1310,3 +1333,5 @@ button
 {
     margin-top: 25px;
 }
+
+

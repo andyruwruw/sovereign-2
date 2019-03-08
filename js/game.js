@@ -180,28 +180,8 @@ window.onload = function()
             tutorialMessageCurrent: "",
             speed: 10,
 
-            highScoreNum: 0,
-            highScoreNum2: 0,
-            highScoreNum3: 0,
-            highScoreNum4: 0,
-            highScoreNum5: 0,
-            highScoreNum6: 0,
-            highScoreNum7: 0,
-            highScoreNum8: 0,
-            highScoreNum9: 0,
-            highScoreNum10: 0,
-            highScoreName: "Name",
-            highScoreOnlineName: "",
-            highScoreOnlineName2: "",
-            highScoreOnlineName3: "",
-            highScoreOnlineName4: "",
-            highScoreOnlineName5: "",
-            highScoreOnlineName6: "",
-            highScoreOnlineName7: "",
-            highScoreOnlineName8: "",
-            highScoreOnlineName9: "",
-            highScoreOnlineName10: "",
 
+            highScoreName: "Name",
             HSLIST: [{username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
@@ -212,7 +192,11 @@ window.onload = function()
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0}],
-
+            highscoreHolderActions: 0,
+            highscoreHolderDisasters: 0,
+            highscoreHolderInvasions: 0,
+            highscoreHolderMaxPop: 0,
+            viewingHighscoreHolders: 0,
             highscores: 0,
             checked: 1,
             totalgames: 0,
@@ -4136,6 +4120,7 @@ window.onload = function()
                 }
                 else
                 {
+                    this.viewingHighscoreHolders = 0;
                     this.morehighscores = 0;
                 }
             },
@@ -4508,9 +4493,141 @@ window.onload = function()
                 this.interval = setInterval(this.refreshData, this.speed);
             },
 
+            setViewHighscore1()
+            {
+                if (this.viewingHighscoreHolders == 1)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 1
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore2()
+            {
+                if (this.viewingHighscoreHolders == 2)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 2
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore3()
+            {
+                if (this.viewingHighscoreHolders == 3)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 3
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore4()
+            {
+                if (this.viewingHighscoreHolders == 4)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 4
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore5()
+            {
+                if (this.viewingHighscoreHolders == 1)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 5
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore6()
+            {
+                if (this.viewingHighscoreHolders == 6)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 6
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore7()
+            {
+                if (this.viewingHighscoreHolders == 7)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 7
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore8()
+            {
+                if (this.viewingHighscoreHolders == 8)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 8
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore9()
+            {
+                if (this.viewingHighscoreHolders == 9)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders == 9
+                    this.highScoreInformation();
+                }
+            },
+            setViewHighscore10()
+            {
+                if (this.viewingHighscoreHolders == 10)
+                {
+                    this.viewingHighscoreHolders = 0;
+                }
+                else
+                {
+                    this.viewingHighscoreHolders = 10
+                    this.highScoreInformation();
+                }
+            },
+
+            highScoreInformation()
+            { 
+                if (this.viewingHighscoreHolders > 0)
+                {
+                    this.highscoreHolderActions = this.HSLIST[this.viewingHighscoreHolders-1].actions
+                    this.highscoreHolderDisasters = this.HSLIST[this.viewingHighscoreHolders-1].disasters
+                    this.highscoreHolderInvasions = this.HSLIST[this.viewingHighscoreHolders-1].invasions
+                    this.highscoreHolderMaxPop = this.HSLIST[this.viewingHighscoreHolders-1].maxpop
+                }
+            },
         },
         computed: 
         {
+
             highScoreNameCalc()
             {
                 if (this.HSLIST[0].username == "")
