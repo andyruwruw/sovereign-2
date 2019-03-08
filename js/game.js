@@ -4111,6 +4111,7 @@ window.onload = function()
                     name = snapshot.child("username").val();
                     
                   });
+                  
                   this.highScoreNum = days;
                   this.highScoreOnlineName = name;
                   
@@ -4242,9 +4243,21 @@ window.onload = function()
         },
         computed: 
         {
+            highScoreNameCalc()
+            {
+                if (this.highScoreOnlineName == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.highScoreOnlineName;
+                }
+            },
             highScoreCalc()
             {
                 var totalDays = this.highScoreNum;
+                
                 var years = 0;
                 while (totalDays > 372)
                 {
