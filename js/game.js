@@ -57,7 +57,7 @@ window.onload = function()
             STONE_FACTORS   : {WORTH: 3},
             GOLD_FACTORS    : {WORTH: 1},
             WEAPON_FACTORS  : {WORTH: 20, STONE_COST: 5, GOLD_COST: 5, DEFENSE: 0.0034},
-            
+            rampDifficulty: 0,
             LAND_FACTORS     : {SQR_MILES: 25},
             SOLDIER_FACTORS  : {GOLD_TRAIN: 20, WEAPON_TRAIN: 1, MONTHLY_WAGE: 5, BOOST: 0.02, PER_CIT: 20},
             ARCHER_FACTORS   : {GOLD_TRAIN: 50, WEAPON_TRAIN: 1, MONTHLY_WAGE: 5, BOOST: 0.04},
@@ -168,7 +168,6 @@ window.onload = function()
             disasterBoosted: 0,
             morehighscores: 0,
 
-            rampDifficulty: 0,
             DIFFICULTY: 0,
 
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
@@ -740,11 +739,11 @@ window.onload = function()
                             {
                                 if (this.DISASTER_FACTORS.DISASTER_CHANCE < 1)
                                 {
-                                    this.DISASTER_FACTORS.DISASTER_CHANCE += .025;
+                                    this.DISASTER_FACTORS.DISASTER_CHANCE += .05;
                                 }
                                 if (this.DISASTER_FACTORS.INVASION < 1)
                                 {
-                                    this.DISASTER_FACTORS.INVASION += .025;
+                                    this.DISASTER_FACTORS.INVASION += .05;
                                 }
                             }
                             var totalMonths = this.monthTime + this.yearTime * 12;
@@ -1440,15 +1439,6 @@ window.onload = function()
                 
                 if (this.DISASTER_FACTORS.DISASTER_CHANCE >= Math.random())
                 {
-                    if (!hardhardMode)
-                    {
-                        this.timeSinceInvasion = this.INVASION_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
-                    }
-                    else
-                    {
-                        this.timeSinceInvasion = this.INVASION_FACTORS.TIME;
-                    }
-                    
                     var disasterSelect = Math.round(100 * Math.random()) % 4;
                     if (disasterSelect == 0)
                     {
