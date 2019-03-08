@@ -172,7 +172,7 @@
         <div id="game" class="container" onclick="playMusic();">
             <div class="row" id="gameoverDiv" v-if="isGameOver">
                 <h2 id="gameOver">GAME OVER</h2>
-                <div id="clear2" class="fulllength" v-if="!moreStats && !highscores">
+                <div id="clear2" class="fulllength" v-if="!moreStats && !highscores && !gameStats">
                     <h3 id="deathReason">{{deathString}}</h3>
                 </div>
                 <div id="clear" class="fulllength">
@@ -180,14 +180,14 @@
                 </div>
                 <div class="fulllength container">
                     <div class="row">
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3">
                             <button id="moreStatsButton" v-on:click="moreStatsButton">More Stats</button>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <button id="moreStatsButton" v-on:click="highscoresButton">Highscores</button>
                         </div>
-                        <div class="col-lg-4"></div>
+                        <div class="col-lg-3"></div>
                     </div>
                 </div>
                 <div class="fulllength row add-highscorePadding" v-if="highscores"><span id="highscoreSpan"></span></div>
@@ -224,6 +224,20 @@
                     </div>
                     <div class="col-lg-4">
                         <h3 id="timeLasted">Total Disasters:</h3>
+                        <h3 id="timeLastedNum">{{disasterNum}}</h3>
+                    </div>
+                </div>
+                <div id="moreStatsDiv" class="fulllength row" v-if="gameStats">
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">Games Played:</h3>
+                        <h3 id="timeLastedNum">{{totalgames}}</h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">% Past 1 Year:</h3>
+                        <h3 id="timeLastedNum">{{invasionNum}}</h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 id="timeLasted">% Past 2 Years:</h3>
                         <h3 id="timeLastedNum">{{disasterNum}}</h3>
                     </div>
                 </div>

@@ -51,7 +51,7 @@ window.onload = function()
                     lateNights: {sound: "lateNights", volume: .3},
                     faire: {sound: "faire", volume: .3},
                     feast: {sound: "feast", volume: .3}},
-        
+                    gameStats: 0,
             LUMBER_FACTORS  : {WORTH: 2},
             FOOD_FACTORS    : {WORTH: 1},
             STONE_FACTORS   : {WORTH: 3},
@@ -185,6 +185,7 @@ window.onload = function()
             highScoreOnlineName: "",
             highscores: 0,
             checked: 1,
+            totalgames: 0,
             
             tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
                                     eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
@@ -494,6 +495,8 @@ window.onload = function()
                         totalgames += 1;
                         firebase.database().ref("gamesplayed/value").set(totalgames);
                     });
+                    var d = new Date();
+                    firebase.database().ref("gamesplayed/dates").push(d.toUTCString());
                 }
                 if (hardmode && !this.hardmodeActivated)
                 {
@@ -4063,11 +4066,13 @@ window.onload = function()
                 {
                     this.moreStats = 0;
                     this.highscores = 0;
+                    this.gameStats = 0;
                 }
                 else
                 {
                     this.moreStats = 1;
                     this.highscores = 0;
+                    this.gameStats = 0;
                 }
             },
             highscoresButton()
@@ -4076,12 +4081,29 @@ window.onload = function()
                 {
                     this.highscores = 0;
                     this.moreStats = 0;
+                    this.gameStats = 0;
                 }
                 else
                 {
                     this.highscores = 1;
                     this.moreStats = 0;
+                    this.gameStats = 0;
                     this.updateHighScores();
+                }
+            },
+            gamescoresButton()
+            {
+                if (this.gameStats == 1)
+                {
+                    this.gameStats = 0;
+                    this.moreStats = 0;
+                    this.highscores = 0;
+                }
+                else
+                {
+                    this.gameStats = 1;
+                    this.moreStats = 0;
+                    this.highscores = 0;
                 }
             },
             highscoreSubmit()
@@ -4252,6 +4274,7 @@ window.onload = function()
             {
                 this.interval = setInterval(this.refreshData, this.speed);
             },
+
         },
         computed: 
         {
@@ -4575,11 +4598,8 @@ window.onload = function()
         },
         created() 
         {
-            this.gameStart();
             this.updateHighScores();
-            
-            
-            
+            this.gameStart();
         }
     })
 }
