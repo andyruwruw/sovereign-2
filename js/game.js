@@ -4249,13 +4249,13 @@ window.onload = function()
                 while (totalDays > 372)
                 {
                     years += 1;
-                    totalDays - 372;
+                    totalDays -= 372;
                 }
                 var months = 0
                 while (totalDays > 31)
                 {
                     months += 1;
-                    totalDays - 31;
+                    totalDays -= 31;
                 }
                 var days = totalDays;
                 return years + " Years,   " + months + " Months,   " + days + " Days.";
