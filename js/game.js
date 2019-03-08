@@ -181,7 +181,7 @@ window.onload = function()
             speed: 10,
 
             highScoreNum: 0,
-            highScoreName: "",
+            highScoreName: "Name",
             highScoreOnlineName: "",
             highscores: 0,
             
