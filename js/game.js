@@ -516,6 +516,7 @@ window.onload = function()
                 {
                     this.hardmodeActivated = 1;
                     console.log("Okay Cowboy, Difficulty INCREASED.");
+                    this.commentArray.push({text: "Okay Cowboy, Difficulty INCREASED.", timer: 15, noise: 0, played: 0, bold: 1});
                     this.DISASTER_FACTORS.DISASTER_CHANCE += .1;
                     this.DISASTER_FACTORS.INVASION += .1;
                     this.CITIZEN_FACTORS.FOOD_NEEDS *= 1.5;
