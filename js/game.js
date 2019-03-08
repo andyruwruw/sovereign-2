@@ -184,6 +184,7 @@ window.onload = function()
             highScoreName: "Name",
             highScoreOnlineName: "",
             highscores: 0,
+            checked: 1,
             
             tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
                                     eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
@@ -483,7 +484,17 @@ window.onload = function()
             },
             oneDay()
             {
-
+                if (this.monthTime == 1 && this.checked)
+                {
+                    this.checked = 0;
+                    var totalgames = 0;
+                    firebase.database().ref('gamesplayed/value').once('value').then(function(snapshot) {
+                        totalgames = (snapshot.val());
+                        console.log(totalgames);
+                        totalgames += 1;
+                        firebase.database().ref("gamesplayed/value").set(totalgames);
+                    });
+                }
                 if (hardmode && !this.hardmodeActivated)
                 {
                     this.hardmodeActivated = 1;
@@ -690,16 +701,7 @@ window.onload = function()
                         else
                         {
                             this.dayTime = 0;
-                            if (this.monthTime == 1)
-                            {
-                                var totalgames = 0;
-                                firebase.database().ref('gamesplayed/value').once('value').then(function(snapshot) {
-                                    totalgames = (snapshot.val());
-                                    console.log(totalgames);
-                                    totalgames += 1;
-                                    firebase.database().ref("gamesplayed/value").set(totalgames);
-                                });
-                            }
+
                             if (this.rampDifficulty)
                             {
                                 if (this.DISASTER_FACTORS.DISASTER_CHANCE < 1)
@@ -4575,7 +4577,6 @@ window.onload = function()
         {
             this.gameStart();
             this.updateHighScores();
-            var totalgames = 0;
             
             
             
