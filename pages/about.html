@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
         <link rel="stylesheet" href="../css/about-style.css" />
+        <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
         <meta name="viewport"/>
         <title>Sovereign</title>
         <audio id="click">
@@ -12,6 +13,20 @@
         <audio id="myMusic">
             <source src="../sounds/aboutsong.mp3" type="audio/mpeg">
         </audio>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyD9D4uxP-DO_xLtXbyGeczkmggDKGI4o7Y",
+                authDomain: "sovereign-353ba.firebaseapp.com",
+                databaseURL: "https://sovereign-353ba.firebaseio.com",
+                projectId: "sovereign-353ba",
+                storageBucket: "sovereign-353ba.appspot.com",
+                messagingSenderId: "654502850497"
+            };
+            
+            firebase.initializeApp(config);
+            console.log("Firebase Loaded");
+        </script>
     </head>
 
     <body id="background">
@@ -35,13 +50,16 @@
 
         <div id="about" class="container" onclick="playMusic()">
             <div class="row" id="menuButtons">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <button id="makingOfButton" class="pageButton" v-on:click="makingOfPage">Making Of</button>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <button id="howToPlayButton" class="pageButton" v-on:click="howToPlayPage">How to Play</button>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
+                    <button id="cheatsButton" class="pageButton" v-on:click="highscorePage">Highscores</button>
+                </div>
+                <div class="col-lg-3">
                     <button id="cheatsButton" class="pageButton" v-on:click="cheatsPage">Cheat Codes</button>
                 </div>
             </div>
@@ -192,8 +210,100 @@
             <div class="row" id="disasters" v-if="disasters">
                 <p>I've spent over 200 hours on this, Imma get to this one later.</p>
             </div>
-            <div class="row" id="specials" v-if="specials">
-                <p>I've spent over 200 hours on this, Imma get to this one later.</p>
+            <div class="row" id="specials" v-if="highscores">
+                <div class="container">
+
+                        <div class="fulllength row" id="highscoreNote" v-if="!viewingHighscoreHolders">Click Anyone to See More Details.</div>
+                        <button id="highscoreNote"  v-on:click="backtotopten" v-if="viewingHighscoreHolders">Click to Return</button>
+                        <div class="fulllength row add-highscorePadding" v-if="!viewingHighscoreHolders"><span id="highscoreSpan"></span></div>
+                        <div class="fulllength row" >
+                            <h1 id="highscoreHolder" v-if="!viewingHighscoreHolders">High Score Holder</h1>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 1)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData"  v-on:click="setViewHighscore1">{{highScoreNameCalc}}: {{highScoreCalc}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row add-highscorePadding"  v-if="!viewingHighscoreHolders"><span id="highscoreSpan"></span></div>
+                        <div class="fulllength row">
+                                <h1 id="highscoreHolder10" v-if="!viewingHighscoreHolders">Top 10 Scores</h1>
+                            </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 2)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore2">{{highScoreNameCalc2}}: {{highScoreCalc2}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 3)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore3">{{highScoreNameCalc3}}: {{highScoreCalc3}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 4)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore4">{{highScoreNameCalc4}}: {{highScoreCalc4}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 5)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore5">{{highScoreNameCalc5}}: {{highScoreCalc5}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 6)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore6">{{highScoreNameCalc6}}: {{highScoreCalc6}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 7)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore7">{{highScoreNameCalc7}}: {{highScoreCalc7}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 8)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore8">{{highScoreNameCalc8}}: {{highScoreCalc8}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 9)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore9">{{highScoreNameCalc9}}: {{highScoreCalc9}}</button>
+                            </div>
+                        </div>
+                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 10)">
+                            <div id="highscoresOnline" class="container">
+                                <button id="highscoreData2"  v-on:click="setViewHighscore10">{{highScoreNameCalc10}}: {{highScoreCalc10}}</button>
+                            </div>
+                        </div>
+                        <div id="moreStatsHighscore" class="fulllength row add-statsPadding" v-if="viewingHighscoreHolders">
+                            <div class="col-lg-3">
+                                <h3 id="timeLasted">Maximum Population:</h3>
+                                <h3 id="timeLastedNum">{{highscoreHolderMaxPop}}</h3>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3 id="timeLasted">Total Invasions:</h3>
+                                <h3 id="timeLastedNum">{{highscoreHolderInvasions}}</h3>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3 id="timeLasted">Total Disasters:</h3>
+                                <h3 id="timeLastedNum">{{highscoreHolderDisasters}}</h3>
+                            </div>
+                            <div class="col-lg-3">
+                                <h3 id="timeLasted">Month Actions:</h3>
+                                <h3 id="timeLastedNum">{{highscoreHolderActions}}</h3>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
             </div>
             <div class="row" id="cheats" v-if="cheats">
                 <h1>Cheater Cheater Pumkin Eater</h1>
