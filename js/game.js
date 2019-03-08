@@ -4068,6 +4068,7 @@ window.onload = function()
             },
             moreStatsButton()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.moreStats == 1)
                 {
                     this.moreStats = 0;
@@ -4083,6 +4084,7 @@ window.onload = function()
             },
             highscoresButton()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.highscores == 1)
                 {
                     this.highscores = 0;
@@ -4099,6 +4101,7 @@ window.onload = function()
             },
             gamescoresButton()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.gameStats == 1)
                 {
                     this.gameStats = 0;
@@ -4114,6 +4117,7 @@ window.onload = function()
             },
             moreHighScores()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.morehighscores == 0)
                 {
                     this.morehighscores = 1;
@@ -4146,70 +4150,89 @@ window.onload = function()
                     disasters: this.disasterNum,
                     maxpop: this.highestPopulation,
                     actions: this.monthActions.average};
-                console.log(this.cheatsUsed);
+                
                 this.updateHighScores();
                 if (this.cheatsUsed == "No")
                 {
+                    
                     if (score.days > this.HSLIST[0].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(0, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[1].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(1, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[2].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(2, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[3].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(3, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[4].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(4, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[5].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(5, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[6].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(6, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[7].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(7, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[8].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(8, 0, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[9].days)
                     {
+                        this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(9, 1, score);
                         this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
+                    else
+                    {
+                        this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
+                    }
+                }
+                else
+                {
+                    this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                 }
 
             },
@@ -4495,6 +4518,7 @@ window.onload = function()
 
             setViewHighscore1()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 1)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4507,6 +4531,7 @@ window.onload = function()
             },
             setViewHighscore2()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 2)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4519,6 +4544,7 @@ window.onload = function()
             },
             setViewHighscore3()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 3)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4531,6 +4557,7 @@ window.onload = function()
             },
             setViewHighscore4()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 4)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4543,6 +4570,7 @@ window.onload = function()
             },
             setViewHighscore5()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 1)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4555,6 +4583,7 @@ window.onload = function()
             },
             setViewHighscore6()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 6)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4567,6 +4596,7 @@ window.onload = function()
             },
             setViewHighscore7()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 7)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4579,6 +4609,7 @@ window.onload = function()
             },
             setViewHighscore8()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 8)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4591,6 +4622,7 @@ window.onload = function()
             },
             setViewHighscore9()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 9)
                 {
                     this.viewingHighscoreHolders = 0;
@@ -4603,6 +4635,7 @@ window.onload = function()
             },
             setViewHighscore10()
             {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
                 if (this.viewingHighscoreHolders == 10)
                 {
                     this.viewingHighscoreHolders = 0;
