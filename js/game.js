@@ -2,6 +2,7 @@ var sunshine = 0;
 var hardmode = 0;
 var hardhardMode = 0;
 var tutorialToggle = 1;
+var posted = 0;
 window.onload = function() 
 {
     let game = new Vue                                  // VUE OBJECT
@@ -178,6 +179,11 @@ window.onload = function()
             tutorialBools: [{done: 0}],
             tutorialMessageCurrent: "",
             speed: 10,
+
+            highScoreNum: 0,
+            highScoreName: "",
+            highScoreOnlineName: "",
+            highscores: 0,
             
             tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
                                     eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
@@ -410,7 +416,7 @@ window.onload = function()
                     {
                         this.tutorialHADBEENSHOWN.twelve = 1;
                         console.log("what do these NUMBERS MEAN");
-                        this.tutorialMessages.push({text: "That's a BUMMER!\n\nFamines are a bit issue if you don't have enough food.\n\n  Citizens need twice as much food.\n  Farms produce 1/3 of their usual.\n\nAssign everyone you can to farms, buy food if you have a market.", time: 20, done: 0, index: 0})
+                        this.tutorialMessages.push({text: "That's a BUMMER!\n\nFamines are a big issue if you don't have enough food.\n\n  Citizens need twice as much food.\n  Farms produce 1/3 of their usual.\n\nAssign everyone you can to farms, buy food if you have a market.", time: 20, done: 0, index: 0})
                     }
                     if (this.firstFire == 1 && this.tutorialHADBEENSHOWN.thirteen == 0 && !this.isGameOver)
                     {
@@ -3072,6 +3078,10 @@ window.onload = function()
                     this.DISASTER_FACTORS
                     this.cheatsActivated = 1;
                 }
+                else if (this.devCode == "Game Over")
+                {
+                    this.isGameOver = 1;
+                }
             },
             addDays(num)
             {
@@ -4040,11 +4050,86 @@ window.onload = function()
                 if (this.moreStats == 1)
                 {
                     this.moreStats = 0;
+                    this.highscores = 0;
                 }
                 else
                 {
                     this.moreStats = 1;
+                    this.highscores = 0;
                 }
+            },
+            highscoresButton()
+            {
+                if (this.highscores == 1)
+                {
+                    this.highscores = 0;
+                    this.moreStats = 0;
+                }
+                else
+                {
+                    this.highscores = 1;
+                    this.moreStats = 0;
+                    this.updateHighScores();
+                }
+            },
+            highscoreSubmit()
+            {
+                var score = {
+                    username: this.highScoreName,
+                    days: ((this.yearTime * 31 * 12) + (this.monthTime * 31) + this.dayTime),
+                    invasions: this.invasionNum, 
+                    disasters: this.disasterNum,
+                    maxpop: this.highestPopulation,
+                    actions: this.monthActions.average};
+                console.log(this.cheatsUsed);
+                
+                if (this.cheatsUsed == "No")
+                {
+                    console.log(score.days + " " + this.highScoreNum);
+                    if (score.days > this.highScoreNum)
+                    {
+                        console.log("UPDATED " + this.highScoreNum);
+                        firebase.database().ref("highscore").set(score);
+                    }
+                    this.updateHighScores();
+                }
+                /*
+                console.log("Submitting");
+                if (this.cheatsUsed == 0 && posted == 0)
+                {
+                    posted = 1;
+                    firebase.database().ref('users-highscores/').push();
+                }
+                */
+            },
+            updateHighScores()
+            {
+                var days;
+                var name;
+                firebase.database().ref("highscore").on("value", function (snapshot) {
+                    days = snapshot.child("days").val();
+                    name = snapshot.child("username").val();
+                    
+                  });
+                  this.highScoreNum = days;
+                  this.highScoreOnlineName = name;
+                  
+                /*
+                console.log("Updating Scores");
+                var topUserScores = firebase.database().ref('users-highscores/');
+                for (var i = 0; i < 5; i++)
+                {
+                    var years = Math.floor(this.topUserScores[i].days / (31 * 12));
+                    var months = Math.floor((this.topUserScores[i].days - (years * 12)) / 31)
+                    var days = Math.floor((this.topUserScores[i].days - (years * 12 * 31) - (months * 31)));
+                    this.highscores.push({name: this.topUserScores[i].name, years: years, months: months, days: days})
+                }
+                console.log("Updating DOM");
+                document.getElementById("highscores").innerHTML = "";
+                for (var i = 5; i >= 0; i--)
+                {
+                    document.getElementById("highscores").innerHTML += "<div class=\"row\"><div class=\"col-lg-3\">" + this.highscores[i].name + "</div><div class=\"col-lg-3\">" + this.highscores[i].days + " Days</div><div class=\"col-lg-3\">" + this.highscores[i].months + " Months</div><div class=\"col-lg-3\">" + this.highscores[i].years + " Years</div></div>";
+                }*/
             },
             wizardSpell()
             {
@@ -4157,6 +4242,24 @@ window.onload = function()
         },
         computed: 
         {
+            highScoreCalc()
+            {
+                var totalDays = this.highScoreNum;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays - 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays - 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
             satisfactionAvgCalc()
             {
                 return Math.round(this.averageSat.sat * 100);
@@ -4448,6 +4551,7 @@ window.onload = function()
         created() 
         {
             this.gameStart();
+            this.updateHighScores();
         }
     })
 }
@@ -4467,7 +4571,6 @@ function playMusic()
     {
         if (!sunshine && !hardhardMode)
         {
-            console.log("thats broke");
             var media = document.getElementById("myMusic");
         }
         else if (sunshine)

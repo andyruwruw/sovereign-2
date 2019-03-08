@@ -215,16 +215,20 @@ h2
 }
 #timeLasted
 {
-    color: rgb(255, 255, 255);
+    
     display: block;
     margin: auto;
     width: 50%;
-    font-size: 180%;
-    text-align: center;
-    text-transform: uppercase;
+    
+    
     background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
     font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 180%;
 }
+
 #timeLastedNum
 {
     color: rgba(148, 148, 148, 0.829);
@@ -243,7 +247,7 @@ h2
     color: rgba(173, 173, 173, 0.377);
     display: block;
     margin: auto;
-    width: 50%;
+    width: 100%;
     padding-top: 1%;
     font-size: 150%;
     text-align: center;
@@ -665,6 +669,11 @@ h2
 {
     text-align: right;
 }
+.rightALIGNED
+{
+    display: block;
+    margin-left: auto;
+}
 .left
 {
     text-align: left;
@@ -688,6 +697,8 @@ button
 {
     border: none;
 }
+
+
 #devText
 {
     background-color: rgba(0, 0, 0, 0);
@@ -1163,3 +1174,95 @@ button
     background-repeat: no-repeat;
     background-position: center;
   }
+
+
+
+
+  #addScore
+{
+    display: block;
+    margin-left: auto;
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 99% 100%) !important;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(163, 162, 162);
+        text-align: right;
+    text-transform: uppercase;
+    font-size: 150%;
+    padding-top: 10px;
+}
+#Name
+{
+    display: block;
+    border: none;
+    background-color: rgba(5, 5, 5, 0.493);
+    width: 100%;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(163, 162, 162);
+        text-align: center;
+    text-transform: uppercase;
+    font-size: 150%;
+    padding-top: 5px;
+    margin: auto;
+}
+#highscoreSubmitButton
+{
+    
+    display: block;
+    margin-right: auto;
+    border: none;
+    background-color: rgba(44, 44, 44, 0);
+    background-image: linear-gradient(to right, rgba(189, 189, 189, 0) 0%, rgba(224, 224, 224, 0) 0% 100%);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(163, 162, 162);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 150%;
+    padding-top: 5px;
+}
+#submitHighScore
+{
+    padding-top: 50px;
+    padding-left: 40px;
+}
+
+#highscoreSpan
+{
+    display: block;
+    margin: 0 auto;
+    background-color: rgba(221, 221, 221, 0.596);
+    height: 3px;
+    width: 50%;
+    margin-top: 25px;
+}
+
+#highscoreData
+{
+    display: block;
+    margin: auto;
+    background-color: rgba(44, 44, 44, 0);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding-left: 40px;
+    text-transform: uppercase;
+    font-size: 180%;
+    padding-top: 10px;
+}
+#highscoreHolder
+{
+    display: block;
+    margin: auto;
+    background-color: rgba(44, 44, 44, 0);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 150%;
+    padding-left: 40px;
+    padding-top: 25px;
+}
+.add-highscorePadding
+{
+    padding-left: 40px;
+}

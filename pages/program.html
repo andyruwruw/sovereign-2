@@ -6,6 +6,19 @@
         <link rel="stylesheet" href="../css/game-style.css" />
         <meta name="viewport"/>
         <title>Sovereign</title>
+        <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyD9D4uxP-DO_xLtXbyGeczkmggDKGI4o7Y",
+                authDomain: "sovereign-353ba.firebaseapp.com",
+                databaseURL: "https://sovereign-353ba.firebaseio.com",
+                projectId: "sovereign-353ba",
+                storageBucket: "sovereign-353ba.appspot.com",
+                messagingSenderId: "654502850497"
+            };
+            firebase.initializeApp(config);
+        </script>
         <audio id="myMusic">
             <source src="../sounds/gametheme.mp3" type="audio/mpeg">
         </audio>
@@ -159,14 +172,47 @@
         <div id="game" class="container" onclick="playMusic();">
             <div class="row" id="gameoverDiv" v-if="isGameOver">
                 <h2 id="gameOver">GAME OVER</h2>
-                <div id="clear2" class="fulllength" v-if="!moreStats">
+                <div id="clear2" class="fulllength" v-if="!moreStats && !highscores">
                     <h3 id="deathReason">{{deathString}}</h3>
                 </div>
                 <div id="clear" class="fulllength">
                     <h3 id="timeLasted">You lasted {{getFinalDays}} {{getFinalMonths}} {{getFinalYears}}</h3>
                 </div>
-                <div class="fulllength">
-                    <button id="moreStatsButton" v-on:click="moreStatsButton">More Stats</button>
+                <div class="fulllength container">
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-2">
+                            <button id="moreStatsButton" v-on:click="moreStatsButton">More Stats</button>
+                        </div>
+                        <div class="col-lg-2">
+                            <button id="moreStatsButton" v-on:click="highscoresButton">Highscores</button>
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+                </div>
+                <div class="fulllength row add-highscorePadding" v-if="highscores"><span id="highscoreSpan"></span></div>
+                <div class="fulllength row" v-if="highscores">
+                    <h1 id="highscoreHolder">High Score Holder</h1>
+                </div>
+                <div class="fulllength row" v-if="highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData">{{highScoreOnlineName}}: {{highScoreCalc}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row add-highscorePadding" v-if="highscores"><span id="highscoreSpan"></span></div>
+                <div id="submitHighScore" class="fulllength row" v-if="highscores">
+                    <div class="col-lg-5">
+                        <h3 id="addScore">Add Your Score : </h3>
+                    </div>
+                    <div class="col-lg-2">
+                        <form v-on:submit.prevent="highScoreName" id="highscoreName">
+                            <input type="text" v-model="highScoreName" id="Name">
+                        </form>
+                        
+                    </div>
+                    <div class="col-lg-5">
+                        <button id="highscoreSubmitButton" v-on:click="highscoreSubmit">Press To Submit</button>
+                    </div>
                 </div>
                 <div id="moreStatsDiv" class="fulllength row" v-if="moreStats">
                     <div class="col-lg-4">
@@ -1245,7 +1291,7 @@
             </div>
             <div class="row" id="about" v-if="home">
             </div>
-            <form v-on:submit.prevent="devCode" id="devText2">
+            <form v-on:submit.prevent="devCode" id="devText2" v-if="!isGameOver">
                 <input type="text" v-model="devCode" id="devText">
             </form>
             <!-- use the modal component, pass in the prop -->
