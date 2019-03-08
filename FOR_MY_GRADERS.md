@@ -18,4 +18,6 @@ I can't tell you how much of a pain it was to figure out **components** for Vue 
 
 I used a **created()** function to set the interval that ran through the caluclations. I didn't know how to use Vue to track *TIME* without a setInterval().
 
+Using FireBase for tracking highscores was the most painful experience of my coding career so far. I had absolutely no idea the errors I was getting. But thank goodness it's up and running finally.
+
 I started this project after our first creative project when I made [Doors](http://cproj1.andrewdanielyoung.com/), so maybe 60% of the easy functions, like checking if you can build a house, were written then when I knew what I did there! Translating the code to work with Vue instead of HTML canvas was a long process so I added functioniality from Vue when nessisary but certainly could have harnessed its power further with more time!

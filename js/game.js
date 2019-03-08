@@ -4652,7 +4652,6 @@ window.onload = function()
 
                 if (!this.cheatsUsed)
                 {
-             
                     if (years >= 1)
                     {
                         var yearAchievers = 0;
