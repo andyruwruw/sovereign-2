@@ -5226,11 +5226,11 @@ window.onload = function()
                 }
                 else if (this.finalYear == 1)
                 {
-                    return "and " + this.finalYear + " year";
+                    return " " + this.finalYear + " year";
                 }
                 else
                 {
-                    return "and " + this.finalYear + " years";
+                    return " " + this.finalYear + " years";
                 }
             },
             getFinalMonths()
@@ -5241,15 +5241,15 @@ window.onload = function()
                 }
                 else if (this.finalMonth == 1)
                 {
-                    if (this.finalYear >= 1)
+                    if (this.finalDay >= 1)
                     {
-                        if (this.finalDays >= 1)
+                        if (this.finalYear >= 1)
                         {
                             return ", " + this.finalMonth + " month";
                         }
                         else
                         {
-                            return this.finalMonth + " month";
+                            return " " + this.finalMonth + " month";
                         }
                     }
                     else
@@ -5260,20 +5260,20 @@ window.onload = function()
                 }
                 else
                 {
-                    if (this.finalYear >= 1)
+                    if (this.finalDay >= 1)
                     {
-                        if (this.finalDays >= 1)
+                        if (this.finalYear >= 1)
                         {
                             return ", " + this.finalMonth + " months";
                         }
                         else
                         {
-                            return this.finalMonth + " months";
+                            return " " + this.finalMonth + " months";
                         }
                     }
                     else
                     {
-                        return "and " + this.finalMonth + " months";
+                        return " and " + this.finalMonth + " months";
                     }
                 }
             },
@@ -5285,11 +5285,25 @@ window.onload = function()
                 }
                 else if (this.finalDay == 1)
                 {
-                    return " " + this.finalDay + " day";
+                    if (this.finalMonth > 0 || this.finalYear > 0)
+                    {
+                        return " and " + this.finalDay + " day";
+                    }
+                    else
+                    {
+                        return " " + this.finalDay + " day";
+                    }
                 }
                 else
                 {
-                    return " " + this.finalDay + " days";
+                    if (this.finalMonth > 0 || this.finalYear > 0)
+                    {
+                        return " and " + this.finalDay + " days";
+                    }
+                    else
+                    {
+                        return " " + this.finalDay + " days";
+                    }
                 }
             },
 
