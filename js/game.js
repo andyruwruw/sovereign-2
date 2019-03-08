@@ -483,6 +483,7 @@ window.onload = function()
             },
             oneDay()
             {
+
                 if (hardmode && !this.hardmodeActivated)
                 {
                     this.hardmodeActivated = 1;
@@ -689,7 +690,16 @@ window.onload = function()
                         else
                         {
                             this.dayTime = 0;
-
+                            if (this.monthTime == 1)
+                            {
+                                var totalgames = 0;
+                                firebase.database().ref('gamesplayed/value').once('value').then(function(snapshot) {
+                                    totalgames = (snapshot.val());
+                                    console.log(totalgames);
+                                    totalgames += 1;
+                                    firebase.database().ref("gamesplayed/value").set(totalgames);
+                                });
+                            }
                             if (this.rampDifficulty)
                             {
                                 if (this.DISASTER_FACTORS.DISASTER_CHANCE < 1)
@@ -4566,12 +4576,7 @@ window.onload = function()
             this.gameStart();
             this.updateHighScores();
             var totalgames = 0;
-            firebase.database().ref('gamesplayed/value').once('value').then(function(snapshot) {
-                totalgames = (snapshot.val());
-                console.log(totalgames);
-                totalgames += 1;
-                firebase.database().ref("gamesplayed/value").set(totalgames);
-            });
+            
             
             
         }
