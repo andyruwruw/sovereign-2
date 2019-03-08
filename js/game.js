@@ -181,6 +181,10 @@ window.onload = function()
             speed: 10,
 
             highScoreNum: 0,
+            highScoreNum2: 0,
+            highScoreNum3: 0,
+            highScoreNum4: 0,
+            highScoreNum5: 0,
             highScoreName: "Name",
             highScoreOnlineName: "",
             highscores: 0,
@@ -1642,6 +1646,7 @@ window.onload = function()
             {
                 if (this.isGameOver)
                 {
+                    
                     console.log("Oh no, I'm terminated.");
                     this.forestPage = false;
                     this.workshopPage = false;
@@ -4299,6 +4304,60 @@ window.onload = function()
                     years += 1;
                     totalDays -= 372;
                 }
+
+                if (!this.cheatsUsed)
+                {
+                    if (years >= 1)
+                    {
+                        var yearAchievers = 0;
+                        firebase.database().ref('gamesplayed/achievers/year1').once('value').then(function(snapshot) {
+                            yearAchievers = (snapshot.val());
+                            yearAchievers += 1;
+                            firebase.database().ref("gamesplayed/achievers/year1").set(yearAchievers);
+                        });
+                    }
+                    if (years >= 2)
+                    {
+                        var year2Achievers = 0;
+                        firebase.database().ref('gamesplayed/achievers/year2').once('value').then(function(snapshot) {
+                            year2Achievers = (snapshot.val());
+                            year2Achievers += 1;
+                            firebase.database().ref("gamesplayed/achievers/year2").set(year2Achievers);
+                        });
+                    }
+                    if (years >= 3)
+                    {
+                        var year3Achievers = 0;
+                        firebase.database().ref('gamesplayed/achievers/year3').once('value').then(function(snapshot) {
+                            year3Achievers = (snapshot.val());
+                            year3Achievers += 1;
+                            firebase.database().ref("gamesplayed/achievers/year3").set(year3Achievers);
+                        });
+                    }
+                    if (years >= 4)
+                    {
+                        var year4Achievers = 0;
+                        firebase.database().ref('gamesplayed/achievers/year4').once('value').then(function(snapshot) {
+                            year4Achievers = (snapshot.val());
+                            year4Achievers += 1;
+                            firebase.database().ref("gamesplayed/achievers/year4").set(year4Achievers);
+                        });
+                    }
+                }
+
+                if (this.highestPopulation >= 100 && !this.cheatsUsed)
+                {
+                    var fullpopAchievers = 0;
+                    firebase.database().ref('gamesplayed/achievers/fullpop').once('value').then(function(snapshot) {
+                        fullpopAchievers = (snapshot.val());
+                        fullpopAchievers += 1;
+                        firebase.database().ref("gamesplayed/achievers/fullpop").set(fullpopAchievers);
+                    });
+                }
+
+
+
+
                 var months = 0
                 while (totalDays > 31)
                 {
