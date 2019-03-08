@@ -4565,6 +4565,15 @@ window.onload = function()
         {
             this.gameStart();
             this.updateHighScores();
+            var totalgames = 0;
+            firebase.database().ref('gamesplayed/value').once('value').then(function(snapshot) {
+                totalgames = (snapshot.val());
+                console.log(totalgames);
+                totalgames += 1;
+                firebase.database().ref("gamesplayed/value").set(totalgames);
+            });
+            
+            
         }
     })
 }
