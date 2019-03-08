@@ -3094,6 +3094,7 @@ window.onload = function()
                     this.DISASTER_FACTORS.INVASION = 1;
                     this.DISASTER_FACTORS.TIME = 7;
                     this.CITIZEN_FACTORS.FOOD_NEEDS = 5;
+                    this.commentArray.push({text: "You're Doomed.", timer: 15, noise: 0, played: 0, bold: 1});
                     this.disasterStorm();
                     this.timeSinceInvasion = 5,
                     this.timeSinceDisaster = 4,
