@@ -166,6 +166,7 @@ window.onload = function()
             showModal: false,
             averageSat: {sat: .6, time: 1},
             disasterBoosted: 0,
+            morehighscores: 0,
 
             rampDifficulty: 0,
             DIFFICULTY: 0,
@@ -185,8 +186,34 @@ window.onload = function()
             highScoreNum3: 0,
             highScoreNum4: 0,
             highScoreNum5: 0,
+            highScoreNum6: 0,
+            highScoreNum7: 0,
+            highScoreNum8: 0,
+            highScoreNum9: 0,
+            highScoreNum10: 0,
             highScoreName: "Name",
             highScoreOnlineName: "",
+            highScoreOnlineName2: "",
+            highScoreOnlineName3: "",
+            highScoreOnlineName4: "",
+            highScoreOnlineName5: "",
+            highScoreOnlineName6: "",
+            highScoreOnlineName7: "",
+            highScoreOnlineName8: "",
+            highScoreOnlineName9: "",
+            highScoreOnlineName10: "",
+
+            HSLIST: [{username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
+                     {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0}],
+
             highscores: 0,
             checked: 1,
             totalgames: 0,
@@ -4111,6 +4138,30 @@ window.onload = function()
                     this.highscores = 0;
                 }
             },
+            moreHighScores()
+            {
+                if (this.morehighscores == 0)
+                {
+                    this.morehighscores = 1;
+                }
+                else
+                {
+                    this.morehighscores = 0;
+                }
+            },
+            uploadAllHighScoreChanges()
+            {
+                firebase.database().ref("highscore").set(this.HSLIST[0]);
+                firebase.database().ref("highscore2").set(this.HSLIST[1]);
+                firebase.database().ref("highscore3").set(this.HSLIST[2]);
+                firebase.database().ref("highscore4").set(this.HSLIST[3]);
+                firebase.database().ref("highscore5").set(this.HSLIST[4]);
+                firebase.database().ref("highscore6").set(this.HSLIST[5]);
+                firebase.database().ref("highscore7").set(this.HSLIST[6]);
+                firebase.database().ref("highscore8").set(this.HSLIST[7]);
+                firebase.database().ref("highscore9").set(this.HSLIST[8]);
+                firebase.database().ref("highscore10").set(this.HSLIST[9]);
+            },
             highscoreSubmit()
             {
                 var score = {
@@ -4121,55 +4172,242 @@ window.onload = function()
                     maxpop: this.highestPopulation,
                     actions: this.monthActions.average};
                 console.log(this.cheatsUsed);
-                
+                this.updateHighScores();
                 if (this.cheatsUsed == "No")
                 {
-                    console.log(score.days + " " + this.highScoreNum);
-                    if (score.days > this.highScoreNum)
+                    if (score.days > this.HSLIST[0].days)
                     {
-                        console.log("UPDATED " + this.highScoreNum);
-                        firebase.database().ref("highscore").set(score);
+                        this.HSLIST.splice(0, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
                     }
-                    this.updateHighScores();
+                    else if (score.days > this.HSLIST[1].days)
+                    {
+                        this.HSLIST.splice(1, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[2].days)
+                    {
+                        this.HSLIST.splice(2, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[3].days)
+                    {
+                        this.HSLIST.splice(3, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[4].days)
+                    {
+                        this.HSLIST.splice(4, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[5].days)
+                    {
+                        this.HSLIST.splice(5, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[6].days)
+                    {
+                        this.HSLIST.splice(6, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[7].days)
+                    {
+                        this.HSLIST.splice(7, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[8].days)
+                    {
+                        this.HSLIST.splice(8, 0, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
+                    else if (score.days > this.HSLIST[9].days)
+                    {
+                        this.HSLIST.splice(9, 1, score);
+                        this.HSLIST.splice(10, 1);
+                        this.uploadAllHighScoreChanges();
+                    }
                 }
-                /*
-                console.log("Submitting");
-                if (this.cheatsUsed == 0 && posted == 0)
-                {
-                    posted = 1;
-                    firebase.database().ref('users-highscores/').push();
-                }
-                */
+
             },
             updateHighScores()
             {
                 var days;
                 var name;
+                var actions;
+                var disasters;
+                var invasions;
+                var maxpop;
+                
                 firebase.database().ref("highscore").on("value", function (snapshot) {
-                    days = snapshot.child("days").val();
-                    name = snapshot.child("username").val();
-                    
-                  });
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
                   
-                  this.highScoreNum = days;
-                  this.highScoreOnlineName = name;
+                this.HSLIST[0].days = days;
+                this.HSLIST[0].username = name;
+                this.HSLIST[0].actions = actions;
+                this.HSLIST[0].disasters = disasters;
+                this.HSLIST[0].invasions = invasions;
+                this.HSLIST[0].maxpop = maxpop;
+
+                firebase.database().ref("highscore2").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[1].days = days;
+                this.HSLIST[1].username = name;
+                this.HSLIST[1].actions = actions;
+                this.HSLIST[1].disasters = disasters;
+                this.HSLIST[1].invasions = invasions;
+                this.HSLIST[1].maxpop = maxpop;
+
+                firebase.database().ref("highscore3").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+    
+                this.HSLIST[2].days = days;
+                this.HSLIST[2].username = name;
+                this.HSLIST[2].actions = actions;
+                this.HSLIST[2].disasters = disasters;
+                this.HSLIST[2].invasions = invasions;
+                this.HSLIST[2].maxpop = maxpop;
+
+                firebase.database().ref("highscore4").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[3].days = days;
+                this.HSLIST[3].username = name;
+                this.HSLIST[3].actions = actions;
+                this.HSLIST[3].disasters = disasters;
+                this.HSLIST[3].invasions = invasions;
+                this.HSLIST[3].maxpop = maxpop;
+
+                firebase.database().ref("highscore5").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[4].days = days;
+                this.HSLIST[4].username = name;
+                this.HSLIST[4].actions = actions;
+                this.HSLIST[4].disasters = disasters;
+                this.HSLIST[4].invasions = invasions;
+                this.HSLIST[4].maxpop = maxpop;
+
+                firebase.database().ref("highscore6").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[5].days = days;
+                this.HSLIST[5].username = name;
+                this.HSLIST[5].actions = actions;
+                this.HSLIST[5].disasters = disasters;
+                this.HSLIST[5].invasions = invasions;
+                this.HSLIST[5].maxpop = maxpop;
+
+                firebase.database().ref("highscore7").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[6].days = days;
+                this.HSLIST[6].username = name;
+                this.HSLIST[6].actions = actions;
+                this.HSLIST[6].disasters = disasters;
+                this.HSLIST[6].invasions = invasions;
+                this.HSLIST[6].maxpop = maxpop;
+
+                firebase.database().ref("highscore8").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[7].days = days;
+                this.HSLIST[7].username = name;
+                this.HSLIST[7].actions = actions;
+                this.HSLIST[7].disasters = disasters;
+                this.HSLIST[7].invasions = invasions;
+                this.HSLIST[7].maxpop = maxpop;
+
+                firebase.database().ref("highscore9").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[8].days = days;
+                this.HSLIST[8].username = name;
+                this.HSLIST[8].actions = actions;
+                this.HSLIST[8].disasters = disasters;
+                this.HSLIST[8].invasions = invasions;
+                this.HSLIST[8].maxpop = maxpop;
+
+                firebase.database().ref("highscore10").on("value", function (snapshot) {
+                days = snapshot.child("days").val();
+                name = snapshot.child("username").val();
+                actions = snapshot.child("actions").val();
+                disasters = snapshot.child("disasters").val();
+                invasions = snapshot.child("invasions").val();
+                maxpop = snapshot.child("maxpop").val();
+                });
+
+                this.HSLIST[9].days = days;
+                this.HSLIST[9].username = name;
+                this.HSLIST[9].actions = actions;
+                this.HSLIST[9].disasters = disasters;
+                this.HSLIST[9].invasions = invasions;
+                this.HSLIST[9].maxpop = maxpop;
+
                   
-                /*
-                console.log("Updating Scores");
-                var topUserScores = firebase.database().ref('users-highscores/');
-                for (var i = 0; i < 5; i++)
-                {
-                    var years = Math.floor(this.topUserScores[i].days / (31 * 12));
-                    var months = Math.floor((this.topUserScores[i].days - (years * 12)) / 31)
-                    var days = Math.floor((this.topUserScores[i].days - (years * 12 * 31) - (months * 31)));
-                    this.highscores.push({name: this.topUserScores[i].name, years: years, months: months, days: days})
-                }
-                console.log("Updating DOM");
-                document.getElementById("highscores").innerHTML = "";
-                for (var i = 5; i >= 0; i--)
-                {
-                    document.getElementById("highscores").innerHTML += "<div class=\"row\"><div class=\"col-lg-3\">" + this.highscores[i].name + "</div><div class=\"col-lg-3\">" + this.highscores[i].days + " Days</div><div class=\"col-lg-3\">" + this.highscores[i].months + " Months</div><div class=\"col-lg-3\">" + this.highscores[i].years + " Years</div></div>";
-                }*/
             },
             wizardSpell()
             {
@@ -4285,18 +4523,18 @@ window.onload = function()
         {
             highScoreNameCalc()
             {
-                if (this.highScoreOnlineName == "")
+                if (this.HSLIST[0].username == "")
                 {
                     return "Unknown";
                 }
                 else
                 {
-                    return this.highScoreOnlineName;
+                    return this.HSLIST[0].username;
                 }
             },
             highScoreCalc()
             {
-                var totalDays = this.highScoreNum;
+                var totalDays = this.HSLIST[0].days;
                 
                 var years = 0;
                 while (totalDays > 372)
@@ -4307,6 +4545,7 @@ window.onload = function()
 
                 if (!this.cheatsUsed)
                 {
+             
                     if (years >= 1)
                     {
                         var yearAchievers = 0;
@@ -4343,21 +4582,16 @@ window.onload = function()
                             firebase.database().ref("gamesplayed/achievers/year4").set(year4Achievers);
                         });
                     }
+                    if (this.highestPopulation >= 100 && !this.cheatsUsed)
+                    {
+                        var fullpopAchievers = 0;
+                        firebase.database().ref('gamesplayed/achievers/fullpop').once('value').then(function(snapshot) {
+                            fullpopAchievers = (snapshot.val());
+                            fullpopAchievers += 1;
+                            firebase.database().ref("gamesplayed/achievers/fullpop").set(fullpopAchievers);
+                        });
+                    }
                 }
-
-                if (this.highestPopulation >= 100 && !this.cheatsUsed)
-                {
-                    var fullpopAchievers = 0;
-                    firebase.database().ref('gamesplayed/achievers/fullpop').once('value').then(function(snapshot) {
-                        fullpopAchievers = (snapshot.val());
-                        fullpopAchievers += 1;
-                        firebase.database().ref("gamesplayed/achievers/fullpop").set(fullpopAchievers);
-                    });
-                }
-
-
-
-
                 var months = 0
                 while (totalDays > 31)
                 {
@@ -4367,6 +4601,270 @@ window.onload = function()
                 var days = totalDays;
                 return years + " Years,   " + months + " Months,   " + days + " Days.";
             },
+            highScoreNameCalc2()
+            {
+                if (this.HSLIST[1].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[1].username;
+                }
+            },
+            highScoreCalc2()
+            {
+                var totalDays = this.HSLIST[1].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc3()
+            {
+                if (this.HSLIST[2].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[2].username;
+                }
+            },
+            highScoreCalc3()
+            {
+                var totalDays = this.HSLIST[2].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc4()
+            {
+                if (this.HSLIST[3].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[3].username;
+                }
+            },
+            highScoreCalc4()
+            {
+                var totalDays = this.HSLIST[3].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc5()
+            {
+                if (this.HSLIST[4].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[4].username;
+                }
+            },
+            highScoreCalc5()
+            {
+                var totalDays = this.HSLIST[4].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc6()
+            {
+                if (this.HSLIST[5].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[5].username;
+                }
+            },
+            highScoreCalc6()
+            {
+                var totalDays = this.HSLIST[5].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc7()
+            {
+                if (this.HSLIST[6].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[6].username;
+                }
+            },
+            highScoreCalc7()
+            {
+                var totalDays = this.HSLIST[6].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc8()
+            {
+                if (this.HSLIST[7].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[7].username;
+                }
+            },
+            highScoreCalc8()
+            {
+                var totalDays = this.HSLIST[7].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc9()
+            {
+                if (this.HSLIST[8].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[8].username;
+                }
+            },
+            highScoreCalc9()
+            {
+                var totalDays = this.HSLIST[8].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+            highScoreNameCalc10()
+            {
+                if (this.HSLIST[9].username == "")
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return this.HSLIST[9].username;
+                }
+            },
+            highScoreCalc10()
+            {
+                var totalDays = this.HSLIST[9].days;
+                var years = 0;
+                while (totalDays > 372)
+                {
+                    years += 1;
+                    totalDays -= 372;
+                }
+                var months = 0
+                while (totalDays > 31)
+                {
+                    months += 1;
+                    totalDays -= 31;
+                }
+                var days = totalDays;
+                return years + " Years,   " + months + " Months,   " + days + " Days.";
+            },
+
+
+
             satisfactionAvgCalc()
             {
                 return Math.round(this.averageSat.sat * 100);

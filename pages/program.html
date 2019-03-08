@@ -7,18 +7,6 @@
         <meta name="viewport"/>
         <title>Sovereign</title>
         <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyD9D4uxP-DO_xLtXbyGeczkmggDKGI4o7Y",
-                authDomain: "sovereign-353ba.firebaseapp.com",
-                databaseURL: "https://sovereign-353ba.firebaseio.com",
-                projectId: "sovereign-353ba",
-                storageBucket: "sovereign-353ba.appspot.com",
-                messagingSenderId: "654502850497"
-            };
-            firebase.initializeApp(config);
-        </script>
         <audio id="myMusic">
             <source src="../sounds/gametheme.mp3" type="audio/mpeg">
         </audio>
@@ -151,6 +139,20 @@
         <audio id="hardmusic">
             <source src="../sounds/hardmusic.mp3" types="audio/mp3">
         </audio>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyD9D4uxP-DO_xLtXbyGeczkmggDKGI4o7Y",
+                authDomain: "sovereign-353ba.firebaseapp.com",
+                databaseURL: "https://sovereign-353ba.firebaseio.com",
+                projectId: "sovereign-353ba",
+                storageBucket: "sovereign-353ba.appspot.com",
+                messagingSenderId: "654502850497"
+            };
+            
+            firebase.initializeApp(config);
+            console.log("Firebase Loaded");
+        </script>
         </head>
     <body id="background">
         <div class="container" id="headerContainer">
@@ -171,14 +173,13 @@
         </div>
         <div id="game" class="container" onclick="playMusic();">
             <div class="row" id="gameoverDiv" v-if="isGameOver">
-                <h2 id="gameOver">GAME OVER</h2>
-                <div id="clear2" class="fulllength" v-if="!moreStats && !highscores && !gameStats">
-                    <h3 id="deathReason">{{deathString}}</h3>
-                </div>
-                <div id="clear" class="fulllength">
+                <h2 id="gameOver" v-if="!morehighscores && !highscores && !moreStats">GAME OVER</h2>
+                <span id="gameOverSpace" v-if="(highscores || moreStats) && !morehighscores"></span>
+                <span id="allhighscores" v-if="morehighscores"></span>
+                <div id="clear" class="fulllength" v-if="!morehighscores">
                     <h3 id="timeLasted">You lasted {{getFinalDays}} {{getFinalMonths}} {{getFinalYears}}</h3>
                 </div>
-                <div class="fulllength container">
+                <div class="fulllength container" v-if="!morehighscores">
                     <div class="row">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-3">
@@ -190,8 +191,20 @@
                         <div class="col-lg-3"></div>
                     </div>
                 </div>
-                <div class="fulllength row add-highscorePadding" v-if="highscores"><span id="highscoreSpan"></span></div>
-                <div class="fulllength row" v-if="highscores">
+                <div id="clear2" class="fulllength" v-if="!moreStats && !highscores && !gameStats">
+                    <h3 id="deathReason">{{deathString}}</h3>
+                </div>
+  
+                <div class="fulllength row add-highscorePadding" v-if="highscores && morehighscores">
+                    <div class="col-lg-12">
+                        <button id="moreStatsButton" v-on:click="moreHighScores" v-if="morehighscores">Go Back</button>
+                    </div>
+                </div>
+                <div class="fulllength row add-highscorePadding" v-if="highscores && !morehighscores"><span id="highscoreSpan"></span></div>
+                <div class="fulllength row" v-if="highscores && morehighscores">
+                    <h1 id="highscoreHolder10">Top 10 Scores</h1>
+                </div>
+                <div class="fulllength row" v-if="highscores && !morehighscores">
                     <h1 id="highscoreHolder">High Score Holder</h1>
                 </div>
                 <div class="fulllength row" v-if="highscores">
@@ -199,19 +212,70 @@
                         <h1 id="highscoreData">{{highScoreNameCalc}}: {{highScoreCalc}}</h1>
                     </div>
                 </div>
-                <div class="fulllength row add-highscorePadding" v-if="highscores"><span id="highscoreSpan"></span></div>
-                <div id="submitHighScore" class="fulllength row" v-if="highscores">
-                    <div class="col-lg-5">
-                        <h3 id="addScore">Add Your Score : </h3>
+                <div class="fulllength row add-highscorePadding" v-if="highscores">
+                    <div class="col-lg-12">
+                        <button id="moreStatsButton" v-on:click="moreHighScores" v-if="!morehighscores">-Click for Top Ten-</button>
                     </div>
-                    <div class="col-lg-2">
-                        <form v-on:submit.prevent="highScoreName" id="highscoreName">
-                            <input type="text" v-model="highScoreName" id="Name">
-                        </form>
+                </div>
+
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc2}}: {{highScoreCalc2}}</h1>
                     </div>
-                    <div class="col-lg-5">
-                        <button id="highscoreSubmitButton" v-on:click="highscoreSubmit">Press To Submit</button>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc3}}: {{highScoreCalc3}}</h1>
                     </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc4}}: {{highScoreCalc4}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc5}}: {{highScoreCalc5}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc6}}: {{highScoreCalc6}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc7}}: {{highScoreCalc7}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc8}}: {{highScoreCalc8}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc9}}: {{highScoreCalc9}}</h1>
+                    </div>
+                </div>
+                <div class="fulllength row" v-if="morehighscores && highscores">
+                    <div id="highscoresOnline" class="container">
+                        <h1 id="highscoreData2">{{highScoreNameCalc10}}: {{highScoreCalc10}}</h1>
+                    </div>
+                </div>
+
+
+                <div class="fulllength row add-highscorePadding" v-if="highscores && !morehighscores"><span id="highscoreSpan"></span></div>
+                <div id="submitHighScore" class="fulllength row" v-if="highscores && !morehighscores">
+                    <h3 id="addScore" class="center">Add Your Score</h3>       
+                </div>
+                <div id="submitHighScore" class="fulllength row" v-if="highscores && !morehighscores">
+                    <form v-on:submit.prevent="highScoreName" id="highscoreName"  class="center">
+                        <input type="text" v-model="highScoreName" id="Name">
+                    </form>
+                </div>
+                <div id="submitHighScore" class="fulllength row" v-if="highscores && !morehighscores">
+                    <button id="highscoreSubmitButton" v-on:click="highscoreSubmit"  class="center">Press To Submit</button>
                 </div>
                 <div id="moreStatsDiv" class="fulllength row add-statsPadding" v-if="moreStats">
                     <div class="col-lg-4">
