@@ -171,6 +171,7 @@
                 </div>
             </div>
         </div>
+        <div id="loading"></div>
         <div id="game" class="container" onclick="playMusic();">
             <div class="row" id="gameoverDiv" v-if="isGameOver">
                 <h2 id="gameOver" v-if="!morehighscores && !highscores && !moreStats">GAME OVER</h2>
@@ -1394,7 +1395,7 @@
                 default content
               -->
         </div>
-        <div id="loading"></div>
+        
         <div id="pausedDiv" onclick="unpause()"></div>
         <script type="text/x-template" id="modal-template">
             <transition name="modal">
