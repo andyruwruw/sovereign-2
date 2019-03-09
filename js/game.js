@@ -4583,6 +4583,10 @@ window.onload = function()
                 {
                     this.viewingHighscoreHolders = 0;
                 }
+                else if (!this.morehighscores)
+                {
+                    this.morehighscores = 1;
+                }
                 else
                 {
                     this.viewingHighscoreHolders = 1;
