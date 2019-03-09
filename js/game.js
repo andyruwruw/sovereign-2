@@ -4250,6 +4250,7 @@ window.onload = function()
                 else
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
+                    console.log("Already Submitted or Cheats Used.");
                 }
 
             },
@@ -4542,7 +4543,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 1
+                    this.viewingHighscoreHolders = 1;
                     this.highScoreInformation();
                 }
             },
@@ -4555,7 +4556,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 2
+                    this.viewingHighscoreHolders = 2;
                     this.highScoreInformation();
                 }
             },
@@ -4568,7 +4569,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 3
+                    this.viewingHighscoreHolders = 3;
                     this.highScoreInformation();
                 }
             },
@@ -4581,20 +4582,20 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 4
+                    this.viewingHighscoreHolders = 4;
                     this.highScoreInformation();
                 }
             },
             setViewHighscore5()
             {
                 this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
-                if (this.viewingHighscoreHolders == 1)
+                if (this.viewingHighscoreHolders == 5)
                 {
                     this.viewingHighscoreHolders = 0;
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 5
+                    this.viewingHighscoreHolders = 5;
                     this.highScoreInformation();
                 }
             },
@@ -4607,7 +4608,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 6
+                    this.viewingHighscoreHolders = 6;
                     this.highScoreInformation();
                 }
             },
@@ -4620,7 +4621,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 7
+                    this.viewingHighscoreHolders = 7;
                     this.highScoreInformation();
                 }
             },
@@ -4633,7 +4634,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 8
+                    this.viewingHighscoreHolders = 8;
                     this.highScoreInformation();
                 }
             },
@@ -4646,7 +4647,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders == 9
+                    this.viewingHighscoreHolders == 9;
                     this.highScoreInformation();
                 }
             },
@@ -4659,7 +4660,7 @@ window.onload = function()
                 }
                 else
                 {
-                    this.viewingHighscoreHolders = 10
+                    this.viewingHighscoreHolders = 10;
                     this.highScoreInformation();
                 }
             },
