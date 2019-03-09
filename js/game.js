@@ -168,7 +168,7 @@ window.onload = function()
             averageSat: {sat: .6, time: 1},
             disasterBoosted: 0,
             morehighscores: 0,
-            
+            submit: 0,
             DIFFICULTY: 0,
 
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
@@ -1659,7 +1659,7 @@ window.onload = function()
             {
                 if (this.isGameOver)
                 {
-                    
+                    document.getElementById("game").style.paddingRight = "0px";
                     console.log("Oh no, I'm terminated.");
                     this.forestPage = false;
                     this.workshopPage = false;
@@ -4169,9 +4169,9 @@ window.onload = function()
                     actions: this.monthActions.average};
                 
                 this.updateHighScores();
-                if (this.cheatsUsed == "No")
+                if (this.cheatsUsed == "No" && this.submit == 0)
                 {
-                    
+                    this.submit = 1;
                     if (score.days > this.HSLIST[0].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
