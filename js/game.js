@@ -4267,70 +4267,60 @@ window.onload = function()
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(0, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[1].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(1, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[2].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(2, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[3].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(3, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[4].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(4, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[5].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(5, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[6].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(6, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[7].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(7, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[8].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(8, 0, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else if (score.days > this.HSLIST[9].days)
                     {
                         this.playSound(this.SOUNDS.siege.sound, this.SOUNDS.siege.volume);
                         this.HSLIST.splice(9, 1, score);
-                        this.HSLIST.splice(10, 1);
                         this.uploadAllHighScoreChanges();
                     }
                     else
