@@ -230,9 +230,29 @@ window.onload = function()
                         this.commentWriter();
                         this.elapsedTime();
                         this.tutorial();
+                        this.checkPeople();
                     }
                 }
                 this.updateColors();
+            },
+            checkPeople()
+            {
+                //laborDistribution : {farm: 0, lumber: 0, soldier: 0, mine: 0, tavern: 0, archer: 0, catapult: 0, free: 0},
+                var totalPeople = this.laborDistribution.farm;
+                totalPeople += this.laborDistribution.lumber;
+                totalPeople += this.laborDistribution.soldier;
+                totalPeople += this.laborDistribution.mine;
+                totalPeople += this.laborDistribution.tavern;
+                totalPeople += this.laborDistribution.archer;
+                totalPeople += (this.laborDistribution.catapult * 2);
+                totalPeople += this.laborDistribution.free;
+                totalPeople += 2;
+
+                if (totalPeople > this.citizensStat.population)
+                {
+                    var wrong = totalPeople - this.citizensStat.population;
+                    this.killPeople(wrong, 0);
+                }
             },
             pause()
             {
