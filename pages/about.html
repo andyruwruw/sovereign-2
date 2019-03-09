@@ -212,104 +212,94 @@
             </div>
             <div class="row" id="specials" v-if="highscores">
                 <div class="container">
-
-                        <div class="fulllength row" id="highscoreNote" v-if="!viewingHighscoreHolders">Click Anyone to See More Details.</div>
-                        <button id="highscoreNote"  v-on:click="backtotopten" v-if="viewingHighscoreHolders">Click to Return</button>
-                        <div class="fulllength row add-highscorePadding" v-if="!viewingHighscoreHolders"><span id="highscoreSpan"></span></div>
-                        <div class="fulllength row" >
-                            <h1 id="highscoreHolder" v-if="!viewingHighscoreHolders">High Score Holder</h1>
+                    <div class="fulllength row" id="highscoreNote" v-if="!viewingHighscoreHolders">Click Anyone to See More Details.</div>
+                    <button id="highscoreNote"  v-on:click="backtotopten" v-if="viewingHighscoreHolders">Click to Return</button>
+                    <div class="fulllength row add-highscorePadding" v-if="!viewingHighscoreHolders"><span id="highscoreSpan"></span></div>
+                    <div class="fulllength row" >
+                        <h1 id="highscoreHolder" v-if="!viewingHighscoreHolders">High Score Holder</h1>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 1)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData"  v-on:click="setViewHighscore1">{{highScoreNameCalc}}: {{highScoreCalc}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 1)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData"  v-on:click="setViewHighscore1">{{highScoreNameCalc}}: {{highScoreCalc}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row add-highscorePadding"  v-if="!viewingHighscoreHolders"><span id="highscoreSpan"></span></div>
+                    <div class="fulllength row">
+                            <h1 id="highscoreHolder10" v-if="!viewingHighscoreHolders">Top 10 Scores</h1>
                         </div>
-                        <div class="fulllength row add-highscorePadding"  v-if="!viewingHighscoreHolders"><span id="highscoreSpan"></span></div>
-                        <div class="fulllength row">
-                                <h1 id="highscoreHolder10" v-if="!viewingHighscoreHolders">Top 10 Scores</h1>
-                            </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 2)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore2">{{highScoreNameCalc2}}: {{highScoreCalc2}}</button>
-                            </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 2)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore2">{{highScoreNameCalc2}}: {{highScoreCalc2}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 3)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore3">{{highScoreNameCalc3}}: {{highScoreCalc3}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 3)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore3">{{highScoreNameCalc3}}: {{highScoreCalc3}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 4)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore4">{{highScoreNameCalc4}}: {{highScoreCalc4}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 4)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore4">{{highScoreNameCalc4}}: {{highScoreCalc4}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 5)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore5">{{highScoreNameCalc5}}: {{highScoreCalc5}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 5)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore5">{{highScoreNameCalc5}}: {{highScoreCalc5}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 6)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore6">{{highScoreNameCalc6}}: {{highScoreCalc6}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 6)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore6">{{highScoreNameCalc6}}: {{highScoreCalc6}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 7)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore7">{{highScoreNameCalc7}}: {{highScoreCalc7}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 7)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore7">{{highScoreNameCalc7}}: {{highScoreCalc7}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 8)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore8">{{highScoreNameCalc8}}: {{highScoreCalc8}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 8)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore8">{{highScoreNameCalc8}}: {{highScoreCalc8}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 9)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore9">{{highScoreNameCalc9}}: {{highScoreCalc9}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 9)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore9">{{highScoreNameCalc9}}: {{highScoreCalc9}}</button>
                         </div>
-                        <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 10)">
-                            <div id="highscoresOnline" class="container">
-                                <button id="highscoreData2"  v-on:click="setViewHighscore10">{{highScoreNameCalc10}}: {{highScoreCalc10}}</button>
-                            </div>
+                    </div>
+                    <div class="fulllength row" v-if="(viewingHighscoreHolders == 0 || viewingHighscoreHolders == 10)">
+                        <div id="highscoresOnline" class="container">
+                            <button id="highscoreData2"  v-on:click="setViewHighscore10">{{highScoreNameCalc10}}: {{highScoreCalc10}}</button>
                         </div>
-                        <div id="moreStatsHighscore" class="fulllength row add-statsPadding" v-if="viewingHighscoreHolders">
-                            <div class="col-lg-3">
-                                <h3 id="timeLasted">Maximum Population:</h3>
-                                <h3 id="timeLastedNum">{{highscoreHolderMaxPop}}</h3>
-                            </div>
-                            <div class="col-lg-3">
-                                <h3 id="timeLasted">Total Invasions:</h3>
-                                <h3 id="timeLastedNum">{{highscoreHolderInvasions}}</h3>
-                            </div>
-                            <div class="col-lg-3">
-                                <h3 id="timeLasted">Total Disasters:</h3>
-                                <h3 id="timeLastedNum">{{highscoreHolderDisasters}}</h3>
-                            </div>
-                            <div class="col-lg-3">
-                                <h3 id="timeLasted">Month Actions:</h3>
-                                <h3 id="timeLastedNum">{{highscoreHolderActions}}</h3>
-                            </div>
+                    </div>
+                    <div id="moreStatsHighscore" class="fulllength row add-statsPadding" v-if="viewingHighscoreHolders">
+                        <div class="col-lg-3">
+                            <h3 id="timeLasted">Maximum Population:</h3>
+                            <h3 id="timeLastedNum">{{highscoreHolderMaxPop}}</h3>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
+                        <div class="col-lg-3">
+                            <h3 id="timeLasted">Total Invasions:</h3>
+                            <h3 id="timeLastedNum">{{highscoreHolderInvasions}}</h3>
+                        </div>
+                        <div class="col-lg-3">
+                            <h3 id="timeLasted">Total Disasters:</h3>
+                            <h3 id="timeLastedNum">{{highscoreHolderDisasters}}</h3>
+                        </div>
+                        <div class="col-lg-3">
+                            <h3 id="timeLasted">Month Actions:</h3>
+                            <h3 id="timeLastedNum">{{highscoreHolderActions}}</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row" id="cheats" v-if="cheats">
                 <h1>Cheater Cheater Pumkin Eater</h1>
                 <p>Ahh so you want some cheat codes to get you through?</p>
                 <p>To use a cheat, there's a little invisiable text box below and on the left of the game screen. Entering an accurate code will cause your text to disappear and usually a sound to display.</p>
-                
+                <p>Keep in mind saying "Ain't My First Rodeo" will increase the difficulty.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Citizens need 50% more food.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10% increase in chance of disaster.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10% increase in chance of invasion / robbery.</p>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-2"></div>
@@ -383,12 +373,11 @@
                         <div class="col-lg-4 right">Causes Famine.</div>
                         <div class="col-lg-2"></div>
                     </div>
-
+                    <div class="row"></div>
+                    <div class="row"></div>
                 </div>
-                <p>Keep in mind saying "Ain't My First Rodeo" will increase the difficulty.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Citizens need 50% more food.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10% increase in chance of disaster.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10% increase in chance of invasion / robbery.</p>
+                <h1>Cheaters are not Eligible for Highscores!</h1>
+
                 
             </div>
         </div>

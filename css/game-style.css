@@ -92,6 +92,20 @@ body
     width: 30px;
     height: 30px;
 }
+#pauseButton
+{
+    background-image: url("https://i.ibb.co/kcRL9jd/play-2749271-960-720-00000.png");
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0);
+    color: black;
+    margin-left: auto;
+    margin-right: 10px;
+}
 #headerTitle
 {
     color: rgb(185, 185, 185);
@@ -1031,6 +1045,25 @@ button
     text-align: center;
     margin-bottom: 20px;
     background-image: linear-gradient(to bottom, rgba(40, 123, 218, 0.171) 0%, rgba(0, 0, 0, 0) 90% 100%);
+}
+#pausedDiv
+{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://i.ibb.co/kcRL9jd/play-2749271-960-720-00000.png");
+    background-size: 10%;
+    background-position: center;
+    background-color: rgba(0, 0, 0, .33);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+
+    background-repeat: no-repeat;
+
 }
 
 
