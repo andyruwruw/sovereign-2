@@ -1708,6 +1708,55 @@ window.onload = function()
                     this.townCenterPage = false;
                     this.barracksPage = false;
                     this.marketPage = false;
+                    
+                    if (!this.cheatsUsed)
+                    {
+                        if (years >= 1)
+                        {
+                            var yearAchievers = 0;
+                            firebase.database().ref('gamesplayed/achievers/year1').once('value').then(function(snapshot) {
+                                yearAchievers = (snapshot.val());
+                                yearAchievers += 1;
+                                firebase.database().ref("gamesplayed/achievers/year1").set(yearAchievers);
+                            });
+                        }
+                        if (years >= 2)
+                        {
+                            var year2Achievers = 0;
+                            firebase.database().ref('gamesplayed/achievers/year2').once('value').then(function(snapshot) {
+                                year2Achievers = (snapshot.val());
+                                year2Achievers += 1;
+                                firebase.database().ref("gamesplayed/achievers/year2").set(year2Achievers);
+                            });
+                        }
+                        if (years >= 3)
+                        {
+                            var year3Achievers = 0;
+                            firebase.database().ref('gamesplayed/achievers/year3').once('value').then(function(snapshot) {
+                                year3Achievers = (snapshot.val());
+                                year3Achievers += 1;
+                                firebase.database().ref("gamesplayed/achievers/year3").set(year3Achievers);
+                            });
+                        }
+                        if (years >= 4)
+                        {
+                            var year4Achievers = 0;
+                            firebase.database().ref('gamesplayed/achievers/year4').once('value').then(function(snapshot) {
+                                year4Achievers = (snapshot.val());
+                                year4Achievers += 1;
+                                firebase.database().ref("gamesplayed/achievers/year4").set(year4Achievers);
+                            });
+                        }
+                        if (this.highestPopulation >= 100 && !this.cheatsUsed)
+                        {
+                            var fullpopAchievers = 0;
+                            firebase.database().ref('gamesplayed/achievers/fullpop').once('value').then(function(snapshot) {
+                                fullpopAchievers = (snapshot.val());
+                                fullpopAchievers += 1;
+                                firebase.database().ref("gamesplayed/achievers/fullpop").set(fullpopAchievers);
+                            });
+                        }
+                    }
                 }
             },
             defenseUpdates()
@@ -3804,7 +3853,6 @@ window.onload = function()
             },
             buyLumber()
             {
-
                 if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.LUMBER_FACTORS.WORTH))
                 {
                     this.monthActions.thismonth += 1;
@@ -4199,6 +4247,7 @@ window.onload = function()
                 firebase.database().ref("highscore8").set(this.HSLIST[7]);
                 firebase.database().ref("highscore9").set(this.HSLIST[8]);
                 firebase.database().ref("highscore10").set(this.HSLIST[9]);
+                firebase.database().ref("lowerhighscores").push(this.HSLIST[10]);
             },
             highscoreSubmit()
             {
@@ -4286,7 +4335,7 @@ window.onload = function()
                     }
                     else
                     {
-                        this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
+                        firebase.database().ref("lowerhighscores").push(score);
                     }
                 }
                 else
@@ -4747,54 +4796,6 @@ window.onload = function()
                     totalDays -= 372;
                 }
 
-                if (!this.cheatsUsed)
-                {
-                    if (years >= 1)
-                    {
-                        var yearAchievers = 0;
-                        firebase.database().ref('gamesplayed/achievers/year1').once('value').then(function(snapshot) {
-                            yearAchievers = (snapshot.val());
-                            yearAchievers += 1;
-                            firebase.database().ref("gamesplayed/achievers/year1").set(yearAchievers);
-                        });
-                    }
-                    if (years >= 2)
-                    {
-                        var year2Achievers = 0;
-                        firebase.database().ref('gamesplayed/achievers/year2').once('value').then(function(snapshot) {
-                            year2Achievers = (snapshot.val());
-                            year2Achievers += 1;
-                            firebase.database().ref("gamesplayed/achievers/year2").set(year2Achievers);
-                        });
-                    }
-                    if (years >= 3)
-                    {
-                        var year3Achievers = 0;
-                        firebase.database().ref('gamesplayed/achievers/year3').once('value').then(function(snapshot) {
-                            year3Achievers = (snapshot.val());
-                            year3Achievers += 1;
-                            firebase.database().ref("gamesplayed/achievers/year3").set(year3Achievers);
-                        });
-                    }
-                    if (years >= 4)
-                    {
-                        var year4Achievers = 0;
-                        firebase.database().ref('gamesplayed/achievers/year4').once('value').then(function(snapshot) {
-                            year4Achievers = (snapshot.val());
-                            year4Achievers += 1;
-                            firebase.database().ref("gamesplayed/achievers/year4").set(year4Achievers);
-                        });
-                    }
-                    if (this.highestPopulation >= 100 && !this.cheatsUsed)
-                    {
-                        var fullpopAchievers = 0;
-                        firebase.database().ref('gamesplayed/achievers/fullpop').once('value').then(function(snapshot) {
-                            fullpopAchievers = (snapshot.val());
-                            fullpopAchievers += 1;
-                            firebase.database().ref("gamesplayed/achievers/fullpop").set(fullpopAchievers);
-                        });
-                    }
-                }
                 var months = 0
                 while (totalDays > 31)
                 {
