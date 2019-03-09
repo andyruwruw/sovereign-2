@@ -755,11 +755,11 @@ window.onload = function()
                             {
                                 if (this.DISASTER_FACTORS.DISASTER_CHANCE < 1)
                                 {
-                                    this.DISASTER_FACTORS.DISASTER_CHANCE += .05;
+                                    this.DISASTER_FACTORS.DISASTER_CHANCE += .04;
                                 }
                                 if (this.DISASTER_FACTORS.INVASION < 1)
                                 {
-                                    this.DISASTER_FACTORS.INVASION += .05;
+                                    this.DISASTER_FACTORS.INVASION += .04;
                                 }
                                 if (this.FIRE_FACTORS.HOUSE_CHANCE < .85)
                                 {
@@ -771,11 +771,11 @@ window.onload = function()
                                 }
                                 if (this.PLAGUE_FACTORS.SAT_DEPRESSION < .30)
                                 {
-                                    this.PLAGUE_FACTORS.SAT_DEPRESSION += .05;
+                                    this.PLAGUE_FACTORS.SAT_DEPRESSION += .02;
                                 }
                                 if (this.FAMINE_FACTORS.SAT_DEPRESSION < .30)
                                 {
-                                    this.FAMINE_FACTORS.SAT_DEPRESSION += .05;
+                                    this.FAMINE_FACTORS.SAT_DEPRESSION += .02;
                                 }
                                 
                             }
