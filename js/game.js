@@ -761,6 +761,23 @@ window.onload = function()
                                 {
                                     this.DISASTER_FACTORS.INVASION += .05;
                                 }
+                                if (this.FIRE_FACTORS.HOUSE_CHANCE < .85)
+                                {
+                                    this.FIRE_FACTORS.HOUSE_CHANCE += .05;
+                                }
+                                if (this.STORM_FACTORS.FARM_CHANCE < .85)
+                                {
+                                    this.STORM_FACTORS.FARM_CHANCE += .05;
+                                }
+                                if (this.PLAGUE_FACTORS.SAT_DEPRESSION < .30)
+                                {
+                                    this.PLAGUE_FACTORS.SAT_DEPRESSION += .05;
+                                }
+                                if (this.FAMINE_FACTORS.SAT_DEPRESSION < .30)
+                                {
+                                    this.FAMINE_FACTORS.SAT_DEPRESSION += .05;
+                                }
+                                
                             }
                             var totalMonths = this.monthTime + this.yearTime * 12;
                             if (this.monthTime > 0)
@@ -791,6 +808,11 @@ window.onload = function()
                                 if (this.yearTime == 1)
                                 {
                                     this.rampDifficulty = 1;
+                                }
+                                if (this.yearTime == 2)
+                                {
+                                    this.DISASTER_FACTORS.TIME -= 5;
+                                    this.INVASION_FACTORS.TIME -= 5;
                                 }
                             }
                             this.newMonth();
@@ -1502,7 +1524,7 @@ window.onload = function()
                 {
                     if (!hardhardMode)
                     {
-                        this.timeSinceDisaster = this.DISASTER_FACTORS.TIME + Math.floor(Math.random() / 18 * 100);
+                        this.timeSinceDisaster = this.DISASTER_FACTORS.TIME;
                     }
                     else
                     {
