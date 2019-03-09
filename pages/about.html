@@ -143,14 +143,17 @@
                 <p>Best to avoid any of those happening.</p>
                 <h2>Click the Buttons Below to Find out How to Not Lose!</h2>
                 <div class="row" id="sideButtonsDiv">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button class="sideButtons" class="pageButton" v-on:click="starvingPage">Starving</button>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button class="sideButtons" class="pageButton" v-on:click="invasionsPage">Invasions</button>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button class="sideButtons" class="pageButton" v-on:click="satisfactionPage">Satisfaction</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="sideButtons" class="pageButton" v-on:click="beatingPage">Beating the Highscore</button>
                     </div>
                 </div>
                 <div class="row waystonotdie" v-if="starving">
@@ -198,6 +201,45 @@
                     <p>Disasters, bad special items, high taxes, losing to invasions are all things that could get you booted from town.</p>
                     <p>Cheat code is available to disable death by satisfaction.</p>
                 
+                </div>
+                <div class="row waystonotdie" v-if="beating">
+                    <h1>Rad Strats</h1>
+                    <p>You've come this far to figure out how to play the game, now I'll share with you how to break it.</p>
+                    <p>Not completly true of course, but I feel since the current highscores have already set such a high bar, you deserve to know the secrets.</p>
+                    <p>I would patch the following methods, but that'd essentially make the highest scores impossible to beat.</p>
+                    <p>Not only did the people who set them sit down for a long period of time to set them, but they played long enough to realize and exploit the subtle details they found.</p>
+                    <p>They're dedication alone stands by their highscores, but you deserve a shot too right?</p>
+                    <p>Here are the secrets...</p>
+                    <h1>1. The Underwhelming Villiage</h1>
+                    <p>Sovereign has a few ways of determining how much bad luck to throw your way.</p>
+                    <p>The first of which is a short 3 month grace period at the start to allow you to begin to build up.</p>
+                    <p>Simply put, satisfaction depressions are lowered to allow you to focus completely on your small stockpile of resources.</p>
+                    <p>The second is unavoidable. Sovereign begins to add to the chance of invasions and disasters each month after your first year.</p>
+                    <p>Invasions and Disasters happen every 20-25 days, in which you have a CHANCE of either. In late game your chance of such events is 100%.</p>
+                    <p>The last way, which IS exploitable, is by population.</p>
+                    <p>Sovereign won't bash you right after a huge loss of citizens, and does that by checking your population.</p>
+                    <p>Invasions themselves can be game breaking, but only occur after your population grows past 30 people. Additionally they're strength is determined by your population.</p>
+                    <p>You'll notice some of the highscores have low max populations, because they decided to stay low.</p>
+                    <p>Obvious downside is the complete lack of labor. The difficulty of the game increases anyways overtime.</p>
+                    <p>However with that low of a population, you can focus your labor on resources and depend on hunting for food.</p>
+                    <p>Might not seem like the grandest way to run your empire, but the end game is survival.</p>
+                    <h1>2. Arms Sales</h1>
+                    <p>Buying and selling from the market was intentionally made to seem expensive, overpriced items encourages you avoid purchasing unless need arrises.</p>
+                    <p>Late game lumber and other resources become irrelevant and stocked high, so it offers a way to exchange that into something useful again.</p>
+                    <p>I set the price for weapons high assuming it would be futile to use unless you completely lacked stone.</p>
+                    <p>However the game uses the same worth values for buying and selling. Therefore you can make weapons CHEAP and sell them for LOTS of gold.</p>
+                    <p>This allows you to turn small amounts of gold and stone, into large amounts of other resources.</p>
+                    <p>Match that with the Wizard's Spell and you have chance of exploding your resources full of enough to last you years.</p>
+                    <p>The game tracks your average actions per month, which is logged with your high score. If you take a look at the highest scores, you'll notice they're rediculously high.</p>
+                    <p>It's a funny downside to the tactic. The market has a multiplyer in which you can sell in larger quantities, weapons does not.</p>
+                    <p>You want to break the high score? Break they're button presses per month in buying and selling weapons.</p>
+                    <h1>3. The Dictator</h1>
+                    <p>Gold solves all of your issues.</p>
+                    <p>Get enough and you'll be fine no matter what.</p>
+                    <p>Taxes will lower your satisfaction but with enough money to buy food, a stream of feasts and faires will keep you afloat.</p>
+                    <p>With enough gold, some of the special market items are cruel, but offer high rewards.</p>
+                    <p>Taking advantage of them requires a high amount of gold.</p>
+                    <p>This method is more useful mid or late game, but can have long lasting results.</p>
                 </div>
 
             </div>

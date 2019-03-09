@@ -12,6 +12,7 @@ window.onload = function()
             disasters: 0,
             specials: 0,
             cheats: 0,
+            beating: 0,
             SOUNDS: {click: {sound: "click", volume: .2}
         
                     },
@@ -150,6 +151,7 @@ window.onload = function()
                 this.starving = 1;
                 this.invasions = 0;
                 this.satisfaction = 0;
+                this.beating = 0;
             },
             invasionsPage()
             {
@@ -158,6 +160,7 @@ window.onload = function()
                 this.starving = 0;
                 this.invasions = 1;
                 this.satisfaction = 0;
+                this.beating = 0;
             },
             satisfactionPage()
             {
@@ -166,6 +169,16 @@ window.onload = function()
                 this.starving = 0;
                 this.invasions = 0;
                 this.satisfaction = 1;
+                this.beating = 0;
+            },
+            beatingPage()
+            {
+                this.playSound(this.SOUNDS.click.sound, this.SOUNDS.click.volume);
+
+                this.starving = 0;
+                this.invasions = 0;
+                this.satisfaction = 0;
+                this.beating = 1;
             },
             playSound(sound, volume)
             {
