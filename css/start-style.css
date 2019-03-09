@@ -155,11 +155,11 @@ body
     #toGame
     {
         position: fixed;
-        color: rgba(165, 165, 165, 0.473);
+        color: rgba(255, 255, 255, 0.473);
         font-size: 400%;
         display: block;
         width: 100%;
-        bottom: 40px;
+        bottom: 60px;
         left: 0px;
         height: 75px;
         background-color: rgba(0, 0, 0, 0);
