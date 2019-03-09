@@ -25,6 +25,7 @@ window.onload = function()
                 console.log("CLICK");
                 if (!this.startBool)
                 {
+                    document.getElementById("interaction").style.paddingTop = "0px";
                     this.start();
                 }
                 else

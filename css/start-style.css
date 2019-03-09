@@ -127,13 +127,14 @@ body
         color: rgba(165, 165, 165, 0.637);
         font-size: 250%;
         display: block;
-        width: 300px;
+        width: 400px;
         height: 75px;
         background-color: rgba(0, 0, 0, 0);
         border: 0px;
         margin: auto;
         text-align: center;
         margin-top: 40px;
+        padding-top: 100px;
         font-family: 'ZCOOL QingKe HuangYou', cursive;
     }
     
