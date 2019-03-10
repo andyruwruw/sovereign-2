@@ -151,7 +151,19 @@ body
         margin-top: 40px;
         font-family: 'ZCOOL QingKe HuangYou', cursive;
     }
-    
+    #homeButton
+    {
+        display: block;
+        position: fixed;
+        left: 5px;
+        top: 5px;
+        width: 50px;
+        height: 50px;
+        margin: 0px;
+        padding: 0px;
+        background-image: url("https://i.ibb.co/271mvDy/homesymbol-white-00000.png");
+        background-size: cover;
+    }
     #toGame
     {
         position: fixed;

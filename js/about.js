@@ -20,7 +20,7 @@ window.onload = function()
             invasions: 0,
             satisfaction: 0,
             highscores: 0,
-
+            gamesPlayed: 0,
             HSLIST: [{username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
                      {username: "",days: 0,invasions: 0, disasters: 0,maxpop: 0,actions: 0},
@@ -197,6 +197,12 @@ window.onload = function()
                 var disasters;
                 var invasions;
                 var maxpop;
+
+                var games;
+                firebase.database().ref("gamesplayed").on("value", function (snapshot) {
+                    games = snapshot.child("value").val();
+                });
+                this.gamesPlayed = games;
                 
                 firebase.database().ref("highscore").on("value", function (snapshot) {
                 days = snapshot.child("days").val();
