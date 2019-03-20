@@ -57,14 +57,14 @@ window.onload = function()
             FOOD_FACTORS    : {WORTH: 1},
             STONE_FACTORS   : {WORTH: 3},
             GOLD_FACTORS    : {WORTH: 1},
-            WEAPON_FACTORS  : {WORTH: 20, STONE_COST: 5, GOLD_COST: 5, DEFENSE: 0.0034},
+            WEAPON_FACTORS  : {WORTH: 10, STONE_COST: 5, GOLD_COST: 5, DEFENSE: 0.0034},
             rampDifficulty: 0,
             LAND_FACTORS     : {SQR_MILES: 25},
             SOLDIER_FACTORS  : {GOLD_TRAIN: 20, WEAPON_TRAIN: 1, MONTHLY_WAGE: 5, BOOST: 0.02, PER_CIT: 20},
             ARCHER_FACTORS   : {GOLD_TRAIN: 50, WEAPON_TRAIN: 1, MONTHLY_WAGE: 5, BOOST: 0.04},
             CATAPULT_FACTORS : {GOLD_TRAIN: 100, LUMBER_COST: 50, SOLDIER_COST: 2, BOOST: .08, MONTHLY_WAGE: 10},
             CITIZEN_FACTORS  : {FOOD_NEEDS: 1, CIT_INCOME: 30, BASE_SATISFACTION: 0.6, TAX_TO_SAT: 5.0, VISITORS: 0.25},
-            TOWN_TYPES : ["H A M L E T", "T O W N", "V I L L I A G E", "K I N G D O M"],
+            TOWN_TYPES : ["H A M L E T", "T O W N", "V I L L A G E", "K I N G D O M"],
             townType: "H A M L E T",
             animateTownType: 0,
             GATHER_WOOD_FACTORS : {LUMBER: 20, TIME: 500, FREE: 5},
@@ -202,8 +202,6 @@ window.onload = function()
             checked: 1,
             totalgames: 0,
 
-            
-            
             tutorialHADBEENSHOWN: {time: 0, time2: 0, time3: 0, time4: 0, one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0,
                                     eleven: 0, twelve: 0, thirteen: 0, fourteen: 0, fifteen: 0, sixteen: 0, seventeen: 0, eightteen: 0,
                                 nineteen: 0, twenty: 0, twentyone: 0, twentytwo: 0, twentythree: 0, twentyfour: 0, twentyfive: 0, twentysix: 0, twentyseven: 0,
@@ -3833,7 +3831,7 @@ window.onload = function()
             sellFood()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.food > 0))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.food >= 1 * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3874,7 +3872,7 @@ window.onload = function()
             sellLumber()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.lumber > 0))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.lumber >= 1 * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3916,7 +3914,7 @@ window.onload = function()
             sellStone()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.stone > 0))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.stone >= 1 * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3958,7 +3956,7 @@ window.onload = function()
             sellWeapons()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.weaponsNum > 0))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.weaponsNum >= 1 * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
