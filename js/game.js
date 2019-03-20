@@ -170,6 +170,7 @@ window.onload = function()
             morehighscores: 0,
             submit: 0,
             DIFFICULTY: 0,
+            difficultyInvasionNum: 0.0,
 
             deathString: "A disease runs rampant through your town. The coughs silent through the week as the bodies pile. Travelers will know your town not by what you did, but by the smell.",
             monthActions: {thismonth: 0, average: 0},
@@ -775,7 +776,10 @@ window.onload = function()
                                 {
                                     this.FAMINE_FACTORS.SAT_DEPRESSION += .02;
                                 }
-                                
+                                if (this.difficultyInvasionNum < .20)
+                                {
+                                    this.difficultyInvasionNum += .005;
+                                }
                             }
                             var totalMonths = this.monthTime + this.yearTime * 12;
                             if (this.monthTime > 0)
@@ -3342,8 +3346,8 @@ window.onload = function()
                 this.playSound(this.SOUNDS.invasion.sound, this.SOUNDS.invasion.volume);
                 var string = "";
                 this.invasionNum += 1;
-                var enemyStrength = this.citizensStat.population / 105 + Math.random() / 10;
-                var kingdomStrength = this.chancesRatios.defense + Math.random() / 10;
+                var enemyStrength = this.citizensStat.population / 105 + (Math.random() / 10) - (Math.random() / 10) + this.difficultyInvasionNum;
+                var kingdomStrength = this.chancesRatios.defense + (Math.random() / 10) - (Math.random() / 10);
                 if (this.mercenaryProtection == 1)
                 {
                     string = " The mercenaries kept their word and defended us, they've left now.";
@@ -3810,7 +3814,7 @@ window.onload = function()
             buyFood()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.FOOD_FACTORS.WORTH))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.FOOD_FACTORS.WORTH * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3822,7 +3826,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.gold >= this.FOOD_FACTORS.WORTH)
+                else if (this.resourceStat.gold < this.FOOD_FACTORS.WORTH * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough gold for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3843,7 +3847,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.food == 0)
+                else if (this.resourceStat.food < 1 * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough food for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3851,7 +3855,7 @@ window.onload = function()
             },
             buyLumber()
             {
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.LUMBER_FACTORS.WORTH))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.LUMBER_FACTORS.WORTH * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3863,7 +3867,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.gold >= this.LUMBER_FACTORS.WORTH)
+                else if (this.resourceStat.gold < this.LUMBER_FACTORS.WORTH * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough gold for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3884,7 +3888,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.lumber == 0)
+                else if (this.resourceStat.lumber < 1 * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough lumber for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3893,7 +3897,7 @@ window.onload = function()
             buyStone()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.STONE_FACTORS.WORTH))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.STONE_FACTORS.WORTH * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3905,7 +3909,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.gold >= this.STONE_FACTORS.WORTH)
+                else if (this.resourceStat.gold < this.STONE_FACTORS.WORTH * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough gold for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3926,7 +3930,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.stone == 0)
+                else if (this.resourceStat.stone < 1 * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough stone for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3935,7 +3939,7 @@ window.onload = function()
             buyWeapons()
             {
 
-                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.WEAPON_FACTORS.WORTH))
+                if ((this.buildingNum.market == 1) && !paused && (this.resourceStat.gold >= this.WEAPON_FACTORS.WORTH * this.marketMultiplyer))
                 {
                     this.monthActions.thismonth += 1;
                     this.playSound(this.SOUNDS.townsqr.sound, this.SOUNDS.townsqr.volume);
@@ -3947,7 +3951,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.gold >= this.WEAPON_FACTORS.WORTH)
+                else if (this.resourceStat.gold < this.WEAPON_FACTORS.WORTH * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough gold for that.", timer: 5, noise: 1, played: 0, bold: 0});
@@ -3968,7 +3972,7 @@ window.onload = function()
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We need a market to trade.", timer: 5, noise: 1, played: 0, bold: 0});
                 }
-                else if (this.resourceStat.weaponsNum == 0)
+                else if (this.resourceStat.weaponsNum < 1 * this.marketMultiplyer)
                 {
                     this.playSound(this.SOUNDS.error.sound, this.SOUNDS.error.volume);
                     this.commentArray.push({text: "Builder: We don't have enough weapons for that.", timer: 5, noise: 1, played: 0, bold: 0});
